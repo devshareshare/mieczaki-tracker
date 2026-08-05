@@ -14,10 +14,17 @@ The legacy single-file tracker was completely modernized into a zero-cost, autom
 - **Centered Header**: Display title "MIĘCZAKI TRACKER", show subtitle ("Fanowski ranking..."), live status badge, last updated widget, and lime `#c8ff00` accents on dark `#121212` show theme.
 - **Top 3 Podium**: Gold (#1), Silver (#2), and Bronze (#3) cards with rank badges, face-zoomed avatars, verified follower counts, published post counts, and milestone progress bars.
 - **Contestant Grid**: Ranks 4–12 responsive grid cards with contestant handles, full names, face-zoomed avatars, follower counts, post counts, and milestone progress.
-- **Centered Special Badges**:
+- **Centered Special Weekly Badges**:
   - 🔥 **Top Weekly Gainer**: Contestant with the highest absolute follower gain over 7 days.
-  - 🚀 **Fastest % Growth**: Contestant with the highest relative percentage growth.
-  - 📸 **Most Active Poster**: Contestant with the highest Instagram post output.
+  - 🚀 **Fastest Weekly % Growth**: Contestant with the highest relative percentage growth over 7 days.
+  - 📸 **Most Active Weekly Poster**: Contestant with the highest Instagram post output over 7 days.
+  - 💬 **Most Discussed Weekly Poster**: Contestant with the highest comment gain across posts over 7 days (centered on row 2).
+- **Unified 50,000 Milestone Goal**: All contestant progress bars benchmark against a shared 50,000 follower target.
+- **Comment Metrics & Analytics**:
+  - `comments` tracking added to `latest.json`, `history.json`, and contestant cards in Podium & Grid.
+  - 💬 **Monthly Comments Gained**: Bar chart comparing comment gains aggregated by calendar month.
+  - Scraper (`scripts/scraper.py`) and GitHub Actions workflow updated to automatically scrape comment counts daily.
+- **Mobile Responsive Podium Order**: Fixed `@media (max-width: 900px)` rules so Gold (#1) card renders at the top on single-column mobile viewports.
 - **Interactive Chart.js Diagrams**:
   - **Follower Growth Trajectory**: Multi-line line chart tracking follower trends over time with range selectors (*Wszystko*, *Ostatnie 30 dni*, *Ostatnie 7 dni*) and interactive contestant selection chips.
   - **Monthly Followers Gained**: Bar chart comparing follower growth aggregated by calendar month.

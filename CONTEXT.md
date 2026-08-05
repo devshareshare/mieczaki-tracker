@@ -14,7 +14,9 @@ Contestants undergo a 6-month physical and mental transformation program competi
 - **AJ** — Adam Josef Modzelewski, show creator, coach, and fitness influencer.
 - **Contestants** — The 12 participants competing in the show.
 - **Podium** — Gold (#1), Silver (#2), and Bronze (#3) top performers display.
-- **Special Badges** — Highlight cards for *Top Weekly Gainer*, *Fastest % Growth*, and *Most Active Poster*.
+- **Special Badges** — Weekly highlight cards for *Top Weekly Gainer*, *Fastest Weekly % Growth*, *Most Active Weekly Poster*, and *Most Discussed Weekly Poster*.
+- **Goal Milestone** — Unified 50,000 follower target across all contestant progress bars.
+- **Comment Metrics** — Aggregated comment totals across contestants' published posts.
 
 ---
 

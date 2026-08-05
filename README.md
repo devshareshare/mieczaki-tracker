@@ -20,16 +20,18 @@ The application is deployed automatically to **GitHub Pages**. A daily GitHub Ac
 ## ✨ Features
 
 - **Centered Show Header**: Clean display title, show subtitle, and live status badge with lime `#c8ff00` accents on dark `#121212` show theme.
-- **Top 3 Podium**: Gold (#1, center/highest), Silver (#2, left), and Bronze (#3, right) cards featuring rank badges, face-zoomed avatars, verified follower counts, post counts, and milestone progress bars.
-- **Contestant Grid**: Ranks 4 through 12 cards displaying full names, handles, face-zoomed avatars, follower counts, post counts, and milestone progress bars.
-- **Centered Special Badges**:
+- **Top 3 Podium**: Gold (#1, center/highest on desktop, #1 top on mobile), Silver (#2, left), and Bronze (#3, right) cards featuring rank badges, face-zoomed avatars, verified follower counts, post counts, total comments, and unified 50,000 follower milestone progress bars.
+- **Contestant Grid**: Ranks 4 through 12 cards displaying full names, handles, face-zoomed avatars, follower counts, post counts, comment totals, and unified 50,000 follower milestone progress bars.
+- **Centered Weekly Special Badges**:
   - 🔥 **Top Weekly Gainer**: Highlights the contestant who gained the most followers in the last 7 days.
-  - 🚀 **Fastest % Growth**: Highlights the contestant with the highest percentage growth.
-  - 📸 **Most Active Poster**: Highlights the contestant with the highest total Instagram post output.
+  - 🚀 **Fastest Weekly % Growth**: Highlights the contestant with the highest percentage growth in the last 7 days.
+  - 📸 **Most Active Weekly Poster**: Highlights the contestant with the highest post output in the last 7 days.
+  - 💬 **Most Discussed Weekly Poster**: Highlights the contestant who gained the most comments across all posts in the last 7 days (centered on 2nd row).
 - **Interactive Chart.js Diagrams**:
   - **Follower Growth Trajectory**: Multi-line line chart tracking follower trends over time with range selectors (*Wszystko*, *Ostatnie 30 dni*, *Ostatnie 7 dni*) and interactive contestant selection chips.
   - **Monthly Followers Gained**: Bar chart comparing follower growth aggregated by calendar month.
   - **Monthly Posts Published**: Bar chart comparing posts published aggregated by calendar month.
+  - **Monthly Comments Gained**: Bar chart comparing total comments gained aggregated by calendar month.
 - **Local Avatar Archiving**: High-resolution contestant photos stored in `public/avatars/` to guarantee zero broken Instagram CDN links.
 - **Pure Read-Only UI**: Runs on autopilot without manual edit or client-side refresh buttons.
 
