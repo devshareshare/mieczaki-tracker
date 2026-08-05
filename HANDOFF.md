@@ -11,7 +11,7 @@
 The legacy single-file tracker was completely modernized into a zero-cost, automated static web application built with **Vite, TypeScript (strict mode), Chart.js, Biome, and Python 3**, deployed automatically to **GitHub Pages**.
 
 ### Key Highlights & Features Delivered:
-- **Centered Header**: Display title "MIĘCZAKI TRACKER", show subtitle, live status badge, and lime `#c8ff00` accents on dark `#121212` show theme.
+- **Centered Header**: Display title "MIĘCZAKI TRACKER", show subtitle ("Fanowski ranking..."), live status badge, last updated widget, and lime `#c8ff00` accents on dark `#121212` show theme.
 - **Top 3 Podium**: Gold (#1), Silver (#2), and Bronze (#3) cards with rank badges, face-zoomed avatars, verified follower counts, published post counts, and milestone progress bars.
 - **Contestant Grid**: Ranks 4–12 responsive grid cards with contestant handles, full names, face-zoomed avatars, follower counts, post counts, and milestone progress.
 - **Centered Special Badges**:
@@ -24,7 +24,7 @@ The legacy single-file tracker was completely modernized into a zero-cost, autom
   - **Monthly Posts Published**: Bar chart comparing posts published aggregated by calendar month.
 - **Local Avatar Archiving**: High-resolution contestant profile photos stored in `public/avatars/` downloaded directly from `mieczaki.com`.
 - **Automated Instagram Scraper**: Python script (`scripts/scraper.py`) with User-Agent rotation, `og:description` parsing, local JPEG caching, and fallback metrics retention.
-- **GitHub Actions CI/CD Pipeline**: `.github/workflows/daily-update.yml` cron workflow executing daily at 6 AM UTC to run the scraper, commit updated metrics/avatars, execute tests, build Vite assets, and deploy to **GitHub Pages**.
+- **GitHub Actions CI/CD Pipeline**: `.github/workflows/daily-update.yml` cron workflow executing daily at 6 AM UTC (and on push) to run the scraper, commit updated metrics/avatars, execute tests, build Vite assets with `base: '/mieczaki-tracker/'`, and deploy to **GitHub Pages**.
 - **Pure Read-Only UI**: Autopilot execution without manual edit or client-side refresh buttons.
 
 ---
@@ -48,55 +48,7 @@ The legacy single-file tracker was completely modernized into a zero-cost, autom
 
 ---
 
-## 3. Key Files & Directory Map
-
-```text
-mieczaki-tracker/
-├── .github/workflows/
-│   ├── daily-update.yml   # Scheduled daily scraper & GitHub Pages deployment
-│   └── ci.yml             # PR and push test validation workflow
-├── .scratch/
-│   └── mieczaki-tracker-modernization/
-│       ├── PRD.md         # Product requirements document
-│       └── issues/        # Sliced implementation tickets (01 to 06)
-├── data/
-│   ├── latest.json        # Current snapshot metrics
-│   └── history.json       # Time-series snapshot log
-├── public/
-│   └── avatars/           # High-resolution contestant profile photos
-├── scripts/
-│   └── scraper.py         # Instagram scraper & avatar archiver script
-├── src/
-│   ├── components/
-│   │   ├── Header.ts      # Main show header
-│   │   ├── Podium.ts      # Top 3 Podium component
-│   │   ├── TileGrid.ts    # Ranks 4-12 tile grid component
-│   │   ├── Badges.ts      # Centered special badges
-│   │   └── Charts.ts      # Chart.js diagrams component
-│   ├── services/
-│   │   └── dataService.ts # Pure data calculation & analytics engine
-│   ├── styles/
-│   │   └── main.css       # Show dark theme styling
-│   ├── types/
-│   │   └── data.ts        # TypeScript data contracts
-│   └── main.ts            # Main application entry point
-├── tests/
-│   ├── dataService.test.ts # Vitest unit tests for analytics
-│   ├── ui.test.ts          # JSDOM UI component tests
-│   ├── badgesAndCharts.test.ts # JSDOM Badge & Chart.js tests
-│   └── test_scraper.py     # Python scraper unit tests
-├── index.html             # Single-page HTML template
-├── biome.json             # Biome lint/format config
-├── tsconfig.json          # TypeScript config
-├── vite.config.ts         # Vite & Vitest config
-├── CONTEXT.md             # Domain context documentation
-├── HANDOFF.md             # Session handoff documentation
-└── README.md              # Project documentation
-```
-
----
-
-## 4. How to Verify & Preview
+## 3. How to Verify & Preview
 
 ```bash
 # Run TypeScript strict type checking
@@ -120,7 +72,7 @@ python3 -m http.server 8080 -d dist
 
 ---
 
-## 5. Suggested Skills for Next Agent Sessions
+## 4. Suggested Skills for Next Agent Sessions
 
 - `qa` — For interactive QA testing of the deployed GitHub Pages site.
 - `code-review` — For automated PR and branch diff reviews.
