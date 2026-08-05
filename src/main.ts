@@ -18,7 +18,7 @@ function initApp(): void {
   const history = historyData as HistorySnapshot[];
   const rankedContestants = getRankedContestants(latest);
 
-  renderHeader(app, rankedContestants);
+  renderHeader(app, rankedContestants, latest);
   renderPodium(app, rankedContestants);
   renderBadges(app, latest, history);
   renderTileGrid(app, rankedContestants);
