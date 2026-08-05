@@ -4,10 +4,13 @@
 import json
 import random
 import re
+import ssl
 import sys
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
+
+SSL_CONTEXT = ssl._create_unverified_context()
 
 CONTESTANT_HANDLES = [
     "maquk_mieczaki",
@@ -146,7 +149,7 @@ def download_avatar(url: str, dest_path: Path, user_agent: str) -> bool:
                 "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
             },
         )
-        with urllib.request.urlopen(req, timeout=15) as resp:
+        with urllib.request.urlopen(req, timeout=15, context=SSL_CONTEXT) as resp:
             data = resp.read()
             if data and len(data) > 100:
                 dest_path.parent.mkdir(parents=True, exist_ok=True)
@@ -170,7 +173,7 @@ def fetch_instagram_profile(handle: str, user_agent: str | None = None) -> dict 
 
     try:
         req = urllib.request.Request(url, headers=headers)
-        with urllib.request.urlopen(req, timeout=15) as resp:
+        with urllib.request.urlopen(req, timeout=15, context=SSL_CONTEXT) as resp:
             html = resp.read().decode("utf-8", errors="replace")
     except Exception as e:
         print(f"[scrape] {handle}: HTTP/Network error: {e}", file=sys.stderr)
