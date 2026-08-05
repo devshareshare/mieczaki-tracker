@@ -835,10 +835,16 @@ body {
     gap: 1.25rem;
   }
 
-  .podium-card.gold,
-  .podium-card.silver,
+  .podium-card.gold {
+    order: 1;
+  }
+
+  .podium-card.silver {
+    order: 2;
+  }
+
   .podium-card.bronze {
-    order: initial;
+    order: 3;
   }
 }
 
