@@ -39,20 +39,20 @@ The application is deployed automatically to **GitHub Pages**. A daily GitHub Ac
 
 ## 👥 Tracked Contestants (12)
 
-| Rank | Handle | Name | Followers | Posts |
-|---|---|---|---|---|
-| **#1** | [@pamelka_mieczaki](https://instagram.com/pamelka_mieczaki) | Pamela Kiedrowicz | 33,511 (~33.5k) | 25 |
-| **#2** | [@pati_mieczaki](https://instagram.com/pati_mieczaki) | Patrycja "Pati" Tomaszewska | 25,837 (~25.8k) | 15 |
-| **#3** | [@filip_mieczaki](https://instagram.com/filip_mieczaki) | Filip Wrzosek | 25,262 (~25.3k) | 30 |
-| **#4** | [@maquk_mieczaki](https://instagram.com/maquk_mieczaki) | Dominik "Maquk" Makowiak | 23,803 (~23.8k) | 7 |
-| **#5** | [@stachu_goggins_mieczaki](https://instagram.com/stachu_goggins_mieczaki) | Stanisław "Stachu" Dybowski | 19,879 (~19.9k) | 17 |
-| **#6** | [@wiktor_mieczaki](https://instagram.com/wiktor_mieczaki) | Wiktor Woroniak | 19,543 (~19.5k) | 10 |
-| **#7** | [@magda_mieczaki](https://instagram.com/magda_mieczaki) | Magdalena Majewska | 16,671 (~16.7k) | 17 |
-| **#8** | [@dori_mieczaki](https://instagram.com/dori_mieczaki) | Dorota "Dori" Kaczmarek | 13,118 (~13.1k) | 29 |
-| **#9** | [@patrykbutrym_mieczaki](https://instagram.com/patrykbutrym_mieczaki) | Patryk Butrym | 10,406 (~10.4k) | 16 |
-| **#10** | [@oktawia_mieczaki](https://instagram.com/oktawia_mieczaki) | Oktawia Juszczyk | 8,413 (~8.4k) | 71 |
-| **#11** | [@oliwia_mieczaki](https://instagram.com/oliwia_mieczaki) | Oliwia Płodzień | 4,265 (~4.3k) | 9 |
-| **#12** | [@patrycja_mieczaki](https://instagram.com/patrycja_mieczaki) | Patrycja Bochyńska | 3,873 (~3.9k) | 40 |
+| Rank | Handle | Name | Followers | Posts | Comments |
+|---|---|---|---|---|---|
+| **#1** | [@pamelka_mieczaki](https://instagram.com/pamelka_mieczaki) | Pamela Kiedrowicz | 33,511 (~33.5k) | 25 | 2,125 |
+| **#2** | [@pati_mieczaki](https://instagram.com/pati_mieczaki) | Patrycja "Pati" Tomaszewska | 25,837 (~25.8k) | 15 | 1,711 |
+| **#3** | [@filip_mieczaki](https://instagram.com/filip_mieczaki) | Filip Wrzosek | 25,262 (~25.3k) | 30 | 1,863 |
+| **#4** | [@maquk_mieczaki](https://instagram.com/maquk_mieczaki) | Dominik "Maquk" Makowiak | 23,803 (~23.8k) | 7 | 1,295 |
+| **#5** | [@stachu_goggins_mieczaki](https://instagram.com/stachu_goggins_mieczaki) | Stanisław "Stachu" Dybowski | 19,879 (~19.9k) | 17 | 1,265 |
+| **#6** | [@wiktor_mieczaki](https://instagram.com/wiktor_mieczaki) | Wiktor Woroniak | 19,543 (~19.5k) | 10 | 1,207 |
+| **#7** | [@magda_mieczaki](https://instagram.com/magda_mieczaki) | Magdalena Majewska | 16,671 (~16.7k) | 17 | 1,241 |
+| **#8** | [@dori_mieczaki](https://instagram.com/dori_mieczaki) | Dorota "Dori" Kaczmarek | 13,118 (~13.1k) | 29 | 1,612 |
+| **#9** | [@patrykbutrym_mieczaki](https://instagram.com/patrykbutrym_mieczaki) | Patryk Butrym | 10,406 (~10.4k) | 16 | 856 |
+| **#10** | [@oktawia_mieczaki](https://instagram.com/oktawia_mieczaki) | Oktawia Juszczyk | 8,413 (~8.4k) | 71 | 1,982 |
+| **#11** | [@oliwia_mieczaki](https://instagram.com/oliwia_mieczaki) | Oliwia Płodzień | 4,265 (~4.3k) | 9 | 474 |
+| **#12** | [@patrycja_mieczaki](https://instagram.com/patrycja_mieczaki) | Patrycja Bochyńska | 3,873 (~3.9k) | 40 | 1,393 |
 
 ---
 

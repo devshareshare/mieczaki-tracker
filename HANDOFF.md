@@ -38,20 +38,20 @@ The legacy single-file tracker was completely modernized into a zero-cost, autom
 
 ## 2. Verified Contestant Metrics
 
-| Rank | Contestant | Handle | Followers | Posts |
-|---|---|---|---|---|
-| **#1** | Pamela Kiedrowicz | `pamelka_mieczaki` | **33,511** (~33.5k) | **25** |
-| **#2** | Patrycja "Pati" Tomaszewska | `pati_mieczaki` | **25,837** (~25.8k) | **15** |
-| **#3** | Filip Wrzosek | `filip_mieczaki` | **25,262** (~25.3k) | **30** |
-| **#4** | Dominik "Maquk" Makowiak | `maquk_mieczaki` | **23,803** (~23.8k) | **7** |
-| **#5** | Stanisław "Stachu" Dybowski | `stachu_goggins_mieczaki` | **19,879** (~19.9k) | **17** |
-| **#6** | Wiktor Woroniak | `wiktor_mieczaki` | **19,543** (~19.5k) | **10** |
-| **#7** | Magdalena Majewska | `magda_mieczaki` | **16,671** (~16.7k) | **17** |
-| **#8** | Dorota "Dori" Kaczmarek | `dori_mieczaki` | **13,118** (~13.1k) | **29** |
-| **#9** | Patryk Butrym | `patrykbutrym_mieczaki` | **10,406** (~10.4k) | **16** |
-| **#10** | Oktawia Juszczyk | `oktawia_mieczaki` | **8,413** (~8.4k) | **71** |
-| **#11** | Oliwia Płodzień | `oliwia_mieczaki` | **4,265** (~4.3k) | **9** |
-| **#12** | Patrycja Bochyńska | `patrycja_mieczaki` | **3,873** (~3.9k) | **40** |
+| Rank | Contestant | Handle | Followers | Posts | Comments |
+|---|---|---|---|---|---|
+| **#1** | Pamela Kiedrowicz | `pamelka_mieczaki` | **33,511** (~33.5k) | **25** | **2,125** |
+| **#2** | Patrycja "Pati" Tomaszewska | `pati_mieczaki` | **25,837** (~25.8k) | **15** | **1,711** |
+| **#3** | Filip Wrzosek | `filip_mieczaki` | **25,262** (~25.3k) | **30** | **1,863** |
+| **#4** | Dominik "Maquk" Makowiak | `maquk_mieczaki` | **23,803** (~23.8k) | **7** | **1,295** |
+| **#5** | Stanisław "Stachu" Dybowski | `stachu_goggins_mieczaki` | **19,879** (~19.9k) | **17** | **1,265** |
+| **#6** | Wiktor Woroniak | `wiktor_mieczaki` | **19,543** (~19.5k) | **10** | **1,207** |
+| **#7** | Magdalena Majewska | `magda_mieczaki` | **16,671** (~16.7k) | **17** | **1,241** |
+| **#8** | Dorota "Dori" Kaczmarek | `dori_mieczaki` | **13,118** (~13.1k) | **29** | **1,612** |
+| **#9** | Patryk Butrym | `patrykbutrym_mieczaki` | **10,406** (~10.4k) | **16** | **856** |
+| **#10** | Oktawia Juszczyk | `oktawia_mieczaki` | **8,413** (~8.4k) | **71** | **1,982** |
+| **#11** | Oliwia Płodzień | `oliwia_mieczaki` | **4,265** (~4.3k) | **9** | **474** |
+| **#12** | Patrycja Bochyńska | `patrycja_mieczaki` | **3,873** (~3.9k) | **40** | **1,393** |
 
 ---
 
