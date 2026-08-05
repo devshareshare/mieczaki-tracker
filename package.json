@@ -1,0 +1,24 @@
+{
+  "name": "mieczaki-tracker",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "check": "biome check ."
+  },
+  "dependencies": {
+    "chart.js": "^4.4.8"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "jsdom": "^26.0.0",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.0",
+    "vitest": "^3.0.7"
+  }
+}

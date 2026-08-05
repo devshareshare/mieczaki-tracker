@@ -1,0 +1,2342 @@
+[
+  {
+    "timestamp": "2026-07-01T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 29000,
+        "posts": 130
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 22000,
+        "posts": 100
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 20000,
+        "posts": 80
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 20000,
+        "posts": 95
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 16000,
+        "posts": 70
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 17000,
+        "posts": 80
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 14000,
+        "posts": 65
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 10000,
+        "posts": 50
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 8000,
+        "posts": 40
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7000,
+        "posts": 35
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3000,
+        "posts": 25
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 2800,
+        "posts": 20
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-02T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 29114,
+        "posts": 130
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 22086,
+        "posts": 101
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 20143,
+        "posts": 81
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 20086,
+        "posts": 95
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 16086,
+        "posts": 70
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 17057,
+        "posts": 80
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 14057,
+        "posts": 65
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 10057,
+        "posts": 50
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 8047,
+        "posts": 40
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7031,
+        "posts": 35
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3031,
+        "posts": 25
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 2825,
+        "posts": 20
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-03T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 29229,
+        "posts": 131
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 22171,
+        "posts": 101
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 20286,
+        "posts": 81
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 20171,
+        "posts": 96
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 16171,
+        "posts": 71
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 17114,
+        "posts": 81
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 14114,
+        "posts": 66
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 10114,
+        "posts": 51
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 8093,
+        "posts": 41
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7062,
+        "posts": 35
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3062,
+        "posts": 26
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 2851,
+        "posts": 20
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-04T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 29343,
+        "posts": 131
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 22257,
+        "posts": 102
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 20429,
+        "posts": 82
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 20257,
+        "posts": 96
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 16257,
+        "posts": 71
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 17171,
+        "posts": 81
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 14171,
+        "posts": 66
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 10171,
+        "posts": 51
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 8140,
+        "posts": 41
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7093,
+        "posts": 36
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3092,
+        "posts": 26
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 2876,
+        "posts": 21
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-05T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 29457,
+        "posts": 132
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 22343,
+        "posts": 102
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 20571,
+        "posts": 82
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 20343,
+        "posts": 97
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 16343,
+        "posts": 72
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 17229,
+        "posts": 81
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 14229,
+        "posts": 66
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 10229,
+        "posts": 52
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 8187,
+        "posts": 41
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7124,
+        "posts": 36
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3123,
+        "posts": 26
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 2901,
+        "posts": 21
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-06T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 29571,
+        "posts": 132
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 22429,
+        "posts": 103
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 20714,
+        "posts": 83
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 20429,
+        "posts": 97
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 16429,
+        "posts": 72
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 17286,
+        "posts": 82
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 14286,
+        "posts": 67
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 10286,
+        "posts": 52
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 8234,
+        "posts": 41
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7155,
+        "posts": 36
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3154,
+        "posts": 26
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 2926,
+        "posts": 21
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-07T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 29686,
+        "posts": 133
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 22514,
+        "posts": 103
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 20857,
+        "posts": 83
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 20514,
+        "posts": 98
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 16514,
+        "posts": 73
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 17343,
+        "posts": 82
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 14343,
+        "posts": 67
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 10343,
+        "posts": 52
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 8280,
+        "posts": 42
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7186,
+        "posts": 36
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3185,
+        "posts": 27
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 2952,
+        "posts": 21
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-08T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 29800,
+        "posts": 133
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 22600,
+        "posts": 104
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 21000,
+        "posts": 84
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 20600,
+        "posts": 98
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 16600,
+        "posts": 73
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 17400,
+        "posts": 82
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 14400,
+        "posts": 67
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 10400,
+        "posts": 53
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 8327,
+        "posts": 42
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7217,
+        "posts": 36
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3216,
+        "posts": 27
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 2977,
+        "posts": 22
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-09T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 29914,
+        "posts": 133
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 22686,
+        "posts": 105
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 21143,
+        "posts": 84
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 20686,
+        "posts": 98
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 16686,
+        "posts": 73
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 17457,
+        "posts": 83
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 14457,
+        "posts": 68
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 10457,
+        "posts": 53
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 8374,
+        "posts": 42
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7248,
+        "posts": 37
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3247,
+        "posts": 27
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3002,
+        "posts": 22
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-10T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 30029,
+        "posts": 134
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 22771,
+        "posts": 105
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 21286,
+        "posts": 85
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 20771,
+        "posts": 99
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 16771,
+        "posts": 74
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 17514,
+        "posts": 83
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 14514,
+        "posts": 68
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 10514,
+        "posts": 54
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 8420,
+        "posts": 43
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7279,
+        "posts": 37
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3277,
+        "posts": 28
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3027,
+        "posts": 22
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-11T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 30143,
+        "posts": 134
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 22857,
+        "posts": 106
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 21429,
+        "posts": 85
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 20857,
+        "posts": 99
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 16857,
+        "posts": 74
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 17571,
+        "posts": 83
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 14571,
+        "posts": 68
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 10571,
+        "posts": 54
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 8467,
+        "posts": 43
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7310,
+        "posts": 37
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3308,
+        "posts": 28
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3053,
+        "posts": 22
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-12T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 30257,
+        "posts": 135
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 22943,
+        "posts": 106
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 21571,
+        "posts": 86
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 20943,
+        "posts": 100
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 16943,
+        "posts": 75
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 17629,
+        "posts": 84
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 14629,
+        "posts": 68
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 10629,
+        "posts": 54
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 8514,
+        "posts": 43
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7341,
+        "posts": 37
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3339,
+        "posts": 28
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3078,
+        "posts": 23
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-13T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 30371,
+        "posts": 135
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 23029,
+        "posts": 107
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 21714,
+        "posts": 86
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 21029,
+        "posts": 100
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 17029,
+        "posts": 75
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 17686,
+        "posts": 84
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 14686,
+        "posts": 69
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 10686,
+        "posts": 55
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 8561,
+        "posts": 43
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7372,
+        "posts": 37
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3370,
+        "posts": 28
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3103,
+        "posts": 23
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-14T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 30486,
+        "posts": 136
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 23114,
+        "posts": 107
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 21857,
+        "posts": 87
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 21114,
+        "posts": 101
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 17114,
+        "posts": 76
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 17743,
+        "posts": 84
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 14743,
+        "posts": 69
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 10743,
+        "posts": 55
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 8607,
+        "posts": 44
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7403,
+        "posts": 38
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3401,
+        "posts": 29
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3128,
+        "posts": 23
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-15T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 30600,
+        "posts": 136
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 23200,
+        "posts": 108
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 22000,
+        "posts": 87
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 21200,
+        "posts": 101
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 17200,
+        "posts": 76
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 17800,
+        "posts": 85
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 14800,
+        "posts": 69
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 10800,
+        "posts": 56
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 8654,
+        "posts": 44
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7434,
+        "posts": 38
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3432,
+        "posts": 29
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3154,
+        "posts": 23
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-16T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 30714,
+        "posts": 136
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 23286,
+        "posts": 109
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 22143,
+        "posts": 88
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 21286,
+        "posts": 101
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 17286,
+        "posts": 76
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 17857,
+        "posts": 85
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 14857,
+        "posts": 70
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 10857,
+        "posts": 56
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 8701,
+        "posts": 44
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7465,
+        "posts": 38
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3462,
+        "posts": 29
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3179,
+        "posts": 23
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-17T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 30829,
+        "posts": 137
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 23371,
+        "posts": 109
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 22286,
+        "posts": 88
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 21371,
+        "posts": 102
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 17371,
+        "posts": 77
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 17914,
+        "posts": 85
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 14914,
+        "posts": 70
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 10914,
+        "posts": 56
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 8747,
+        "posts": 45
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7496,
+        "posts": 38
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3493,
+        "posts": 30
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3204,
+        "posts": 24
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-18T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 30943,
+        "posts": 137
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 23457,
+        "posts": 110
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 22429,
+        "posts": 89
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 21457,
+        "posts": 102
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 17457,
+        "posts": 77
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 17971,
+        "posts": 86
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 14971,
+        "posts": 70
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 10971,
+        "posts": 57
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 8794,
+        "posts": 45
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7527,
+        "posts": 38
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3524,
+        "posts": 30
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3229,
+        "posts": 24
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-19T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 31057,
+        "posts": 138
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 23543,
+        "posts": 110
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 22571,
+        "posts": 89
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 21543,
+        "posts": 103
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 17543,
+        "posts": 78
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 18029,
+        "posts": 86
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 15029,
+        "posts": 71
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 11029,
+        "posts": 57
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 8841,
+        "posts": 45
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7559,
+        "posts": 39
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3555,
+        "posts": 30
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3255,
+        "posts": 24
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-20T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 31171,
+        "posts": 138
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 23629,
+        "posts": 111
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 22714,
+        "posts": 90
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 21629,
+        "posts": 103
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 17629,
+        "posts": 78
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 18086,
+        "posts": 87
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 15086,
+        "posts": 71
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 11086,
+        "posts": 58
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 8888,
+        "posts": 45
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7590,
+        "posts": 39
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3586,
+        "posts": 30
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3280,
+        "posts": 24
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-21T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 31286,
+        "posts": 139
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 23714,
+        "posts": 111
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 22857,
+        "posts": 90
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 21714,
+        "posts": 104
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 17714,
+        "posts": 79
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 18143,
+        "posts": 87
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 15143,
+        "posts": 71
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 11143,
+        "posts": 58
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 8934,
+        "posts": 46
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7621,
+        "posts": 39
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3617,
+        "posts": 31
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3305,
+        "posts": 25
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-22T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 31400,
+        "posts": 139
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 23800,
+        "posts": 112
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 23000,
+        "posts": 91
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 21800,
+        "posts": 104
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 17800,
+        "posts": 79
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 18200,
+        "posts": 87
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 15200,
+        "posts": 72
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 11200,
+        "posts": 58
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 8981,
+        "posts": 46
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7652,
+        "posts": 39
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3647,
+        "posts": 31
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3330,
+        "posts": 25
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-23T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 31514,
+        "posts": 139
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 23886,
+        "posts": 113
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 23143,
+        "posts": 91
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 21886,
+        "posts": 104
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 17886,
+        "posts": 79
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 18257,
+        "posts": 88
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 15257,
+        "posts": 72
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 11257,
+        "posts": 59
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 9028,
+        "posts": 46
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7683,
+        "posts": 39
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3678,
+        "posts": 31
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3356,
+        "posts": 25
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-24T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 31629,
+        "posts": 140
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 23971,
+        "posts": 113
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 23286,
+        "posts": 92
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 21971,
+        "posts": 105
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 17971,
+        "posts": 80
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 18314,
+        "posts": 88
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 15314,
+        "posts": 72
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 11314,
+        "posts": 59
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 9074,
+        "posts": 47
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7714,
+        "posts": 40
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3709,
+        "posts": 32
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3381,
+        "posts": 25
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-25T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 31743,
+        "posts": 140
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 24057,
+        "posts": 114
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 23429,
+        "posts": 92
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 22057,
+        "posts": 105
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 18057,
+        "posts": 80
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 18371,
+        "posts": 88
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 15371,
+        "posts": 73
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 11371,
+        "posts": 60
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 9121,
+        "posts": 47
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7745,
+        "posts": 40
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3740,
+        "posts": 32
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3406,
+        "posts": 25
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-26T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 31857,
+        "posts": 141
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 24143,
+        "posts": 114
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 23571,
+        "posts": 93
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 22143,
+        "posts": 106
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 18143,
+        "posts": 81
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 18429,
+        "posts": 89
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 15429,
+        "posts": 73
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 11429,
+        "posts": 60
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 9168,
+        "posts": 47
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7776,
+        "posts": 40
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3771,
+        "posts": 32
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3431,
+        "posts": 26
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-27T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 31971,
+        "posts": 141
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 24229,
+        "posts": 115
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 23714,
+        "posts": 93
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 22229,
+        "posts": 106
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 18229,
+        "posts": 81
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 18486,
+        "posts": 89
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 15486,
+        "posts": 73
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 11486,
+        "posts": 60
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 9215,
+        "posts": 47
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7807,
+        "posts": 40
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3802,
+        "posts": 32
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3457,
+        "posts": 26
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-28T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 32086,
+        "posts": 142
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 24314,
+        "posts": 115
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 23857,
+        "posts": 94
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 22314,
+        "posts": 107
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 18314,
+        "posts": 82
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 18543,
+        "posts": 89
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 15543,
+        "posts": 73
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 11543,
+        "posts": 61
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 9261,
+        "posts": 48
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7838,
+        "posts": 40
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3832,
+        "posts": 33
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3482,
+        "posts": 26
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-29T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 32200,
+        "posts": 142
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 24400,
+        "posts": 116
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 24000,
+        "posts": 94
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 22400,
+        "posts": 107
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 18400,
+        "posts": 82
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 18600,
+        "posts": 90
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 15600,
+        "posts": 74
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 11600,
+        "posts": 61
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 9308,
+        "posts": 48
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7869,
+        "posts": 41
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3863,
+        "posts": 33
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3507,
+        "posts": 26
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-30T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 32314,
+        "posts": 142
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 24486,
+        "posts": 117
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 24143,
+        "posts": 95
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 22486,
+        "posts": 107
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 18486,
+        "posts": 82
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 18657,
+        "posts": 90
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 15657,
+        "posts": 74
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 11657,
+        "posts": 62
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 9355,
+        "posts": 48
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7900,
+        "posts": 41
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3894,
+        "posts": 33
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3532,
+        "posts": 27
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-07-31T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 32429,
+        "posts": 143
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 24571,
+        "posts": 117
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 24286,
+        "posts": 95
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 22571,
+        "posts": 108
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 18571,
+        "posts": 83
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 18714,
+        "posts": 90
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 15714,
+        "posts": 74
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 11714,
+        "posts": 62
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 9401,
+        "posts": 49
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7931,
+        "posts": 41
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3925,
+        "posts": 34
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3558,
+        "posts": 27
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-08-01T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 32543,
+        "posts": 143
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 24657,
+        "posts": 118
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 24429,
+        "posts": 96
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 22657,
+        "posts": 108
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 18657,
+        "posts": 83
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 18771,
+        "posts": 91
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 15771,
+        "posts": 75
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 11771,
+        "posts": 62
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 9448,
+        "posts": 49
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7962,
+        "posts": 41
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3956,
+        "posts": 34
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3583,
+        "posts": 27
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-08-02T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 32657,
+        "posts": 144
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 24743,
+        "posts": 118
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 24571,
+        "posts": 96
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 22743,
+        "posts": 109
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 18743,
+        "posts": 84
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 18829,
+        "posts": 91
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 15829,
+        "posts": 75
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 11829,
+        "posts": 63
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 9495,
+        "posts": 49
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 7993,
+        "posts": 41
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 3987,
+        "posts": 34
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3608,
+        "posts": 27
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-08-03T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 32771,
+        "posts": 144
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 24829,
+        "posts": 119
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 24714,
+        "posts": 97
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 22829,
+        "posts": 109
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 18829,
+        "posts": 84
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 18886,
+        "posts": 91
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 15886,
+        "posts": 75
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 11886,
+        "posts": 63
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 9542,
+        "posts": 49
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 8024,
+        "posts": 42
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 4017,
+        "posts": 34
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3633,
+        "posts": 28
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-08-04T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 32886,
+        "posts": 145
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 24914,
+        "posts": 119
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 24857,
+        "posts": 97
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 22914,
+        "posts": 110
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 18914,
+        "posts": 85
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 18943,
+        "posts": 92
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 15943,
+        "posts": 76
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 11943,
+        "posts": 64
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 9588,
+        "posts": 50
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 8055,
+        "posts": 42
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 4048,
+        "posts": 35
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3659,
+        "posts": 28
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-08-05T00:00:00.000Z",
+    "contestants": [
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 33000,
+        "posts": 145
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 25000,
+        "posts": 120
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 25000,
+        "posts": 98
+      },
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 23000,
+        "posts": 110
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 19000,
+        "posts": 85
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 19000,
+        "posts": 92
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 16000,
+        "posts": 76
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 12000,
+        "posts": 64
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 9635,
+        "posts": 50
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 8086,
+        "posts": 42
+      },
+      {
+        "handle": "oliwia_mieczaki",
+        "followers": 4079,
+        "posts": 35
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 3684,
+        "posts": 28
+      }
+    ]
+  }
+]

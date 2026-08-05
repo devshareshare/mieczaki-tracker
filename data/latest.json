@@ -1,0 +1,113 @@
+{
+  "timestamp": "2026-08-05T00:00:00.000Z",
+  "contestants": [
+    {
+      "id": "pamelka_mieczaki",
+      "name": "Pamela Kiedrowicz",
+      "handle": "pamelka_mieczaki",
+      "followers": 33000,
+      "posts": 145,
+      "avatar": "/avatars/pamelka_mieczaki.jpg",
+      "instagramUrl": "https://www.instagram.com/pamelka_mieczaki/"
+    },
+    {
+      "id": "filip_mieczaki",
+      "name": "Filip Wrzosek",
+      "handle": "filip_mieczaki",
+      "followers": 25000,
+      "posts": 120,
+      "avatar": "/avatars/filip_mieczaki.jpg",
+      "instagramUrl": "https://www.instagram.com/filip_mieczaki/"
+    },
+    {
+      "id": "pati_mieczaki",
+      "name": "Patrycja \"Pati\" Tomaszewska",
+      "handle": "pati_mieczaki",
+      "followers": 25000,
+      "posts": 98,
+      "avatar": "/avatars/pati_mieczaki.jpg",
+      "instagramUrl": "https://www.instagram.com/pati_mieczaki/"
+    },
+    {
+      "id": "maquk_mieczaki",
+      "name": "Dominik \"Maquk\" Makowiak",
+      "handle": "maquk_mieczaki",
+      "followers": 23000,
+      "posts": 110,
+      "avatar": "/avatars/maquk_mieczaki.jpg",
+      "instagramUrl": "https://www.instagram.com/maquk_mieczaki/"
+    },
+    {
+      "id": "stachu_goggins_mieczaki",
+      "name": "Stanisław \"Stachu\" Dybowski",
+      "handle": "stachu_goggins_mieczaki",
+      "followers": 19000,
+      "posts": 85,
+      "avatar": "/avatars/stachu_goggins_mieczaki.jpg",
+      "instagramUrl": "https://www.instagram.com/stachu_goggins_mieczaki/"
+    },
+    {
+      "id": "wiktor_mieczaki",
+      "name": "Wiktor Woroniak",
+      "handle": "wiktor_mieczaki",
+      "followers": 19000,
+      "posts": 92,
+      "avatar": "/avatars/wiktor_mieczaki.jpg",
+      "instagramUrl": "https://www.instagram.com/wiktor_mieczaki/"
+    },
+    {
+      "id": "magda_mieczaki",
+      "name": "Magdalena Majewska",
+      "handle": "magda_mieczaki",
+      "followers": 16000,
+      "posts": 76,
+      "avatar": "/avatars/magda_mieczaki.jpg",
+      "instagramUrl": "https://www.instagram.com/magda_mieczaki/"
+    },
+    {
+      "id": "dori_mieczaki",
+      "name": "Dorota \"Dori\" Kaczmarek",
+      "handle": "dori_mieczaki",
+      "followers": 12000,
+      "posts": 64,
+      "avatar": "/avatars/dori_mieczaki.jpg",
+      "instagramUrl": "https://www.instagram.com/dori_mieczaki/"
+    },
+    {
+      "id": "patrykbutrym_mieczaki",
+      "name": "Patryk Butrym",
+      "handle": "patrykbutrym_mieczaki",
+      "followers": 9635,
+      "posts": 50,
+      "avatar": "/avatars/patrykbutrym_mieczaki.jpg",
+      "instagramUrl": "https://www.instagram.com/patrykbutrym_mieczaki/"
+    },
+    {
+      "id": "oktawia_mieczaki",
+      "name": "Oktawia Juszczyk",
+      "handle": "oktawia_mieczaki",
+      "followers": 8086,
+      "posts": 42,
+      "avatar": "/avatars/oktawia_mieczaki.jpg",
+      "instagramUrl": "https://www.instagram.com/oktawia_mieczaki/"
+    },
+    {
+      "id": "oliwia_mieczaki",
+      "name": "Oliwia Płodzień",
+      "handle": "oliwia_mieczaki",
+      "followers": 4079,
+      "posts": 35,
+      "avatar": "/avatars/oliwia_mieczaki.jpg",
+      "instagramUrl": "https://www.instagram.com/oliwia_mieczaki/"
+    },
+    {
+      "id": "patrycja_mieczaki",
+      "name": "Patrycja Bochyńska",
+      "handle": "patrycja_mieczaki",
+      "followers": 3684,
+      "posts": 28,
+      "avatar": "/avatars/patrycja_mieczaki.jpg",
+      "instagramUrl": "https://www.instagram.com/patrycja_mieczaki/"
+    }
+  ]
+}
