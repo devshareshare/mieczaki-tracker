@@ -24,6 +24,21 @@ CONTESTANT_HANDLES = [
     "wiktor_mieczaki",
 ]
 
+OFFICIAL_MIECZAKI_AVATARS = {
+    "maquk_mieczaki": "https://mieczaki.com/wp-content/uploads/2026/05/Dominik-Makowiak.jpg",
+    "dori_mieczaki": "https://mieczaki.com/wp-content/uploads/2026/05/DOROTA_KACZMAREK_.jpg",
+    "filip_mieczaki": "https://mieczaki.com/wp-content/uploads/2026/05/Filip-Wrzosek.jpg",
+    "magda_mieczaki": "https://mieczaki.com/wp-content/uploads/2026/05/Magdalena-Majewska.jpg",
+    "oktawia_mieczaki": "https://mieczaki.com/wp-content/uploads/2026/05/OKTAWIA_JUSZCZYK.jpg",
+    "oliwia_mieczaki": "https://mieczaki.com/wp-content/uploads/2026/05/OLIWIA_PLODZIEN.jpg",
+    "pamelka_mieczaki": "https://mieczaki.com/wp-content/uploads/2026/05/PAMELA_KIEDROWICZ.jpg",
+    "patrycja_mieczaki": "https://mieczaki.com/wp-content/uploads/2026/05/PATRYCJA_BOCHYNSKA.jpg",
+    "pati_mieczaki": "https://mieczaki.com/wp-content/uploads/2026/05/PATRYCJA_TOMASZEWSKA.jpg",
+    "patrykbutrym_mieczaki": "https://mieczaki.com/wp-content/uploads/2026/05/PATRYK_BUTRYM.jpg",
+    "stachu_goggins_mieczaki": "https://mieczaki.com/wp-content/uploads/2026/05/STANISLAW_DYBOWSKI.jpg",
+    "wiktor_mieczaki": "https://mieczaki.com/wp-content/uploads/2026/05/WIKTOR_WORONIAK.jpg",
+}
+
 USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
@@ -198,18 +213,26 @@ def merge_contestant_data(
 
     updated = dict(existing)
 
+    avatar_path = get_avatar_path(handle, base_dir)
+    avatar_success = False
+
     if scraped and scraped.get("followers") is not None and scraped.get("posts") is not None:
         updated["followers"] = scraped["followers"]
         updated["posts"] = scraped["posts"]
 
         avatar_url = scraped.get("avatar_url")
         if avatar_url:
-            avatar_path = get_avatar_path(handle, base_dir)
-            download_avatar(avatar_url, avatar_path, user_agent)
+            avatar_success = download_avatar(avatar_url, avatar_path, user_agent)
     else:
         print(
             f"[fallback] Retaining previous metrics for {handle}: followers={updated.get('followers')}, posts={updated.get('posts')}"
         )
+
+    # Ensure avatar exists; if missing or scrape failed, use official mieczaki.com avatar
+    if not avatar_success or not avatar_path.exists():
+        official_url = OFFICIAL_MIECZAKI_AVATARS.get(handle)
+        if official_url:
+            download_avatar(official_url, avatar_path, user_agent)
 
     return updated
 
