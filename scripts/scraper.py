@@ -173,13 +173,20 @@ def fetch_instagram_profile(handle: str, user_agent: str | None = None) -> dict 
 
     scraped_comments = None
     try:
+        import socket
         import instaloader
-        L = instaloader.Instaloader()
+        socket.setdefaulttimeout(5)
+        L = instaloader.Instaloader(max_connection_attempts=1)
         L.context._session.verify = False
+        L.context.max_connection_attempts = 1
         profile = instaloader.Profile.from_username(L.context, handle)
         total_comments = 0
+        posts_counted = 0
         for post in profile.get_posts():
             total_comments += getattr(post, "comments", 0)
+            posts_counted += 1
+            if posts_counted >= 30:
+                break
         scraped_comments = total_comments
     except Exception as e:
         print(f"[instaloader] {handle}: Instaloader comments query: {e}", file=sys.stderr)
