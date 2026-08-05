@@ -58,7 +58,9 @@ export function createPodium(contestants: Contestant[]): HTMLElement {
     const milestone = getMilestoneProgress(contestant.followers);
     const formattedFollowers = contestant.followers.toLocaleString("en-US");
     const formattedPosts = contestant.posts.toLocaleString("en-US");
-    const formattedComments = (contestant.comments || 0).toLocaleString("en-US");
+    const formattedComments = (contestant.comments || 0).toLocaleString(
+      "en-US",
+    );
 
     const card = document.createElement("div");
     card.className = `podium-card ${type}`;

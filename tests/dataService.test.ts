@@ -48,25 +48,70 @@ const mockHistory: HistorySnapshot[] = [
   {
     timestamp: "2026-07-01T00:00:00.000Z",
     contestants: [
-      { handle: "pamelka_mieczaki", followers: 29000, posts: 130, comments: 4000 },
-      { handle: "filip_mieczaki", followers: 20000, posts: 100, comments: 2500 },
-      { handle: "patrycja_mieczaki", followers: 2000, posts: 20, comments: 400 },
+      {
+        handle: "pamelka_mieczaki",
+        followers: 29000,
+        posts: 130,
+        comments: 4000,
+      },
+      {
+        handle: "filip_mieczaki",
+        followers: 20000,
+        posts: 100,
+        comments: 2500,
+      },
+      {
+        handle: "patrycja_mieczaki",
+        followers: 2000,
+        posts: 20,
+        comments: 400,
+      },
     ],
   },
   {
     timestamp: "2026-07-29T00:00:00.000Z", // 7 days before latest
     contestants: [
-      { handle: "pamelka_mieczaki", followers: 31500, posts: 140, comments: 4500 },
-      { handle: "filip_mieczaki", followers: 23000, posts: 110, comments: 2800 },
-      { handle: "patrycja_mieczaki", followers: 3000, posts: 25, comments: 550 },
+      {
+        handle: "pamelka_mieczaki",
+        followers: 31500,
+        posts: 140,
+        comments: 4500,
+      },
+      {
+        handle: "filip_mieczaki",
+        followers: 23000,
+        posts: 110,
+        comments: 2800,
+      },
+      {
+        handle: "patrycja_mieczaki",
+        followers: 3000,
+        posts: 25,
+        comments: 550,
+      },
     ],
   },
   {
     timestamp: "2026-08-05T00:00:00.000Z",
     contestants: [
-      { handle: "pamelka_mieczaki", followers: 33000, posts: 145, comments: 4800 },
-      { handle: "filip_mieczaki", followers: 25000, posts: 120, comments: 3200 },
-      { handle: "patrycja_mieczaki", followers: 3684, posts: 28, comments: 650 },
+      {
+        handle: "pamelka_mieczaki",
+        followers: 33000,
+        posts: 145,
+        comments: 4800,
+      },
+      {
+        handle: "filip_mieczaki",
+        followers: 25000,
+        posts: 120,
+        comments: 3200,
+      },
+      {
+        handle: "patrycja_mieczaki",
+        followers: 3684,
+        posts: 28,
+        comments: 650,
+      },
     ],
   },
 ];

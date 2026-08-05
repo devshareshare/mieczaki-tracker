@@ -43,17 +43,47 @@ const mockHistory: HistorySnapshot[] = [
   {
     timestamp: "2026-07-01T00:00:00.000Z",
     contestants: [
-      { handle: "pamelka_mieczaki", followers: 29000, posts: 130, comments: 4000 },
-      { handle: "filip_mieczaki", followers: 20000, posts: 100, comments: 2500 },
-      { handle: "patrycja_mieczaki", followers: 2000, posts: 20, comments: 400 },
+      {
+        handle: "pamelka_mieczaki",
+        followers: 29000,
+        posts: 130,
+        comments: 4000,
+      },
+      {
+        handle: "filip_mieczaki",
+        followers: 20000,
+        posts: 100,
+        comments: 2500,
+      },
+      {
+        handle: "patrycja_mieczaki",
+        followers: 2000,
+        posts: 20,
+        comments: 400,
+      },
     ],
   },
   {
     timestamp: "2026-07-29T00:00:00.000Z",
     contestants: [
-      { handle: "pamelka_mieczaki", followers: 31500, posts: 140, comments: 4500 },
-      { handle: "filip_mieczaki", followers: 23000, posts: 110, comments: 2800 },
-      { handle: "patrycja_mieczaki", followers: 3000, posts: 25, comments: 550 },
+      {
+        handle: "pamelka_mieczaki",
+        followers: 31500,
+        posts: 140,
+        comments: 4500,
+      },
+      {
+        handle: "filip_mieczaki",
+        followers: 23000,
+        posts: 110,
+        comments: 2800,
+      },
+      {
+        handle: "patrycja_mieczaki",
+        followers: 3000,
+        posts: 25,
+        comments: 550,
+      },
     ],
   },
   {
@@ -148,7 +178,9 @@ describe("Badges and Charts Components", () => {
       expect(gainerCard?.textContent).toContain("Top Weekly Gainer");
       expect(growthCard?.textContent).toContain("Fastest Weekly % Growth");
       expect(posterCard?.textContent).toContain("Most Active Weekly Poster");
-      expect(discussedCard?.textContent).toContain("Most Discussed Weekly Poster");
+      expect(discussedCard?.textContent).toContain(
+        "Most Discussed Weekly Poster",
+      );
 
       expect(gainerCard?.textContent).toContain("Filip Wrzosek");
       expect(
@@ -167,7 +199,8 @@ describe("Badges and Charts Components", () => {
 
       expect(discussedCard?.textContent).toContain("Filip Wrzosek");
       expect(
-        discussedCard?.querySelector('[data-testid="badge-metric"]')?.textContent,
+        discussedCard?.querySelector('[data-testid="badge-metric"]')
+          ?.textContent,
       ).toBe("400 komentarzy");
     });
 
