@@ -290,6 +290,7 @@ def run_scraper(project_root: Path | str | None = None) -> None:
     latest_file.parent.mkdir(parents=True, exist_ok=True)
     with open(latest_file, "w", encoding="utf-8") as f:
         json.dump(latest_payload, f, ensure_ascii=False, indent=2)
+        f.write("\n")
     print(f"[scraper] Saved updated metrics to {latest_file}")
 
     # Load and update history.json
@@ -319,6 +320,7 @@ def run_scraper(project_root: Path | str | None = None) -> None:
 
     with open(history_file, "w", encoding="utf-8") as f:
         json.dump(history_list, f, ensure_ascii=False, indent=2)
+        f.write("\n")
     print(f"[scraper] Saved history snapshot to {history_file}")
 
 
