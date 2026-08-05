@@ -36,7 +36,7 @@ export function createHeader(
         </div>
       </div>
       <h1 class="header-title">MIĘCZAKI <span>TRACKER</span></h1>
-      <p class="header-subtitle">Oficjalny ranking społecznościowy uczestników programu Mięczaki</p>
+      <p class="header-subtitle">Fanowski ranking społecznościowy uczestników programu Mięczaki</p>
     </div>
   `;
 
