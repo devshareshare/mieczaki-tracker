@@ -2,51 +2,46 @@
 
 ## What is this?
 
-A locally-hosted Instagram follower tracker for the Polish fitness reality show **"Mięczaki"** created by Adam Josef Modzelewski (AJ / @ajthepolishamerican). The project tracks follower counts of the 12 contestants competing in a 6-month physical/mental transformation program, with a €200K prize.
+An automated, zero-cost static web application hosted on **GitHub Pages** tracking Instagram follower counts, published post counts, and growth analytics for contestants of the Polish fitness reality show **"Mięczaki"** created by Adam Josef Modzelewski (AJ / [@ajthepolishamerican](https://instagram.com/ajthepolishamerican)).
 
-## Key concepts
+Contestants undergo a 6-month physical and mental transformation program competing for a 200,000 PLN prize and a contract with AJ's brand OYCHE.
 
-- **Mięczaki** — "mollusks" in Polish; the show's name, implying soft/out-of-shape participants who transform into "twardziele" (tough guys)
-- **AJ** — Adam Josef Modzelewski, creator/coach, Polish-American fitness YouTuber
-- **Contestants** — 12 participants living together, undergoing fitness transformations
-- **Podium** — Top 3 by Instagram followers displayed as gold/silver/bronze
+---
 
-## Project components
+## Domain Vocabulary
 
-- `index.html` — Single-page tracker with podium, tile grid, and flanking project/coach profiles
-- `server.py` — Python HTTP server (attempted IG scraper backend — blocked by Instagram)
-- `img/` — Downloaded profile pictures (stale; page uses live IG CDN URLs now)
+- **Mięczaki** — "Mollusks" in Polish; the show's name, signifying out-of-shape participants who transform into "twardziele" (tough guys).
+- **AJ** — Adam Josef Modzelewski, show creator, coach, and fitness influencer.
+- **Contestants** — The 12 participants competing in the show.
+- **Podium** — Gold (#1), Silver (#2), and Bronze (#3) top performers display.
+- **Special Badges** — Highlight cards for *Top Weekly Gainer*, *Fastest % Growth*, and *Most Active Poster*.
 
-## Contestants (12)
+---
+
+## Tracked Contestants (12)
 
 | Handle | Name | Nickname |
 |---|---|---|
-| maquk_mieczaki | Dominik Makowiak | Maquk |
-| dori_mieczaki | Dorota Kaczmarek | Dori |
-| filip_mieczaki | Filip Wrzosek | — |
-| magda_mieczaki | Magdalena Majewska | — |
-| oktawia_mieczaki | Oktawia Juszczyk | — |
-| oliwia_mieczaki | Oliwia Płodzień | — |
-| pamelka_mieczaki | Pamela Kiedrowicz | — |
-| patrycja_mieczaki | Patrycja Bochyńska | — |
-| pati_mieczaki | Patrycja Tomaszewska | Pati |
-| patrykbutrym_mieczaki | Patryk Butrym | — |
-| stachu_goggins_mieczaki | Stanisław Dybowski | Stachu |
-| wiktor_mieczaki | Wiktor Woroniak | — |
+| `pamelka_mieczaki` | Pamela Kiedrowicz | — |
+| `pati_mieczaki` | Patrycja Tomaszewska | Pati |
+| `filip_mieczaki` | Filip Wrzosek | — |
+| `maquk_mieczaki` | Dominik Makowiak | Maquk |
+| `stachu_goggins_mieczaki` | Stanisław Dybowski | Stachu |
+| `wiktor_mieczaki` | Wiktor Woroniak | — |
+| `magda_mieczaki` | Magdalena Majewska | — |
+| `dori_mieczaki` | Dorota Kaczmarek | Dori |
+| `patrykbutrym_mieczaki` | Patryk Butrym | — |
+| `oktawia_mieczaki` | Oktawia Juszczyk | — |
+| `oliwia_mieczaki` | Oliwia Płodzień | — |
+| `patrycja_mieczaki` | Patrycja Bochyńska | — |
 
-## Project accounts
+*Note: Host `@mieczaki_aj` and coach `@ajthepolishamerican` accounts are omitted to focus exclusively on contestant rankings.*
 
-- @mieczaki_aj — Official project account
-- @ajthepolishamerican — AJ's personal/coach account
+---
 
-## Data source
+## Technical Architecture
 
-Follower counts are scraped from Instagram og:description meta tags via the `webfetch` tool. Direct scraping from this machine is blocked by Instagram's anti-bot protection.
-
-## How to run
-
-```bash
-python3 -m http.server 8080 --directory /home/krbel/projects/mieczaki-tracker
-```
-
-Then open http://localhost:8080
+- **Frontend**: Vite + TypeScript (strict mode) + Chart.js + CSS Variables (lime `#c8ff00` accents on `#121212` dark show theme).
+- **Data Engine**: `data/latest.json` (current metrics) + `data/history.json` (daily snapshot log) + `src/services/dataService.ts` (analytics calculations).
+- **Scraper & Avatars**: Python 3 (`scripts/scraper.py`) with User-Agent rotation, `og:description` parsing, local JPEG caching under `public/avatars/`, and high-res fallbacks from `mieczaki.com`.
+- **CI/CD Autopilot**: GitHub Actions workflow (`.github/workflows/daily-update.yml`) runs daily at 6:00 AM UTC to scrape Instagram, update JSON & avatars, execute tests, build Vite assets, and deploy to GitHub Pages.
