@@ -1,7 +1,7 @@
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
-  base: "./",
+  base: "/mieczaki-tracker/",
   test: {
     environment: "jsdom",
   },
