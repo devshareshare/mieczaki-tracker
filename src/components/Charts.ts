@@ -87,6 +87,19 @@ export function createCharts(
   `;
   gridContainer.appendChild(postsBarCard);
 
+  // Monthly Comments Gained
+  const commentsBarCard = document.createElement("div");
+  commentsBarCard.className = "chart-card";
+  commentsBarCard.innerHTML = `
+    <div class="chart-card-header">
+      <h3 class="chart-card-title">💬 KOMENTARZE ZYSKANE MIESIĘCZNIE</h3>
+    </div>
+    <div class="chart-container-wrapper">
+      <canvas id="monthly-comments-chart"></canvas>
+    </div>
+  `;
+  gridContainer.appendChild(commentsBarCard);
+
   section.appendChild(gridContainer);
 
   // Initialize Charts when appended or immediately
@@ -94,6 +107,7 @@ export function createCharts(
     initTrajectoryChart(section, history);
     initMonthlyFollowersChart(section, history);
     initMonthlyPostsChart(section, history);
+    initMonthlyCommentsChart(section, history);
   }, 0);
 
   return section;
@@ -368,6 +382,76 @@ function initMonthlyPostsChart(
   const datasets = Array.from(handlesSet).map((handle) => {
     const color = getColorForHandle(handle);
     const data = monthlyStats.map((s) => s.postsPublished[handle] || 0);
+    return {
+      label: `@${handle}`,
+      data,
+      backgroundColor: color,
+      borderRadius: 4,
+    };
+  });
+
+  new Chart(canvas, {
+    type: "bar",
+    data: {
+      labels,
+      datasets,
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          labels: {
+            color: "#f3f4f6",
+            font: { family: "'Plus Jakarta Sans', sans-serif", size: 11 },
+            usePointStyle: true,
+            boxWidth: 8,
+          },
+        },
+        tooltip: {
+          backgroundColor: "#1e1e1e",
+          titleColor: "#c8ff00",
+          bodyColor: "#f3f4f6",
+          borderColor: "#2e2e2e",
+          borderWidth: 1,
+        },
+      },
+      scales: {
+        x: {
+          grid: { color: "rgba(255, 255, 255, 0.05)" },
+          ticks: { color: "#9ca3af" },
+        },
+        y: {
+          grid: { color: "rgba(255, 255, 255, 0.05)" },
+          ticks: { color: "#9ca3af" },
+        },
+      },
+    },
+  });
+}
+
+function initMonthlyCommentsChart(
+  container: HTMLElement,
+  history: HistorySnapshot[],
+) {
+  const canvas = container.querySelector(
+    "#monthly-comments-chart",
+  ) as HTMLCanvasElement | null;
+  if (!canvas) return;
+
+  const monthlyStats = getMonthlyStats(history);
+  const labels = monthlyStats.map((s) => s.month);
+
+  const handlesSet = new Set<string>();
+  for (const s of monthlyStats) {
+    for (const h of Object.keys(s.commentsGained)) {
+      handlesSet.add(h);
+    }
+  }
+
+  const datasets = Array.from(handlesSet).map((handle) => {
+    const color = getColorForHandle(handle);
+    const data = monthlyStats.map((s) => s.commentsGained[handle] || 0);
     return {
       label: `@${handle}`,
       data,

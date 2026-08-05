@@ -7,9 +7,7 @@ import type {
   MonthlyStats,
 } from "../types/data";
 
-const MILESTONES = [
-  1000, 2500, 5000, 10000, 25000, 50000, 100000, 250000, 500000, 1000000,
-];
+const TARGET_GOAL = 50000;
 
 export interface GrowthChartDataset {
   handle: string;
@@ -36,9 +34,7 @@ export function getRankedContestants(latest: LatestSnapshot): Contestant[] {
 
 export function getMilestoneProgress(followers: number): MilestoneProgress {
   const current = Math.max(0, followers);
-  const target =
-    MILESTONES.find((m) => m > current) ??
-    Math.ceil((current + 1) / 100000) * 100000;
+  const target = TARGET_GOAL;
   const rawPercent = (current / target) * 100;
   const percent = Math.min(100, Math.max(0, Number(rawPercent.toFixed(1))));
 
@@ -99,6 +95,7 @@ export function getBadges(
   let topGainer: { handle: string; gained: number } | undefined;
   let fastestGrowth: { handle: string; percent: number } | undefined;
   let mostActive: { handle: string; posts: number } | undefined;
+  let mostDiscussed: { handle: string; comments: number } | undefined;
 
   for (const c of latest.contestants) {
     const pastEntry = pastSnapshot.contestants.find(
@@ -106,6 +103,10 @@ export function getBadges(
     );
     const pastFollowers = pastEntry ? pastEntry.followers : c.followers;
     const pastPosts = pastEntry ? pastEntry.posts : c.posts;
+    const pastComments =
+      pastEntry && pastEntry.comments !== undefined
+        ? pastEntry.comments
+        : c.comments || 0;
 
     const gained = c.followers - pastFollowers;
     const percent =
@@ -115,6 +116,7 @@ export function getBadges(
           )
         : 0;
     const postsGained = c.posts - pastPosts;
+    const commentsGained = (c.comments || 0) - pastComments;
 
     if (gained > 0 && (!topGainer || gained > topGainer.gained)) {
       topGainer = { handle: c.handle, gained };
@@ -128,12 +130,19 @@ export function getBadges(
     if (!mostActive || postsMetric > mostActive.posts) {
       mostActive = { handle: c.handle, posts: postsMetric };
     }
+
+    const commentsMetric =
+      commentsGained > 0 ? commentsGained : c.comments || 0;
+    if (!mostDiscussed || commentsMetric > mostDiscussed.comments) {
+      mostDiscussed = { handle: c.handle, comments: commentsMetric };
+    }
   }
 
   return {
     topWeeklyGainer: topGainer,
     fastestPercentageGrowth: fastestGrowth,
     mostActivePoster: mostActive,
+    mostDiscussedPoster: mostDiscussed,
   };
 }
 
@@ -210,6 +219,7 @@ export function getMonthlyStats(history: HistorySnapshot[]): MonthlyStats {
 
     const followersGained: Record<string, number> = {};
     const postsPublished: Record<string, number> = {};
+    const commentsGained: Record<string, number> = {};
 
     const handles = new Set<string>([
       ...startSnapshot.contestants.map((c) => c.handle),
@@ -226,15 +236,23 @@ export function getMonthlyStats(history: HistorySnapshot[]): MonthlyStats {
       const endFollowers = endEntry ? endEntry.followers : 0;
       const startPosts = startEntry ? startEntry.posts : 0;
       const endPosts = endEntry ? endEntry.posts : 0;
+      const startComments =
+        startEntry && startEntry.comments !== undefined
+          ? startEntry.comments
+          : 0;
+      const endComments =
+        endEntry && endEntry.comments !== undefined ? endEntry.comments : 0;
 
       followersGained[handle] = Math.max(0, endFollowers - startFollowers);
       postsPublished[handle] = Math.max(0, endPosts - startPosts);
+      commentsGained[handle] = Math.max(0, endComments - startComments);
     }
 
     result.push({
       month: monthKey,
       followersGained,
       postsPublished,
+      commentsGained,
     });
 
     lastSnapshotOfPreviousMonth = endSnapshot;

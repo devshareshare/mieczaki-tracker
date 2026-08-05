@@ -34,6 +34,7 @@ export function createTileGrid(
     const milestone = getMilestoneProgress(contestant.followers);
     const formattedFollowers = contestant.followers.toLocaleString("en-US");
     const formattedPosts = contestant.posts.toLocaleString("en-US");
+    const formattedComments = (contestant.comments || 0).toLocaleString("en-US");
 
     const card = document.createElement("div");
     card.className = "tile-card";
@@ -70,6 +71,10 @@ export function createTileGrid(
         <div class="tile-stat">
           <span class="tile-stat-value" data-testid="posts-count">${formattedPosts}</span>
           <span class="tile-stat-label">Postów</span>
+        </div>
+        <div class="tile-stat">
+          <span class="tile-stat-value" data-testid="comments-count">${formattedComments}</span>
+          <span class="tile-stat-label">Komentarzy</span>
         </div>
       </div>
 

@@ -196,6 +196,23 @@ body {
   gap: 1.5rem;
 }
 
+.section-header-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.25rem;
+}
+
+.section-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-dim);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
 .section-title {
   font-family: var(--font-display);
   font-size: 2rem;
@@ -400,6 +417,16 @@ body {
   gap: 1.25rem;
 }
 
+/* Center 4th badge on 2nd row when 4 badges are present */
+@media (min-width: 900px) {
+  .badges-grid > .badge-card:last-child:nth-child(4) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 100%;
+    max-width: 380px;
+  }
+}
+
 .badge-card {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
@@ -464,6 +491,13 @@ body {
   font-weight: 700;
   color: var(--text-main);
   line-height: 1.2;
+}
+
+.badge-timeframe {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-top: 0.2rem;
+  font-weight: 500;
 }
 
 .badge-body {

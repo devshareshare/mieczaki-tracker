@@ -40,7 +40,9 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          python3 -m pip install instaloader
 
       - name: Run Instagram Scraper
         run: python3 scripts/scraper.py

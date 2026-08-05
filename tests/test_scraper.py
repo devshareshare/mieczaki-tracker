@@ -84,6 +84,7 @@ class TestScraper(unittest.TestCase):
             "handle": "pamelka_mieczaki",
             "followers": 33000,
             "posts": 145,
+            "comments": 4800,
             "avatar": "/avatars/pamelka_mieczaki.jpg",
             "instagramUrl": "https://www.instagram.com/pamelka_mieczaki/",
         }
@@ -98,12 +99,14 @@ class TestScraper(unittest.TestCase):
         )
         self.assertEqual(merged_failed["followers"], 33000)
         self.assertEqual(merged_failed["posts"], 145)
+        self.assertEqual(merged_failed["comments"], 4800)
 
         # Case 2: Scrape succeeded -> updates metrics
         scraped_success = {
             "handle": "pamelka_mieczaki",
             "followers": 33500,
             "posts": 148,
+            "comments": 4950,
             "avatar_url": None,
         }
         merged_success = merge_contestant_data(
@@ -115,6 +118,7 @@ class TestScraper(unittest.TestCase):
         )
         self.assertEqual(merged_success["followers"], 33500)
         self.assertEqual(merged_success["posts"], 148)
+        self.assertEqual(merged_success["comments"], 4950)
 
 
 if __name__ == "__main__":

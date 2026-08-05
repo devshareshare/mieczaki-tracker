@@ -8,7 +8,8 @@
       "followers": 23803,
       "posts": 7,
       "avatar": "./avatars/maquk_mieczaki.jpg",
-      "instagramUrl": "https://www.instagram.com/maquk_mieczaki/"
+      "instagramUrl": "https://www.instagram.com/maquk_mieczaki/",
+      "comments": 1295
     },
     {
       "id": "dori_mieczaki",
@@ -17,7 +18,8 @@
       "followers": 13118,
       "posts": 29,
       "avatar": "./avatars/dori_mieczaki.jpg",
-      "instagramUrl": "https://www.instagram.com/dori_mieczaki/"
+      "instagramUrl": "https://www.instagram.com/dori_mieczaki/",
+      "comments": 1612
     },
     {
       "id": "filip_mieczaki",
@@ -26,7 +28,8 @@
       "followers": 25262,
       "posts": 30,
       "avatar": "./avatars/filip_mieczaki.jpg",
-      "instagramUrl": "https://www.instagram.com/filip_mieczaki/"
+      "instagramUrl": "https://www.instagram.com/filip_mieczaki/",
+      "comments": 1863
     },
     {
       "id": "magda_mieczaki",
@@ -35,7 +38,8 @@
       "followers": 16671,
       "posts": 17,
       "avatar": "./avatars/magda_mieczaki.jpg",
-      "instagramUrl": "https://www.instagram.com/magda_mieczaki/"
+      "instagramUrl": "https://www.instagram.com/magda_mieczaki/",
+      "comments": 1241
     },
     {
       "id": "oktawia_mieczaki",
@@ -44,7 +48,8 @@
       "followers": 8413,
       "posts": 71,
       "avatar": "./avatars/oktawia_mieczaki.jpg",
-      "instagramUrl": "https://www.instagram.com/oktawia_mieczaki/"
+      "instagramUrl": "https://www.instagram.com/oktawia_mieczaki/",
+      "comments": 1982
     },
     {
       "id": "oliwia_mieczaki",
@@ -53,7 +58,8 @@
       "followers": 4265,
       "posts": 9,
       "avatar": "./avatars/oliwia_mieczaki.jpg",
-      "instagramUrl": "https://www.instagram.com/oliwia_mieczaki/"
+      "instagramUrl": "https://www.instagram.com/oliwia_mieczaki/",
+      "comments": 474
     },
     {
       "id": "pamelka_mieczaki",
@@ -62,7 +68,8 @@
       "followers": 33511,
       "posts": 25,
       "avatar": "./avatars/pamelka_mieczaki.jpg",
-      "instagramUrl": "https://www.instagram.com/pamelka_mieczaki/"
+      "instagramUrl": "https://www.instagram.com/pamelka_mieczaki/",
+      "comments": 2125
     },
     {
       "id": "patrycja_mieczaki",
@@ -71,7 +78,8 @@
       "followers": 3873,
       "posts": 40,
       "avatar": "./avatars/patrycja_mieczaki.jpg",
-      "instagramUrl": "https://www.instagram.com/patrycja_mieczaki/"
+      "instagramUrl": "https://www.instagram.com/patrycja_mieczaki/",
+      "comments": 1393
     },
     {
       "id": "pati_mieczaki",
@@ -80,7 +88,8 @@
       "followers": 25837,
       "posts": 15,
       "avatar": "./avatars/pati_mieczaki.jpg",
-      "instagramUrl": "https://www.instagram.com/pati_mieczaki/"
+      "instagramUrl": "https://www.instagram.com/pati_mieczaki/",
+      "comments": 1711
     },
     {
       "id": "patrykbutrym_mieczaki",
@@ -89,7 +98,8 @@
       "followers": 10406,
       "posts": 16,
       "avatar": "./avatars/patrykbutrym_mieczaki.jpg",
-      "instagramUrl": "https://www.instagram.com/patrykbutrym_mieczaki/"
+      "instagramUrl": "https://www.instagram.com/patrykbutrym_mieczaki/",
+      "comments": 856
     },
     {
       "id": "stachu_goggins_mieczaki",
@@ -98,7 +108,8 @@
       "followers": 19879,
       "posts": 17,
       "avatar": "./avatars/stachu_goggins_mieczaki.jpg",
-      "instagramUrl": "https://www.instagram.com/stachu_goggins_mieczaki/"
+      "instagramUrl": "https://www.instagram.com/stachu_goggins_mieczaki/",
+      "comments": 1265
     },
     {
       "id": "wiktor_mieczaki",
@@ -107,7 +118,8 @@
       "followers": 19543,
       "posts": 10,
       "avatar": "./avatars/wiktor_mieczaki.jpg",
-      "instagramUrl": "https://www.instagram.com/wiktor_mieczaki/"
+      "instagramUrl": "https://www.instagram.com/wiktor_mieczaki/",
+      "comments": 1207
     }
   ]
 }

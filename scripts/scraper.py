@@ -162,7 +162,7 @@ def download_avatar(url: str, dest_path: Path, user_agent: str) -> bool:
 
 
 def fetch_instagram_profile(handle: str, user_agent: str | None = None) -> dict | None:
-    """Fetch profile HTML and extract followers, posts, and avatar URL."""
+    """Fetch profile HTML and extract followers, posts, comments, and avatar URL."""
     url = f"https://www.instagram.com/{handle}/"
     ua = user_agent or get_random_user_agent()
     headers = {
@@ -170,6 +170,19 @@ def fetch_instagram_profile(handle: str, user_agent: str | None = None) -> dict 
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
         "Accept-Language": "pl-PL,pl;q=0.9,en-US;q=0.8",
     }
+
+    scraped_comments = None
+    try:
+        import instaloader
+        L = instaloader.Instaloader()
+        L.context._session.verify = False
+        profile = instaloader.Profile.from_username(L.context, handle)
+        total_comments = 0
+        for post in profile.get_posts():
+            total_comments += getattr(post, "comments", 0)
+        scraped_comments = total_comments
+    except Exception as e:
+        print(f"[instaloader] {handle}: Instaloader comments query: {e}", file=sys.stderr)
 
     try:
         req = urllib.request.Request(url, headers=headers)
@@ -187,12 +200,16 @@ def fetch_instagram_profile(handle: str, user_agent: str | None = None) -> dict 
     followers, posts = stats
     og_image = parse_og_image(html)
 
-    return {
+    result = {
         "handle": handle,
         "followers": followers,
         "posts": posts,
         "avatar_url": og_image,
     }
+    if scraped_comments is not None:
+        result["comments"] = scraped_comments
+
+    return result
 
 
 def merge_contestant_data(
@@ -210,11 +227,14 @@ def merge_contestant_data(
             "handle": handle,
             "followers": 0,
             "posts": 0,
+            "comments": 0,
             "avatar": f"./avatars/{handle}.jpg",
             "instagramUrl": f"https://www.instagram.com/{handle}/",
         }
 
     updated = dict(existing)
+    if "comments" not in updated:
+        updated["comments"] = 0
 
     avatar_path = get_avatar_path(handle, base_dir)
     avatar_success = False
@@ -223,12 +243,15 @@ def merge_contestant_data(
         updated["followers"] = scraped["followers"]
         updated["posts"] = scraped["posts"]
 
+        if scraped.get("comments") is not None:
+            updated["comments"] = scraped["comments"]
+
         avatar_url = scraped.get("avatar_url")
         if avatar_url:
             avatar_success = download_avatar(avatar_url, avatar_path, user_agent)
     else:
         print(
-            f"[fallback] Retaining previous metrics for {handle}: followers={updated.get('followers')}, posts={updated.get('posts')}"
+            f"[fallback] Retaining previous metrics for {handle}: followers={updated.get('followers')}, posts={updated.get('posts')}, comments={updated.get('comments')}"
         )
 
     # Ensure avatar exists; if missing or scrape failed, use official mieczaki.com avatar
@@ -279,6 +302,7 @@ def run_scraper(project_root: Path | str | None = None) -> None:
                 "handle": handle,
                 "followers": merged["followers"],
                 "posts": merged["posts"],
+                "comments": merged.get("comments", 0),
             }
         )
 

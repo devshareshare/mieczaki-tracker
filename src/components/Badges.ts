@@ -12,10 +12,20 @@ export function createBadges(
   const section = document.createElement("section");
   section.className = "badges-section";
 
+  const headerGroup = document.createElement("div");
+  headerGroup.className = "section-header-group";
+
   const title = document.createElement("h2");
   title.className = "section-title";
-  title.textContent = "WYRÓŻNIENIA I BADGE'E";
-  section.appendChild(title);
+  title.textContent = "WYRÓŻNIENIA I BADGE'E (TYGODNIOWE)";
+
+  const subtitle = document.createElement("p");
+  subtitle.className = "section-subtitle";
+  subtitle.textContent = "Wyniki z ostatnich 7 dni";
+
+  headerGroup.appendChild(title);
+  headerGroup.appendChild(subtitle);
+  section.appendChild(headerGroup);
 
   const grid = document.createElement("div");
   grid.className = "badges-grid";
@@ -34,8 +44,9 @@ export function createBadges(
   const gainerCard = createBadgeCard({
     badgeType: "top-weekly-gainer",
     icon: "🔥",
-    category: "LIDER WZROSTU",
+    category: "TYGODNIOWY LIDER WZROSTU",
     title: "Top Weekly Gainer",
+    timeframe: "Ostatnie 7 dni",
     contestant: gainerContestant,
     handle: gainerData?.handle,
     metricText: gainerData
@@ -50,8 +61,9 @@ export function createBadges(
   const growthCard = createBadgeCard({
     badgeType: "fastest-percentage-growth",
     icon: "🚀",
-    category: "NAJSZYBSZY % WZROST",
-    title: "Fastest % Growth",
+    category: "NAJSZYBSZY TYGODNIOWY % WZROST",
+    title: "Fastest Weekly % Growth",
+    timeframe: "Ostatnie 7 dni",
     contestant: growthContestant,
     handle: growthData?.handle,
     metricText: growthData ? `+${growthData.percent}%` : "Brak danych",
@@ -64,8 +76,9 @@ export function createBadges(
   const posterCard = createBadgeCard({
     badgeType: "most-active-poster",
     icon: "📸",
-    category: "NAJBARDZIEJ AKTYWNY",
-    title: "Most Active Poster",
+    category: "NAJBARDZIEJ AKTYWNY W TYGODNIU",
+    title: "Most Active Weekly Poster",
+    timeframe: "Ostatnie 7 dni",
     contestant: posterContestant,
     handle: posterData?.handle,
     metricText: posterData
@@ -73,6 +86,23 @@ export function createBadges(
       : "Brak danych",
   });
   grid.appendChild(posterCard);
+
+  // 4. Most Discussed Poster
+  const discussedData = calculatedBadges.mostDiscussedPoster;
+  const discussedContestant = findContestant(discussedData?.handle);
+  const discussedCard = createBadgeCard({
+    badgeType: "most-discussed-poster",
+    icon: "💬",
+    category: "NAJCZĘŚCIEJ KOMENTOWANY W TYGODNIU",
+    title: "Most Discussed Weekly Poster",
+    timeframe: "Ostatnie 7 dni",
+    contestant: discussedContestant,
+    handle: discussedData?.handle,
+    metricText: discussedData
+      ? `${discussedData.comments.toLocaleString("en-US")} komentarzy`
+      : "Brak danych",
+  });
+  grid.appendChild(discussedCard);
 
   section.appendChild(grid);
   return section;
@@ -83,6 +113,7 @@ interface BadgeCardOptions {
   icon: string;
   category: string;
   title: string;
+  timeframe?: string;
   contestant?: Contestant;
   handle?: string;
   metricText: string;
@@ -93,7 +124,8 @@ function createBadgeCard(options: BadgeCardOptions): HTMLElement {
   card.className = "badge-card";
   card.setAttribute("data-badge-type", options.badgeType);
 
-  const { contestant, handle, icon, category, title, metricText } = options;
+  const { contestant, handle, icon, category, title, timeframe, metricText } =
+    options;
   const displayName = contestant
     ? contestant.name
     : handle
@@ -113,6 +145,7 @@ function createBadgeCard(options: BadgeCardOptions): HTMLElement {
       <div class="badge-title-group">
         <span class="badge-category">${category}</span>
         <h3 class="badge-title">${title}</h3>
+        ${timeframe ? `<span class="badge-timeframe">${timeframe}</span>` : ""}
       </div>
     </div>
     <div class="badge-body">
