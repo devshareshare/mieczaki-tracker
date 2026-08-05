@@ -135,7 +135,7 @@ describe("UI Components", () => {
         "img.avatar-image",
       ) as HTMLImageElement;
       expect(img).not.toBeNull();
-      expect(img.getAttribute("src")).toBe("/avatars/pamelka_mieczaki.jpg");
+      expect(img.getAttribute("src")).toBe("./avatars/pamelka_mieczaki.jpg");
 
       const followers = goldCard?.querySelector(
         '[data-testid="followers-count"]',
@@ -195,7 +195,7 @@ describe("UI Components", () => {
       const img = firstCard?.querySelector(
         "img.tile-avatar",
       ) as HTMLImageElement;
-      expect(img.getAttribute("src")).toBe("/avatars/maquk_mieczaki.jpg");
+      expect(img.getAttribute("src")).toBe("./avatars/maquk_mieczaki.jpg");
 
       const followers = firstCard?.querySelector(
         '[data-testid="followers-count"]',

@@ -210,7 +210,7 @@ def merge_contestant_data(
             "handle": handle,
             "followers": 0,
             "posts": 0,
-            "avatar": f"/avatars/{handle}.jpg",
+            "avatar": f"./avatars/{handle}.jpg",
             "instagramUrl": f"https://www.instagram.com/{handle}/",
         }
 

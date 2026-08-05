@@ -51,7 +51,10 @@ export function createPodium(contestants: Contestant[]): HTMLElement {
   }
 
   for (const { contestant, rank, type, title: _rankTitle } of topThree) {
-    const avatarPath = contestant.avatar || `/avatars/${contestant.handle}.jpg`;
+    const cleanAvatar = contestant.avatar
+      ? contestant.avatar.replace(/^\//, "./")
+      : `./avatars/${contestant.handle}.jpg`;
+    const avatarPath = cleanAvatar;
     const milestone = getMilestoneProgress(contestant.followers);
     const formattedFollowers = contestant.followers.toLocaleString("en-US");
     const formattedPosts = contestant.posts.toLocaleString("en-US");
@@ -68,7 +71,7 @@ export function createPodium(contestants: Contestant[]): HTMLElement {
           src="${avatarPath}" 
           alt="${contestant.name}" 
           class="avatar-image"
-          onerror="this.onerror=null; this.src='/avatars/${contestant.handle}.jpg';"
+          onerror="this.onerror=null; this.src='./avatars/${contestant.handle}.jpg';"
         />
       </div>
       <h3 class="contestant-name">${contestant.name}</h3>

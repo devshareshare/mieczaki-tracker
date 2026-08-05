@@ -100,8 +100,9 @@ function createBadgeCard(options: BadgeCardOptions): HTMLElement {
       ? `@${handle}`
       : "Brak danych";
   const displayHandle = handle ? `@${handle}` : "";
-  const avatarPath =
-    contestant?.avatar || (handle ? `/avatars/${handle}.jpg` : "");
+  const rawAvatar =
+    contestant?.avatar || (handle ? `./avatars/${handle}.jpg` : "");
+  const avatarPath = rawAvatar ? rawAvatar.replace(/^\//, "./") : "";
   const instagramUrl =
     contestant?.instagramUrl ||
     (handle ? `https://www.instagram.com/${handle}/` : "#");
@@ -117,7 +118,7 @@ function createBadgeCard(options: BadgeCardOptions): HTMLElement {
     <div class="badge-body">
       ${
         avatarPath
-          ? `<img src="${avatarPath}" alt="${displayName}" class="badge-avatar" onerror="this.onerror=null; this.src='/avatars/${handle}.jpg';" />`
+          ? `<img src="${avatarPath}" alt="${displayName}" class="badge-avatar" onerror="this.onerror=null; this.src='./avatars/${handle}.jpg';" />`
           : ""
       }
       <div class="badge-contestant-info">
