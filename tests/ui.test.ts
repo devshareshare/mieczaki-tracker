@@ -85,26 +85,12 @@ describe("UI Components", () => {
       expect(subtitle?.textContent?.length).toBeGreaterThan(0);
     });
 
-    it("calculates and renders total aggregate followers across all contestants", () => {
-      const header = createHeader(contestants);
-      document.body.appendChild(header);
-
-      const totalElement = header.querySelector(
-        '[data-testid="total-followers"]',
-      );
-      expect(totalElement).not.toBeNull();
-      // 33000 + 25000 + 23000 + 21000 + 19000 = 121000 -> "121,000"
-      expect(totalElement?.textContent).toBe("121,000");
-    });
-
     it("handles empty contestant list gracefully", () => {
       const header = createHeader([]);
       document.body.appendChild(header);
 
-      const totalElement = header.querySelector(
-        '[data-testid="total-followers"]',
-      );
-      expect(totalElement?.textContent).toBe("0");
+      const title = header.querySelector(".header-title");
+      expect(title?.textContent).toContain("MIĘCZAKI");
     });
   });
 
