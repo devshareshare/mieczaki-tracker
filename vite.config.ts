@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  base: "/mieczaki-tracker/",
+  base: "./",
   server: {
     port: 8080,
     host: true,
