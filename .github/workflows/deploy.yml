@@ -36,6 +36,17 @@ jobs:
       - name: Build Vite application
         run: npm run build
 
+      - name: Update root build assets on main
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          cp -r dist/* .
+          git add index.html assets/ avatars/
+          if ! git diff --staged --quiet; then
+            git commit -m "build: update root static assets"
+            git push origin HEAD:main
+          fi
+
       - name: Deploy to gh-pages branch
         run: |
           git config --global user.name "github-actions[bot]"
