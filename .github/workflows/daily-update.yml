@@ -27,7 +27,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: python3 -m pip install instaloader
+        run: python3 -m pip install instaloader beautifulsoup4
 
       - name: Run Instagram Scraper
         run: python3 scripts/scraper.py

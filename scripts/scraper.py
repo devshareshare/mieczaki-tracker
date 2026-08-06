@@ -10,7 +10,13 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
+try:
+    from bs4 import BeautifulSoup
+except ImportError:
+    BeautifulSoup = None
+
 SSL_CONTEXT = ssl._create_unverified_context()
+HTTP_TIMEOUT = 8  # strict timeout in seconds
 
 CONTESTANT_HANDLES = [
     "maquk_mieczaki",
@@ -50,6 +56,10 @@ USER_AGENTS = [
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2.1 Safari/605.1.15",
 ]
 
+GOOGLEBOT_USER_AGENT = (
+    "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+)
+
 
 def get_random_user_agent() -> str:
     """Return a random User-Agent header string."""
@@ -78,30 +88,36 @@ def parse_count(raw: str) -> int:
 
 
 def parse_description_text(desc: str) -> tuple[int, int] | None:
-    """Parse '23K Followers, 41 Following, 7 Posts' into (followers, posts)."""
+    """Parse description text into (followers, posts)."""
     if not desc:
         return None
 
-    # Pattern 1: <followers> Followers, <following> Following, <posts> Posts
+    f_match = re.search(r"([\d,.\s]+[KM]?)\s*Followers?\b(?!ing)", desc, re.IGNORECASE)
+    p_match = re.search(r"([\d,.\s]+[KM]?)\s*Posts?\b", desc, re.IGNORECASE)
+
+    if f_match and p_match:
+        followers = parse_count(f_match.group(1))
+        posts = parse_count(p_match.group(1))
+        return (followers, posts)
+
     match = re.search(
         r"([\d,.\s]+[KM]?)\s+Followers?,?\s*[\d,.\s]+[KM]?\s+Following,?\s*([\d,.\s]+[KM]?)\s+Posts?",
         desc,
         re.IGNORECASE,
     )
     if not match:
-        # Pattern 2: <followers> Followers, <posts> Posts
         match = re.search(
             r"([\d,.\s]+[KM]?)\s+Followers?,?\s*([\d,.\s]+[KM]?)\s+Posts?",
             desc,
             re.IGNORECASE,
         )
 
-    if not match:
-        return None
+    if match:
+        followers = parse_count(match.group(1))
+        posts = parse_count(match.group(2))
+        return (followers, posts)
 
-    followers = parse_count(match.group(1))
-    posts = parse_count(match.group(2))
-    return (followers, posts)
+    return None
 
 
 def parse_og_description(html: str) -> tuple[int, int] | None:
@@ -130,6 +146,253 @@ def parse_og_image(html: str) -> str | None:
     return None
 
 
+def fetch_url(url: str, headers: dict, timeout: int = HTTP_TIMEOUT) -> str | None:
+    """Fetch URL with timeout and return response text or None if error."""
+    try:
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=timeout, context=SSL_CONTEXT) as resp:
+            if resp.status == 200:
+                return resp.read().decode("utf-8", errors="replace")
+    except Exception:
+        pass
+    return None
+
+
+def fetch_comments_instaloader(handle: str, timeout: int = 5) -> int | None:
+    """Attempt to fetch comment count using instaloader with timeout."""
+    try:
+        import socket
+        import instaloader
+
+        socket.setdefaulttimeout(timeout)
+        L = instaloader.Instaloader(max_connection_attempts=1)
+        L.context._session.verify = False
+        L.context.max_connection_attempts = 1
+        profile = instaloader.Profile.from_username(L.context, handle)
+        total_comments = 0
+        posts_counted = 0
+        for post in profile.get_posts():
+            total_comments += getattr(post, "comments", 0)
+            posts_counted += 1
+            if posts_counted >= 30:
+                break
+        return total_comments
+    except Exception:
+        return None
+
+
+# Strategy 1: Instagram Web API
+def strategy_1_instagram_api(handle: str, user_agent: str) -> dict | None:
+    """Strategy 1: Instagram Web API."""
+    url = f"https://www.instagram.com/api/v1/users/web_profile_info/?username={handle}"
+    headers = {
+        "User-Agent": user_agent,
+        "X-IG-App-ID": "936619743392459",
+        "Accept": "*/*",
+        "Accept-Language": "en-US,en;q=0.9",
+    }
+    raw = fetch_url(url, headers)
+    if not raw:
+        return None
+
+    try:
+        data = json.loads(raw)
+        user = data.get("data", {}).get("user")
+        if user:
+            followers = user.get("edge_followed_by", {}).get("count")
+            posts = user.get("edge_owner_to_timeline_media", {}).get("count")
+            avatar_url = user.get("profile_pic_url_hd") or user.get("profile_pic_url")
+            if followers is not None and posts is not None:
+                return {
+                    "followers": int(followers),
+                    "posts": int(posts),
+                    "avatar_url": avatar_url,
+                }
+    except Exception:
+        pass
+    return None
+
+
+# Strategy 2: Picuki Public Mirror
+def strategy_2_picuki(handle: str, user_agent: str) -> dict | None:
+    """Strategy 2: Picuki public mirror."""
+    url = f"https://www.picuki.com/profile/{handle}"
+    headers = {
+        "User-Agent": user_agent,
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9,pl;q=0.8",
+    }
+    html = fetch_url(url, headers)
+    if not html:
+        return None
+
+    stats = parse_og_description(html)
+    followers, posts = stats if stats else (None, None)
+    avatar_url = parse_og_image(html)
+
+    if (followers is None or posts is None) and BeautifulSoup:
+        try:
+            soup = BeautifulSoup(html, "html.parser")
+            if followers is None:
+                fol_el = soup.find(class_=re.compile(r"followed_by|followers", re.I))
+                if fol_el:
+                    followers = parse_count(fol_el.get_text())
+                else:
+                    m = re.search(r"([\d,.\s]+[KM]?)\s*followers", html, re.I)
+                    if m:
+                        followers = parse_count(m.group(1))
+
+            if posts is None:
+                post_el = soup.find(class_=re.compile(r"total_posts|posts", re.I))
+                if post_el:
+                    posts = parse_count(post_el.get_text())
+                else:
+                    m = re.search(r"([\d,.\s]+[KM]?)\s*posts", html, re.I)
+                    if m:
+                        posts = parse_count(m.group(1))
+
+            if not avatar_url:
+                img_el = soup.find(
+                    "div", class_=re.compile(r"profile-avatar|profile-spec-image|profile-image", re.I)
+                )
+                if img_el:
+                    sub_img = img_el.find("img")
+                    if sub_img:
+                        src = sub_img.get("src")
+                        if isinstance(src, str):
+                            avatar_url = src
+        except Exception:
+            pass
+
+    if followers is not None and posts is not None:
+        return {
+            "followers": followers,
+            "posts": posts,
+            "avatar_url": avatar_url,
+        }
+    return None
+
+
+# Strategy 3: Imginn Public Mirror
+def strategy_3_imginn(handle: str, user_agent: str) -> dict | None:
+    """Strategy 3: Imginn public mirror."""
+    url = f"https://imginn.com/{handle}/"
+    headers = {
+        "User-Agent": user_agent,
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9",
+    }
+    html = fetch_url(url, headers)
+    if not html:
+        return None
+
+    stats = parse_og_description(html)
+    followers, posts = stats if stats else (None, None)
+    avatar_url = parse_og_image(html)
+
+    if (followers is None or posts is None) and BeautifulSoup:
+        try:
+            soup = BeautifulSoup(html, "html.parser")
+            if followers is None:
+                m = re.search(r"([\d,.\s]+[KM]?)\s*followers", html, re.I)
+                if m:
+                    followers = parse_count(m.group(1))
+            if posts is None:
+                m = re.search(r"([\d,.\s]+[KM]?)\s*posts", html, re.I)
+                if m:
+                    posts = parse_count(m.group(1))
+            if not avatar_url:
+                img_el = soup.find("div", class_=re.compile(r"img|avatar|profile", re.I))
+                if img_el:
+                    sub_img = img_el.find("img")
+                    if sub_img:
+                        src = sub_img.get("src")
+                        if isinstance(src, str):
+                            avatar_url = src
+        except Exception:
+            pass
+
+    if followers is not None and posts is not None:
+        return {
+            "followers": followers,
+            "posts": posts,
+            "avatar_url": avatar_url,
+        }
+    return None
+
+
+# Strategy 4: Dumpor Public Mirror
+def strategy_4_dumpor(handle: str, user_agent: str) -> dict | None:
+    """Strategy 4: Dumpor public mirror."""
+    url = f"https://dumpor.com/v/{handle}"
+    headers = {
+        "User-Agent": user_agent,
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9",
+    }
+    html = fetch_url(url, headers)
+    if not html:
+        return None
+
+    stats = parse_og_description(html)
+    followers, posts = stats if stats else (None, None)
+    avatar_url = parse_og_image(html)
+
+    if (followers is None or posts is None) and BeautifulSoup:
+        try:
+            soup = BeautifulSoup(html, "html.parser")
+            if followers is None:
+                m = re.search(r"([\d,.\s]+[KM]?)\s*followers", html, re.I)
+                if m:
+                    followers = parse_count(m.group(1))
+            if posts is None:
+                m = re.search(r"([\d,.\s]+[KM]?)\s*posts", html, re.I)
+                if m:
+                    posts = parse_count(m.group(1))
+            if not avatar_url:
+                img_el = soup.find("img", alt=re.compile(r"avatar|profile|user", re.I))
+                if img_el:
+                    src = img_el.get("src")
+                    if isinstance(src, str):
+                        avatar_url = src
+        except Exception:
+            pass
+
+    if followers is not None and posts is not None:
+        return {
+            "followers": followers,
+            "posts": posts,
+            "avatar_url": avatar_url,
+        }
+    return None
+
+
+# Strategy 5: OpenGraph Meta Tag Scraping
+def strategy_5_opengraph_googlebot(handle: str) -> dict | None:
+    """Strategy 5: OpenGraph meta tag scraping using Googlebot User-Agent."""
+    url = f"https://www.instagram.com/{handle}/"
+    headers = {
+        "User-Agent": GOOGLEBOT_USER_AGENT,
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9",
+    }
+    html = fetch_url(url, headers)
+    if not html:
+        return None
+
+    stats = parse_og_description(html)
+    avatar_url = parse_og_image(html)
+
+    if stats:
+        followers, posts = stats
+        return {
+            "followers": followers,
+            "posts": posts,
+            "avatar_url": avatar_url,
+        }
+    return None
+
+
 def get_avatar_path(handle: str, base_dir: Path | str | None = None) -> Path:
     """Return local avatar file path for a contestant handle."""
     if base_dir is None:
@@ -141,6 +404,8 @@ def get_avatar_path(handle: str, base_dir: Path | str | None = None) -> Path:
 
 def download_avatar(url: str, dest_path: Path, user_agent: str) -> bool:
     """Download JPEG profile image from URL and save to dest_path."""
+    if not url:
+        return False
     try:
         req = urllib.request.Request(
             url,
@@ -149,7 +414,7 @@ def download_avatar(url: str, dest_path: Path, user_agent: str) -> bool:
                 "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
             },
         )
-        with urllib.request.urlopen(req, timeout=15, context=SSL_CONTEXT) as resp:
+        with urllib.request.urlopen(req, timeout=HTTP_TIMEOUT, context=SSL_CONTEXT) as resp:
             data = resp.read()
             if data and len(data) > 100:
                 dest_path.parent.mkdir(parents=True, exist_ok=True)
@@ -162,59 +427,65 @@ def download_avatar(url: str, dest_path: Path, user_agent: str) -> bool:
 
 
 def fetch_instagram_profile(handle: str, user_agent: str | None = None) -> dict | None:
-    """Fetch profile HTML and extract followers, posts, comments, and avatar URL."""
-    url = f"https://www.instagram.com/{handle}/"
+    """Fetch contestant profile using multi-strategy fallbacks."""
     ua = user_agent or get_random_user_agent()
-    headers = {
-        "User-Agent": ua,
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-        "Accept-Language": "pl-PL,pl;q=0.9,en-US;q=0.8",
-    }
 
-    scraped_comments = None
-    try:
-        import socket
-        import instaloader
-        socket.setdefaulttimeout(5)
-        L = instaloader.Instaloader(max_connection_attempts=1)
-        L.context._session.verify = False
-        L.context.max_connection_attempts = 1
-        profile = instaloader.Profile.from_username(L.context, handle)
-        total_comments = 0
-        posts_counted = 0
-        for post in profile.get_posts():
-            total_comments += getattr(post, "comments", 0)
-            posts_counted += 1
-            if posts_counted >= 30:
+    strategies = [
+        ("Strategy 1: Instagram Web API", lambda: strategy_1_instagram_api(handle, ua)),
+        ("Strategy 2: Picuki public mirror", lambda: strategy_2_picuki(handle, ua)),
+        ("Strategy 3: Imginn public mirror", lambda: strategy_3_imginn(handle, ua)),
+        ("Strategy 4: Dumpor public mirror", lambda: strategy_4_dumpor(handle, ua)),
+        ("Strategy 5: OpenGraph Googlebot", lambda: strategy_5_opengraph_googlebot(handle)),
+    ]
+
+    scraped_result = None
+    successful_strategy = None
+
+    for name, strategy_fn in strategies:
+        try:
+            res = strategy_fn()
+            followers = res.get("followers") if res else None
+            posts = res.get("posts") if res else None
+            if (
+                res
+                and isinstance(followers, int)
+                and followers > 0
+                and isinstance(posts, int)
+                and posts > 0
+            ):
+                scraped_result = res
+                successful_strategy = name
+                print(f"[scraper] {handle}: Success via {name}")
                 break
-        scraped_comments = total_comments
-    except Exception as e:
-        print(f"[instaloader] {handle}: Instaloader comments query: {e}", file=sys.stderr)
+            else:
+                print(
+                    f"[scraper] {handle}: {name} returned incomplete data. Trying next strategy...",
+                    file=sys.stderr,
+                )
+        except Exception as e:
+            print(
+                f"[scraper] {handle}: {name} failed: {e}. Trying next strategy...",
+                file=sys.stderr,
+            )
 
-    try:
-        req = urllib.request.Request(url, headers=headers)
-        with urllib.request.urlopen(req, timeout=15, context=SSL_CONTEXT) as resp:
-            html = resp.read().decode("utf-8", errors="replace")
-    except Exception as e:
-        print(f"[scrape] {handle}: HTTP/Network error: {e}", file=sys.stderr)
+    if not scraped_result:
+        print(
+            f"[scraper] {handle}: All strategies failed to fetch fresh metrics.",
+            file=sys.stderr,
+        )
         return None
-
-    stats = parse_og_description(html)
-    if not stats:
-        print(f"[scrape] {handle}: Could not parse stats from og:description", file=sys.stderr)
-        return None
-
-    followers, posts = stats
-    og_image = parse_og_image(html)
 
     result = {
         "handle": handle,
-        "followers": followers,
-        "posts": posts,
-        "avatar_url": og_image,
+        "followers": scraped_result["followers"],
+        "posts": scraped_result["posts"],
+        "avatar_url": scraped_result.get("avatar_url"),
+        "strategy": successful_strategy,
     }
-    if scraped_comments is not None:
-        result["comments"] = scraped_comments
+
+    comments = fetch_comments_instaloader(handle)
+    if comments is not None:
+        result["comments"] = comments
 
     return result
 
@@ -261,7 +532,7 @@ def merge_contestant_data(
             f"[fallback] Retaining previous metrics for {handle}: followers={updated.get('followers')}, posts={updated.get('posts')}, comments={updated.get('comments')}"
         )
 
-    # Ensure avatar exists; if missing or scrape failed, use official mieczaki.com avatar
+    # Ensure avatar exists; if missing or download failed, fallback to official mieczaki avatar
     if not avatar_success or not avatar_path.exists():
         official_url = OFFICIAL_MIECZAKI_AVATARS.get(handle)
         if official_url:
@@ -357,3 +628,4 @@ def run_scraper(project_root: Path | str | None = None) -> None:
 
 if __name__ == "__main__":
     run_scraper()
+
