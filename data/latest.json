@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-14T17:06:27.541257+00:00",
+  "timestamp": "2026-08-14T17:14:23.774778+00:00",
   "contestants": [
     {
       "id": "maquk_mieczaki",
@@ -105,7 +105,7 @@
       "id": "stachu_goggins_mieczaki",
       "name": "Stanisław \"Stachu\" Dybowski",
       "handle": "stachu_goggins_mieczaki",
-      "followers": 23000,
+      "followers": 24000,
       "posts": 20,
       "avatar": "./avatars/stachu_goggins_mieczaki.jpg",
       "instagramUrl": "https://www.instagram.com/stachu_goggins_mieczaki/",
@@ -116,7 +116,7 @@
       "name": "Wiktor Woroniak",
       "handle": "wiktor_mieczaki",
       "followers": 25600,
-      "posts": 13,
+      "posts": 14,
       "avatar": "./avatars/wiktor_mieczaki.jpg",
       "instagramUrl": "https://www.instagram.com/wiktor_mieczaki/",
       "comments": 1207
