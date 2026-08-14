@@ -8,7 +8,7 @@ Tracks 12 contestants competing in a 6-month physical/mental transformation prog
 
 ## 🚀 Live Site & Autopilot Deployment
 
-The application is deployed automatically to **GitHub Pages**. A daily GitHub Actions workflow (`.github/workflows/daily-update.yml`) runs on a schedule at 6:00 AM UTC to:
+The application is deployed automatically to **GitHub Pages**. A daily GitHub Actions workflow (`.github/workflows/daily-update.yml`) runs on a schedule at 4:00 AM UTC to:
 1. Scrape Instagram follower and post counts for all 12 contestants using `scripts/scraper.py`.
 2. Cache profile avatar images locally under `public/avatars/` (falling back to high-resolution official photos from `mieczaki.com`).
 3. Append timestamped snapshot records to `data/history.json` and update `data/latest.json`.
@@ -63,9 +63,9 @@ The application is deployed automatically to **GitHub Pages**. A daily GitHub Ac
   - `data/latest.json`: Current snapshot holding rankings, follower counts, post counts, and local avatar paths.
   - `data/history.json`: Time-series log containing daily snapshots.
   - `src/services/dataService.ts`: Pure computation module for sorting, badge calculations, progress milestones, and monthly aggregations.
-- **Scraper Script**: Python 3 (`scripts/scraper.py`) with User-Agent rotation, `og:description` parsing, local JPEG caching, and fallback metrics retention.
+- **Scraper Script**: Python 3 (`scripts/scraper.py`) with multi-strategy fallback — exact follower counts via Instagram `web_profile_info`, precise counts via the Imginn mirror, `og:description` parsing, and anonymous comment totals via `api/v1/feed/user/{id}`. Includes User-Agent rotation, local JPEG caching with non-square rejection, follower anomaly guards, and fallback metrics retention.
 - **CI/CD Pipelines**:
-  - `.github/workflows/daily-update.yml`: Scheduled daily scraper execution & GitHub Pages deployment.
+  - `.github/workflows/daily-update.yml`: Single self-contained workflow — scheduled daily scraper, tests, build, and GitHub Pages deployment. (Deploy is inlined because `GITHUB_TOKEN` pushes don't re-trigger other workflows.)
   - `.github/workflows/ci.yml`: Pull request and push test/typecheck validation.
 - **Tooling**: Biome (linting/formatting), Vitest (JS/TS tests), `unittest` (Python scraper tests).
 

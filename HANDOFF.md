@@ -1,7 +1,7 @@
 # Handoff: Mięczaki Tracker
 
-**Date**: 2026-08-05  
-**Project Path**: `/home/nbkbelch/projects/mieczaki-tracker`  
+**Date**: 2026-08-14  
+**Project Path**: `/home/krbel/projects/mieczaki-tracker`  
 **PRD / Tickets**: `.scratch/mieczaki-tracker-modernization/`  
 
 ---
@@ -31,7 +31,7 @@ The legacy single-file tracker was completely modernized into a zero-cost, autom
   - **Monthly Posts Published**: Bar chart comparing posts published aggregated by calendar month.
 - **Local Avatar Archiving**: High-resolution contestant profile photos stored in `public/avatars/` downloaded directly from `mieczaki.com`.
 - **Automated Instagram Scraper**: Python script (`scripts/scraper.py`) with User-Agent rotation, `og:description` parsing, local JPEG caching, and fallback metrics retention.
-- **GitHub Actions CI/CD Pipeline**: `.github/workflows/daily-update.yml` cron workflow executing daily at 6 AM UTC (and on push) to run the scraper, commit updated metrics/avatars, execute tests, build Vite assets with `base: '/mieczaki-tracker/'`, and deploy to **GitHub Pages**.
+- **GitHub Actions CI/CD Pipeline**: `.github/workflows/daily-update.yml` cron workflow executing daily at 4 AM UTC (and on push) to run the scraper, commit updated metrics/avatars, execute tests, build Vite assets with `base: '/mieczaki-tracker/'`, and deploy to **GitHub Pages**.
 - **Pure Read-Only UI**: Autopilot execution without manual edit or client-side refresh buttons.
 
 ---
@@ -84,3 +84,13 @@ python3 -m http.server 8080 -d dist
 - `qa` — For interactive QA testing of the deployed GitHub Pages site.
 - `code-review` — For automated PR and branch diff reviews.
 - `diagnose` — If Instagram scraping behavior needs debugging or proxy tuning.
+
+---
+
+## 5. Recent Fixes (2026-08-14)
+
+- **Scraper hardening**: follower anomaly guard (reject >50% 1-day drop) + sanity floor (reject `followers < 1000`) so mirror garbage (e.g. a 240-follower glitch) can't corrupt data.
+- **Exact followers + comments, no login**: `web_profile_info` gives exact follower counts; comments are summed anonymously via `api/v1/feed/user/{id}` (replaces the broken instaloader path).
+- **Avatar fix**: non-square images (e.g. a 640×1136 photo) are rejected and fall back to official `mieczaki.com` square avatars.
+- **Badge math**: "Most Active" and "Most Discussed" weekly badges no longer fall back to lifetime totals when 7-day gain is zero.
+- **Daily deploy fixed**: `daily-update.yml` now runs the full scrape → test → build → deploy pipeline in one workflow. Previously the deploy never ran on daily auto-commits because `GITHUB_TOKEN` pushes don't re-trigger the separate `deploy.yml` (site was frozen at Aug 6).
