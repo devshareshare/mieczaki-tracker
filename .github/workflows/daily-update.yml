@@ -7,6 +7,8 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: 'daily-scrape'
@@ -14,6 +16,9 @@ concurrency:
 
 jobs:
   scrape-build-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -61,17 +66,14 @@ jobs:
       - name: Build Vite application
         run: npm run build
 
-      - name: Deploy to gh-pages branch
-        run: |
-          tmp_dist=$(mktemp -d)
-          cp -r dist/* "$tmp_dist/"
-          git checkout --orphan gh-pages-temp
-          git reset --hard
-          git clean -fdx
-          cp -r "$tmp_dist"/* .
-          touch .nojekyll
-          git add -A
-          if ! git diff --staged --quiet; then
-            git commit -m "deploy: update GitHub Pages build assets"
-            git push -f origin gh-pages-temp:gh-pages
-          fi
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
