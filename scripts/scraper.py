@@ -17,6 +17,15 @@ except ImportError:
 
 SSL_CONTEXT = ssl._create_unverified_context()
 HTTP_TIMEOUT = 8  # strict timeout in seconds
+MIN_PLAUSIBLE_FOLLOWERS = 1000  # reject mirror garbage below this as a glitch
+
+# Mobile (iPad) app identifiers used by the anonymous api/v1/feed endpoint.
+MOBILE_APP_ID = "124024574287414"
+IPAD_USER_AGENT = (
+    "Instagram 361.0.0.35.82 (iPad13,8; iOS 18_0; en_US; en-US; "
+    "scale=2.00; 2048x2732; 674117118) AppleWebKit/420+"
+)
+MAX_FEED_PAGES = 3  # cap comment pagination at ~3 pages (≈ 99 posts)
 
 CONTESTANT_HANDLES = [
     "maquk_mieczaki",
@@ -158,6 +167,54 @@ def fetch_url(url: str, headers: dict, timeout: int = HTTP_TIMEOUT) -> str | Non
     return None
 
 
+def parse_feed_response(data: dict) -> dict:
+    """Extract comment total + pagination info from a mobile feed API response."""
+    total = 0
+    for item in data.get("items") or []:
+        cc = item.get("comment_count")
+        if isinstance(cc, int) and cc > 0:
+            total += cc
+    return {
+        "comments_total": total,
+        "follower_count": data.get("user", {}).get("follower_count"),
+        "next_max_id": data.get("next_max_id") or data.get("max_id"),
+        "more_available": bool(data.get("more_available")),
+    }
+
+
+def fetch_comments_feed(user_id: str | int | None) -> int | None:
+    """Sum comment counts over a user's posts via the anonymous mobile feed endpoint."""
+    if not user_id:
+        return None
+    headers = {
+        "User-Agent": IPAD_USER_AGENT,
+        "x-ig-app-id": MOBILE_APP_ID,
+        "Accept": "*/*",
+        "Accept-Language": "en-US,en;q=0.9",
+    }
+    total = 0
+    max_id = None
+    for _ in range(MAX_FEED_PAGES):
+        params = [("count", "33")]
+        if max_id:
+            params.append(("max_id", max_id))
+        qs = "&".join(f"{k}={v}" for k, v in params)
+        url = f"https://www.instagram.com/api/v1/feed/user/{user_id}/?{qs}"
+        raw = fetch_url(url, headers)
+        if not raw:
+            break
+        try:
+            data = json.loads(raw)
+        except Exception:
+            break
+        parsed = parse_feed_response(data)
+        total += parsed["comments_total"]
+        max_id = parsed["next_max_id"]
+        if not max_id or not parsed["more_available"]:
+            break
+    return total if total > 0 else None
+
+
 def fetch_comments_instaloader(handle: str, timeout: int = 5) -> int | None:
     """Attempt to fetch comment count using instaloader with timeout."""
     try:
@@ -202,11 +259,13 @@ def strategy_1_instagram_api(handle: str, user_agent: str) -> dict | None:
             followers = user.get("edge_followed_by", {}).get("count")
             posts = user.get("edge_owner_to_timeline_media", {}).get("count")
             avatar_url = user.get("profile_pic_url_hd") or user.get("profile_pic_url")
+            user_id = user.get("id")
             if followers is not None and posts is not None:
                 return {
                     "followers": int(followers),
                     "posts": int(posts),
                     "avatar_url": avatar_url,
+                    "user_id": user_id,
                 }
     except Exception:
         pass
@@ -402,6 +461,27 @@ def get_avatar_path(handle: str, base_dir: Path | str | None = None) -> Path:
     return base_dir / "public" / "avatars" / f"{handle}.jpg"
 
 
+def _jpeg_dimensions(data: bytes) -> tuple[int, int] | None:
+    """Return (width, height) for a JPEG, or None if not a valid JPEG."""
+    if len(data) < 9 or data[:2] != b"\xff\xd8":
+        return None
+    i = 2
+    while i + 9 < len(data):
+        if data[i] != 0xFF:
+            i += 1
+            continue
+        marker = data[i + 1]
+        if 0xC0 <= marker <= 0xCF and marker not in (0xC4, 0xC8, 0xCC):
+            height = (data[i + 5] << 8) | data[i + 6]
+            width = (data[i + 7] << 8) | data[i + 8]
+            return width, height
+        if marker == 0xD8 or marker == 0x01 or 0xD0 <= marker <= 0xD9:
+            i += 2
+            continue
+        i += 2 + ((data[i + 2] << 8) | data[i + 3])
+    return None
+
+
 def download_avatar(url: str, dest_path: Path, user_agent: str) -> bool:
     """Download JPEG profile image from URL and save to dest_path."""
     if not url:
@@ -417,6 +497,16 @@ def download_avatar(url: str, dest_path: Path, user_agent: str) -> bool:
         with urllib.request.urlopen(req, timeout=HTTP_TIMEOUT, context=SSL_CONTEXT) as resp:
             data = resp.read()
             if data and len(data) > 100:
+                dims = _jpeg_dimensions(data)
+                if dims:
+                    width, height = dims
+                    ratio = max(width, height) / max(1, min(width, height))
+                    if ratio > 1.5:
+                        print(
+                            f"[avatar] Skipping non-square avatar for {dest_path.stem} ({width}x{height}).",
+                            file=sys.stderr,
+                        )
+                        return False
                 dest_path.parent.mkdir(parents=True, exist_ok=True)
                 with open(dest_path, "wb") as f:
                     f.write(data)
@@ -430,12 +520,15 @@ def fetch_instagram_profile(handle: str, user_agent: str | None = None) -> dict 
     """Fetch contestant profile using multi-strategy fallbacks."""
     ua = user_agent or get_random_user_agent()
 
+    # Imginn mirror exposes precise counts ("27.1K"), while Instagram's own
+    # og:description rounds to whole K ("27K") and the Web API is login-walled.
+    # Order: exact API -> precise mirror -> rounded official -> remaining mirrors.
     strategies = [
         ("Strategy 1: Instagram Web API", lambda: strategy_1_instagram_api(handle, ua)),
-        ("Strategy 2: Picuki public mirror", lambda: strategy_2_picuki(handle, ua)),
         ("Strategy 3: Imginn public mirror", lambda: strategy_3_imginn(handle, ua)),
-        ("Strategy 4: Dumpor public mirror", lambda: strategy_4_dumpor(handle, ua)),
         ("Strategy 5: OpenGraph Googlebot", lambda: strategy_5_opengraph_googlebot(handle)),
+        ("Strategy 2: Picuki public mirror", lambda: strategy_2_picuki(handle, ua)),
+        ("Strategy 4: Dumpor public mirror", lambda: strategy_4_dumpor(handle, ua)),
     ]
 
     scraped_result = None
@@ -449,7 +542,7 @@ def fetch_instagram_profile(handle: str, user_agent: str | None = None) -> dict 
             if (
                 res
                 and isinstance(followers, int)
-                and followers > 0
+                and followers >= MIN_PLAUSIBLE_FOLLOWERS
                 and isinstance(posts, int)
                 and posts > 0
             ):
@@ -483,7 +576,9 @@ def fetch_instagram_profile(handle: str, user_agent: str | None = None) -> dict 
         "strategy": successful_strategy,
     }
 
-    comments = fetch_comments_instaloader(handle)
+    comments = fetch_comments_feed(scraped_result.get("user_id"))
+    if comments is None:
+        comments = fetch_comments_instaloader(handle)
     if comments is not None:
         result["comments"] = comments
 
@@ -518,15 +613,26 @@ def merge_contestant_data(
     avatar_success = False
 
     if scraped and scraped.get("followers") is not None and scraped.get("posts") is not None:
-        updated["followers"] = scraped["followers"]
-        updated["posts"] = scraped["posts"]
+        new_followers = int(scraped["followers"])
+        prev_followers = int(updated.get("followers", 0) or 0)
 
-        if scraped.get("comments") is not None:
-            updated["comments"] = scraped["comments"]
+        # Anomaly guard: reject implausible follower drops (>50% in one day)
+        # as mirror/parse garbage instead of corrupting the dataset.
+        if prev_followers > 0 and new_followers < prev_followers * 0.5:
+            print(
+                f"[guard] {handle}: implausible follower drop {prev_followers} -> {new_followers}. Retaining previous metrics.",
+                file=sys.stderr,
+            )
+        else:
+            updated["followers"] = new_followers
+            updated["posts"] = scraped["posts"]
 
-        avatar_url = scraped.get("avatar_url")
-        if avatar_url:
-            avatar_success = download_avatar(avatar_url, avatar_path, user_agent)
+            if scraped.get("comments") is not None:
+                updated["comments"] = scraped["comments"]
+
+            avatar_url = scraped.get("avatar_url")
+            if avatar_url:
+                avatar_success = download_avatar(avatar_url, avatar_path, user_agent)
     else:
         print(
             f"[fallback] Retaining previous metrics for {handle}: followers={updated.get('followers')}, posts={updated.get('posts')}, comments={updated.get('comments')}"

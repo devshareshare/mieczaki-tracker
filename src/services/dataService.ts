@@ -126,15 +126,15 @@ export function getBadges(
       fastestGrowth = { handle: c.handle, percent };
     }
 
-    const postsMetric = postsGained > 0 ? postsGained : c.posts;
-    if (!mostActive || postsMetric > mostActive.posts) {
-      mostActive = { handle: c.handle, posts: postsMetric };
+    if (postsGained > 0 && (!mostActive || postsGained > mostActive.posts)) {
+      mostActive = { handle: c.handle, posts: postsGained };
     }
 
-    const commentsMetric =
-      commentsGained > 0 ? commentsGained : c.comments || 0;
-    if (!mostDiscussed || commentsMetric > mostDiscussed.comments) {
-      mostDiscussed = { handle: c.handle, comments: commentsMetric };
+    if (
+      commentsGained > 0 &&
+      (!mostDiscussed || commentsGained > mostDiscussed.comments)
+    ) {
+      mostDiscussed = { handle: c.handle, comments: commentsGained };
     }
   }
 

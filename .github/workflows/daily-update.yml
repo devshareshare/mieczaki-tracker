@@ -13,7 +13,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  scrape-and-commit:
+  scrape-build-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -26,11 +26,27 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install Python dependencies
         run: python3 -m pip install instaloader beautifulsoup4
+
+      - name: Install Node dependencies
+        run: npm ci
 
       - name: Run Instagram Scraper
         run: python3 scripts/scraper.py
+
+      - name: Run checks and tests
+        run: |
+          npm run check
+          npm run typecheck
+          npm run test
+          python3 -m unittest discover tests
 
       - name: Commit and push data updates
         run: |
@@ -40,4 +56,22 @@ jobs:
           if ! git diff --staged --quiet; then
             git commit -m "auto: daily Instagram data refresh"
             git push origin HEAD:main
+          fi
+
+      - name: Build Vite application
+        run: npm run build
+
+      - name: Deploy to gh-pages branch
+        run: |
+          tmp_dist=$(mktemp -d)
+          cp -r dist/* "$tmp_dist/"
+          git checkout --orphan gh-pages-temp
+          git reset --hard
+          git clean -fdx
+          cp -r "$tmp_dist"/* .
+          touch .nojekyll
+          git add -A
+          if ! git diff --staged --quiet; then
+            git commit -m "deploy: update GitHub Pages build assets"
+            git push -f origin gh-pages-temp:gh-pages
           fi

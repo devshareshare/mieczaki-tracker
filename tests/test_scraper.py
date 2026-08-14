@@ -11,6 +11,7 @@ from scripts.scraper import (
     merge_contestant_data,
     parse_count,
     parse_description_text,
+    parse_feed_response,
     parse_og_description,
     parse_og_image,
 )
@@ -76,6 +77,71 @@ class TestScraper(unittest.TestCase):
             str(path),
             os.path.normpath("/tmp/test_dir/public/avatars/pamelka_mieczaki.jpg"),
         )
+
+    def test_merge_contestant_data_anomaly_guard(self):
+        import tempfile
+
+        existing = {
+            "id": "stachu_goggins_mieczaki",
+            "name": "Stanislaw Dybowski",
+            "handle": "stachu_goggins_mieczaki",
+            "followers": 19879,
+            "posts": 17,
+            "comments": 1265,
+            "avatar": "/avatars/stachu_goggins_mieczaki.jpg",
+            "instagramUrl": "https://www.instagram.com/stachu_goggins_mieczaki/",
+        }
+
+        # Mirror returns garbage (240 followers) -> guard must retain previous
+        scraped_bad = {
+            "handle": "stachu_goggins_mieczaki",
+            "followers": 240,
+            "posts": 20,
+            "comments": None,
+            "avatar_url": None,
+        }
+
+        with tempfile.TemporaryDirectory() as tmp:
+            base_dir = Path(tmp)
+            avatar = base_dir / "public" / "avatars" / "stachu_goggins_mieczaki.jpg"
+            avatar.parent.mkdir(parents=True, exist_ok=True)
+            avatar.write_bytes(b"fake")
+
+            merged = merge_contestant_data(
+                existing=existing,
+                scraped=scraped_bad,
+                handle="stachu_goggins_mieczaki",
+                base_dir=base_dir,
+                user_agent="TestUA",
+            )
+
+        self.assertEqual(merged["followers"], 19879)
+        self.assertEqual(merged["posts"], 17)
+        self.assertEqual(merged["comments"], 1265)
+
+    def test_parse_feed_response(self):
+        data = {
+            "items": [
+                {"comment_count": 12, "like_count": 100},
+                {"comment_count": 5, "like_count": 50},
+                {"comment_count": None, "like_count": 20},
+            ],
+            "user": {"follower_count": 23900, "media_count": 20},
+            "next_max_id": "abc123",
+            "more_available": True,
+        }
+        parsed = parse_feed_response(data)
+        self.assertEqual(parsed["comments_total"], 17)
+        self.assertEqual(parsed["follower_count"], 23900)
+        self.assertEqual(parsed["next_max_id"], "abc123")
+        self.assertTrue(parsed["more_available"])
+
+    def test_parse_feed_response_empty(self):
+        parsed = parse_feed_response({})
+        self.assertEqual(parsed["comments_total"], 0)
+        self.assertIsNone(parsed["follower_count"])
+        self.assertIsNone(parsed["next_max_id"])
+        self.assertFalse(parsed["more_available"])
 
     def test_merge_contestant_data_fallback(self):
         existing = {

@@ -190,6 +190,49 @@ describe("dataService", () => {
         posts: 145,
       });
     });
+
+    it("does not award weekly badges from lifetime totals when weekly gain is zero", () => {
+      const latest: LatestSnapshot = {
+        timestamp: "2026-08-05T00:00:00.000Z",
+        contestants: [
+          {
+            id: "a",
+            name: "A",
+            handle: "a",
+            followers: 10000,
+            posts: 80,
+            comments: 500,
+            avatar: "",
+            instagramUrl: "",
+          },
+          {
+            id: "b",
+            name: "B",
+            handle: "b",
+            followers: 10000,
+            posts: 20,
+            comments: 200,
+            avatar: "",
+            instagramUrl: "",
+          },
+        ],
+      };
+      const history: HistorySnapshot[] = [
+        {
+          timestamp: "2026-07-29T00:00:00.000Z",
+          contestants: [
+            { handle: "a", followers: 10000, posts: 80, comments: 500 },
+            { handle: "b", followers: 10000, posts: 15, comments: 150 },
+          ],
+        },
+      ];
+
+      const badges = getBadges(latest, history);
+
+      // "a" has 0 weekly post gain despite 80 lifetime posts; "b" gained 5.
+      expect(badges.mostActivePoster).toEqual({ handle: "b", posts: 5 });
+      expect(badges.mostDiscussedPoster).toEqual({ handle: "b", comments: 50 });
+    });
   });
 
   describe("getGrowthChartData", () => {
