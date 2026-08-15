@@ -2,10 +2,15 @@
 """Instagram multi-strategy scraper and local avatar archiver for Mięczaki Tracker."""
 
 import json
+import os
 import random
 import re
+import shutil
 import ssl
+import subprocess
 import sys
+import tempfile
+import time
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
@@ -223,6 +228,144 @@ def fetch_comments_instaloader(handle: str, timeout: int = 5) -> int | None:
         return None
 
 
+# Strategy 0: Rendered browser (agent-browser). Reads the follower count that
+# Instagram actually renders in a real browser ("11.2K followers", or the exact
+# "5,142 followers" under 10K) — more precise than the whole-K og:description
+# fallback. Posts come from the page's og:description meta tag (exact).
+BROWSER_LIB_DIR = Path.home() / ".local" / "share" / "mieczaki-tracker" / "chrome-libs"
+_REQUIRED_BROWSER_LIBS = ("libnspr4.so", "libnss3.so", "libasound.so.2")
+
+_COOKIE_DISMISS_JS = (
+    '(()=>{const b=[...document.querySelectorAll("button")].find(x=>'
+    '/allow all cookies/i.test(x.textContent||""));if(b)b.click();return !!b})()'
+)
+_LOGIN_DISMISS_JS = (
+    '(()=>{const d=document.querySelector("div[role=dialog]");if(d){const b='
+    '[...d.querySelectorAll("button")].find(x=>(x.getAttribute("aria-label")||"")'
+    '.toLowerCase()==="close");if(b)b.click();return "closed"}return "no-dialog"})()'
+)
+_READ_PROFILE_JS = (
+    '(()=>{const h=document.querySelector("header");'
+    'const m=document.querySelector(\'meta[property="og:description"]\');'
+    'return (h?h.innerText:"")+"@@OG@@"+(m?m.content:"")})()'
+)
+
+
+def parse_browser_followers(header_text: str) -> int | None:
+    """Extract the follower count from rendered Instagram header text."""
+    if not header_text:
+        return None
+    m = re.search(r"([\d.,]+[KM]?)\s*followers", header_text, re.IGNORECASE)
+    if not m:
+        return None
+    return parse_count(m.group(1))
+
+
+def _ensure_browser_libs() -> Path | None:
+    """Provision Chrome's missing NSS/ALSA libs locally; return their dir, else None.
+
+    The bundled Chrome can't run without these shared libraries on a minimal
+    system. They're downloaded from apt (Ubuntu 24.04+/26.04 amd64) and extracted
+    into BROWSER_LIB_DIR so the scraper can set LD_LIBRARY_PATH for it.
+    """
+    if all((BROWSER_LIB_DIR / name).exists() for name in _REQUIRED_BROWSER_LIBS):
+        return BROWSER_LIB_DIR
+    try:
+        BROWSER_LIB_DIR.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory() as tmp:
+            subprocess.run(
+                ["apt-get", "download", "libnspr4", "libnss3", "libasound2t64"],
+                cwd=tmp, check=True, capture_output=True,
+            )
+            merged = Path(tmp) / "merged"
+            for deb in Path(tmp).glob("*.deb"):
+                subprocess.run(
+                    ["dpkg-deb", "-x", str(deb), str(merged)],
+                    check=True, capture_output=True,
+                )
+            src = merged / "usr" / "lib" / "x86_64-linux-gnu"
+            for so in src.glob("*.so*"):
+                shutil.copy2(so, BROWSER_LIB_DIR)
+    except Exception as exc:
+        print(
+            f"[browser] Could not provision Chrome libs ({exc}). Browser strategy disabled.",
+            file=sys.stderr,
+        )
+        return None
+    if all((BROWSER_LIB_DIR / name).exists() for name in _REQUIRED_BROWSER_LIBS):
+        return BROWSER_LIB_DIR
+    return None
+
+
+def _browser_env(libdir: Path | None) -> dict:
+    env = dict(os.environ)
+    if libdir:
+        existing = env.get("LD_LIBRARY_PATH", "")
+        env["LD_LIBRARY_PATH"] = str(libdir) if not existing else f"{libdir}:{existing}"
+    return env
+
+
+def _ab(args: list[str], env: dict, timeout: int = 90) -> str | None:
+    """Run an agent-browser command; return stdout on success, else None.
+
+    stdout is captured via a temp file (not a pipe) so a lingering browser
+    subprocess can't hold the read end open and hang the caller.
+    """
+    with tempfile.TemporaryFile() as out:
+        try:
+            proc = subprocess.run(
+                ["agent-browser", *args],
+                env=env,
+                stdout=out,
+                stderr=subprocess.DEVNULL,
+                timeout=timeout,
+            )
+        except Exception:
+            return None
+        if proc.returncode != 0:
+            return None
+        out.seek(0)
+        return out.read().decode("utf-8", "replace")
+
+
+def strategy_browser(handle: str, env: dict | None = None) -> dict | None:
+    """Strategy 0: read followers + posts from the rendered Instagram profile."""
+    if not env:
+        return None
+    if _ab(["open", f"https://www.instagram.com/{handle}/"], env) is None:
+        return None
+    _ab(["wait", "--load", "networkidle"], env)
+    time.sleep(1)
+    _ab(["eval", _COOKIE_DISMISS_JS], env)
+    time.sleep(1)
+    _ab(["eval", _LOGIN_DISMISS_JS], env)
+    time.sleep(1)
+    raw_out = _ab(["eval", _READ_PROFILE_JS], env)
+    if not raw_out:
+        return None
+    try:
+        raw = json.loads(raw_out.strip())
+    except Exception:
+        return None
+    if not isinstance(raw, str) or "@@OG@@" not in raw:
+        return None
+    header, og = raw.split("@@OG@@", 1)
+    followers = parse_browser_followers(header)
+    posts = None
+    if og:
+        desc = parse_description_text(og)
+        if desc:
+            posts = desc[1]
+    if (
+        isinstance(followers, int)
+        and followers >= MIN_PLAUSIBLE_FOLLOWERS
+        and isinstance(posts, int)
+        and posts > 0
+    ):
+        return {"followers": followers, "posts": posts}
+    return None
+
+
 # Strategy 1: Instagram Web API
 def strategy_1_instagram_api(handle: str, user_agent: str) -> dict | None:
     """Strategy 1: Instagram Web API."""
@@ -437,14 +580,19 @@ def strategy_5_opengraph_googlebot(handle: str) -> dict | None:
     return None
 
 
-def fetch_instagram_profile(handle: str, user_agent: str | None = None) -> dict | None:
+def fetch_instagram_profile(
+    handle: str,
+    user_agent: str | None = None,
+    env: dict | None = None,
+) -> dict | None:
     """Fetch contestant profile using multi-strategy fallbacks."""
     ua = user_agent or get_random_user_agent()
 
-    # Imginn mirror exposes precise counts ("27.1K"), while Instagram's own
-    # og:description rounds to whole K ("27K") and the Web API is login-walled.
-    # Order: exact API -> precise mirror -> rounded official -> remaining mirrors.
+    # Order of preference: rendered browser (most precise followers) -> exact
+    # Web API (login-walled) -> Imginn mirror (0.1K) -> rounded og:description
+    # (whole K) -> remaining mirrors. Browser is disabled when env is None.
     strategies = [
+        ("Strategy 0: Rendered browser", lambda: strategy_browser(handle, env)),
         ("Strategy 1: Instagram Web API", lambda: strategy_1_instagram_api(handle, ua)),
         ("Strategy 3: Imginn public mirror", lambda: strategy_3_imginn(handle, ua)),
         ("Strategy 5: OpenGraph Googlebot", lambda: strategy_5_opengraph_googlebot(handle)),
@@ -579,9 +727,22 @@ def run_scraper(project_root: Path | str | None = None) -> None:
     updated_contestants = []
     history_entry_contestants = []
 
+    # Prepare the rendered-browser strategy (best effort). Falls back to HTTP
+    # strategies when agent-browser or its libs are unavailable.
+    env = None
+    if shutil.which("agent-browser"):
+        libdir = _ensure_browser_libs()
+        if libdir:
+            env = _browser_env(libdir)
+            # Restart the agent-browser server so it inherits LD_LIBRARY_PATH.
+            subprocess.run(
+                ["pkill", "-f", "agent-browser-linux"], capture_output=True,
+            )
+            time.sleep(0.5)
+
     for handle in CONTESTANT_HANDLES:
         ua = get_random_user_agent()
-        scraped = fetch_instagram_profile(handle, user_agent=ua)
+        scraped = fetch_instagram_profile(handle, user_agent=ua, env=env)
         existing = existing_latest.get(handle)
         merged = merge_contestant_data(existing, scraped, handle)
 
@@ -594,6 +755,12 @@ def run_scraper(project_root: Path | str | None = None) -> None:
                 "comments": merged.get("comments", 0),
             }
         )
+
+    if env:
+        _ab(["close", "--all"], env)
+        # Ensure the agent-browser server (and any stray Chrome) is gone so the
+        # scraper process can exit without orphaned children holding its stdout.
+        subprocess.run(["pkill", "-f", "agent-browser-linux"], capture_output=True)
 
     # Save latest.json
     latest_payload = {

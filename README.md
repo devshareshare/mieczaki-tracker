@@ -62,7 +62,7 @@ The application is deployed automatically to **GitHub Pages**. A daily GitHub Ac
   - `data/latest.json`: Current snapshot holding rankings, follower counts, post counts, and local avatar paths.
   - `data/history.json`: Time-series log containing daily snapshots.
   - `src/services/dataService.ts`: Pure computation module for sorting, badge calculations, progress milestones, and monthly aggregations.
-- **Scraper Script**: Python 3 (`scripts/scraper.py`) with multi-strategy fallback — exact follower counts via Instagram `web_profile_info`, precise counts via the Imginn mirror, `og:description` parsing, and anonymous comment totals via `api/v1/feed/user/{id}`. Includes User-Agent rotation, local JPEG caching with non-square rejection, follower anomaly guards, and fallback metrics retention.
+- **Scraper Script**: Python 3 (`scripts/scraper.py`) with multi-strategy fallback — follower counts read from the rendered Instagram profile via a headless browser (`agent-browser`; exact under 10k, 0.1K precision above), with HTTP mirrors (`web_profile_info`, Imginn, `og:description`) as fallback; post counts via `og:description`; comment totals via `api/v1/feed/user/{id}` + instaloader. Includes User-Agent rotation, follower anomaly guards, and fallback metrics retention.
 - **CI/CD Pipelines**:
   - `.github/workflows/daily-update.yml`: Single self-contained workflow — scheduled daily scraper, tests, build, and GitHub Pages deployment. (Deploy is inlined because `GITHUB_TOKEN` pushes don't re-trigger other workflows.)
   - `.github/workflows/ci.yml`: Pull request and push test/typecheck validation.
@@ -117,7 +117,7 @@ mieczaki-tracker/
 ├── public/
 │   └── avatars/           # High-resolution contestant profile photos
 ├── scripts/
-│   └── scraper.py         # Instagram scraper & avatar archiver script
+│   └── scraper.py         # Instagram scraper (headless browser + HTTP fallback)
 ├── src/
 │   ├── components/
 │   │   ├── Header.ts      # Main show header

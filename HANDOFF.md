@@ -17,7 +17,7 @@ All code is committed and the live site is current as of 2026-08-14.
 
 ## ⚠️ "update data" command — most important
 
-The daily 4 AM UTC CI run **cannot reliably scrape** — Instagram blocks GitHub's datacenter IP (all 5 scraper strategies return incomplete data there). The user refreshes data manually.
+The daily 4 AM UTC CI run **cannot reliably scrape** — Instagram blocks GitHub's datacenter IP (all 6 scraper strategies return incomplete data there, including the browser). The user refreshes data manually.
 
 **When the user says "update data", do exactly this:**
 
@@ -30,6 +30,8 @@ git push origin main                # triggers deploy.yml → actions/deploy-pag
 ```
 
 The push auto-deploys. Verify at https://devshareshare.github.io/mieczaki-tracker/ ("Ostatnia aktualizacja" should show today's date).
+
+The scraper's primary follower source is a headless browser (`agent-browser`). It needs `agent-browser` installed (`npm i -g agent-browser && agent-browser install`); missing Chrome system libs (`libnspr4`, `libnss3`, `libasound2`) are auto-provisioned to `~/.local/share/mieczaki-tracker/chrome-libs/`. If the browser is unavailable, it falls back to HTTP mirrors (less precise).
 
 Note: if the push rejects as non-fast-forward (CI committed data in between), run `git pull --rebase origin main`, resolve data-file conflicts **in favor of the local scrape** (`git checkout --theirs data/`), then `git rebase --continue` and push.
 
@@ -52,7 +54,7 @@ Note: if the push rejects as non-fast-forward (CI committed data in between), ru
 
 1. **CI scraping is blocked** (datacenter IP). The daily run stays green but *retains previous data* when all strategies fail. See the "update data" section above.
 2. **Comments depend on fallback paths** — the `api/v1/feed/user/{id}` comment endpoint needs a `user_id` from `web_profile_info` (blocked on CI), so comment totals come from `instaloader`/mirrors and may be retained from the previous run when those fail.
-3. **Follower counts are imprecise for accounts ≥10k** — Instagram's `og:description` rounds to whole K; Imginn gives 0.1K precision; exact counts only via `web_profile_info` (blocked).
+3. **Followers need the browser for precision** — the headless-browser strategy (`agent-browser`) reads the rendered count (exact under 10k, 0.1K above). If agent-browser/Chrome is unavailable, the scraper falls back to mirrors (Imginn 0.1K, `og:description` whole-K).
 4. `bs4`/`instaloader` are optional runtime deps (guarded by try/except); CI installs them, local may not have them.
 
 ---

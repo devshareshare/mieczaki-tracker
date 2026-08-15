@@ -7,6 +7,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from scripts.scraper import (
     merge_contestant_data,
+    parse_browser_followers,
     parse_count,
     parse_description_text,
     parse_feed_response,
@@ -24,6 +25,21 @@ class TestScraper(unittest.TestCase):
         self.assertEqual(parse_count("145"), 145)
         self.assertEqual(parse_count(""), 0)
         self.assertEqual(parse_count("invalid"), 0)
+
+    def test_parse_browser_followers(self):
+        self.assertEqual(
+            parse_browser_followers("oktawia_mieczaki\n11.2K followers\n317 following"),
+            11200,
+        )
+        self.assertEqual(
+            parse_browser_followers("oliwia\n5,142 followers\n447 following"),
+            5142,
+        )
+        self.assertEqual(
+            parse_browser_followers("stachu\n24.3K followers"),
+            24300,
+        )
+        self.assertIsNone(parse_browser_followers("no followers here"))
 
     def test_parse_description_text(self):
         desc1 = "23K Followers, 41 Following, 7 Posts - See Instagram photos and videos"
