@@ -417,16 +417,6 @@ body {
   gap: 1.25rem;
 }
 
-/* Center 4th badge on 2nd row when 4 badges are present */
-@media (min-width: 900px) {
-  .badges-grid > .badge-card:last-child:nth-child(4) {
-    grid-column: 1 / -1;
-    justify-self: center;
-    width: 100%;
-    max-width: 380px;
-  }
-}
-
 .badge-card {
   background: var(--bg-card);
   border: 1px solid var(--border-color);

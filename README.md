@@ -26,13 +26,12 @@ The application is deployed automatically to **GitHub Pages**. A daily GitHub Ac
   - 🔥 **Top Weekly Gainer**: Highlights the contestant who gained the most followers in the last 7 days.
   - 🚀 **Fastest Weekly % Growth**: Highlights the contestant with the highest percentage growth in the last 7 days.
   - 📸 **Most Active Weekly Poster**: Highlights the contestant with the highest post output in the last 7 days.
-  - 💬 **Most Discussed Weekly Poster**: Highlights the contestant who gained the most comments across all posts in the last 7 days (centered on 2nd row).
 - **Interactive Chart.js Diagrams**:
   - **Follower Growth Trajectory**: Multi-line line chart tracking follower trends over time with range selectors (*Wszystko*, *Ostatnie 30 dni*, *Ostatnie 7 dni*) and interactive contestant selection chips.
   - **Monthly Followers Gained**: Bar chart comparing follower growth aggregated by calendar month.
   - **Monthly Posts Published**: Bar chart comparing posts published aggregated by calendar month.
   - **Monthly Comments Gained**: Bar chart comparing total comments gained aggregated by calendar month.
-- **Local Avatar Archiving**: High-resolution contestant photos stored in `public/avatars/` to guarantee zero broken Instagram CDN links.
+- **Static Local Avatars**: High-resolution contestant photos stored in `public/avatars/` to guarantee zero broken Instagram CDN links.
 - **Pure Read-Only UI**: Runs on autopilot without manual edit or client-side refresh buttons.
 
 ---

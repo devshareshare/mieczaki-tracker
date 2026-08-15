@@ -24,7 +24,7 @@ The daily 4 AM UTC CI run **cannot reliably scrape** — Instagram blocks GitHub
 ```bash
 cd /home/krbel/projects/mieczaki-tracker
 python3 scripts/scraper.py          # scrapes from residential IP (works)
-git add data/latest.json data/history.json public/avatars/
+git add data/latest.json data/history.json
 git commit -m "auto: daily Instagram data refresh (local)"
 git push origin main                # triggers deploy.yml → actions/deploy-pages
 ```
@@ -51,7 +51,7 @@ Note: if the push rejects as non-fast-forward (CI committed data in between), ru
 ## Known limitations / watch items
 
 1. **CI scraping is blocked** (datacenter IP). The daily run stays green but *retains previous data* when all strategies fail. See the "update data" section above.
-2. **Comments are frozen** — the `api/v1/feed/user/{id}` comment endpoint needs a `user_id` from `web_profile_info`, which is also blocked. "Most Discussed Poster" badge shows "Brak danych" until that's unblocked (or until `user_id` extraction is added to the Imginn fallback — a known follow-up).
+2. **Comments depend on fallback paths** — the `api/v1/feed/user/{id}` comment endpoint needs a `user_id` from `web_profile_info` (blocked on CI), so comment totals come from `instaloader`/mirrors and may be retained from the previous run when those fail.
 3. **Follower counts are imprecise for accounts ≥10k** — Instagram's `og:description` rounds to whole K; Imginn gives 0.1K precision; exact counts only via `web_profile_info` (blocked).
 4. `bs4`/`instaloader` are optional runtime deps (guarded by try/except); CI installs them, local may not have them.
 

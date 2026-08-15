@@ -174,11 +174,6 @@ describe("dataService", () => {
         handle: "filip_mieczaki",
         posts: 10,
       });
-
-      expect(badges.mostDiscussedPoster).toEqual({
-        handle: "filip_mieczaki",
-        comments: 400,
-      });
     });
 
     it("handles empty history gracefully", () => {
@@ -231,7 +226,6 @@ describe("dataService", () => {
 
       // "a" has 0 weekly post gain despite 80 lifetime posts; "b" gained 5.
       expect(badges.mostActivePoster).toEqual({ handle: "b", posts: 5 });
-      expect(badges.mostDiscussedPoster).toEqual({ handle: "b", comments: 50 });
     });
   });
 

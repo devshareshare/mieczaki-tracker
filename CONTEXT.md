@@ -14,7 +14,7 @@ Contestants undergo a 6-month physical and mental transformation program competi
 - **AJ** — Adam Josef Modzelewski, show creator, coach, and fitness influencer.
 - **Contestants** — The 12 participants competing in the show.
 - **Podium** — Gold (#1), Silver (#2), and Bronze (#3) top performers display.
-- **Special Badges** — Weekly highlight cards for *Top Weekly Gainer*, *Fastest Weekly % Growth*, *Most Active Weekly Poster*, and *Most Discussed Weekly Poster*.
+- **Special Badges** — Weekly highlight cards for *Top Weekly Gainer*, *Fastest Weekly % Growth*, and *Most Active Weekly Poster*.
 - **Goal Milestone** — Unified 50,000 follower target across all contestant progress bars.
 - **Comment Metrics** — Aggregated comment totals across contestants' published posts.
 
@@ -45,5 +45,5 @@ Contestants undergo a 6-month physical and mental transformation program competi
 
 - **Frontend**: Vite + TypeScript (strict mode) + Chart.js + CSS Variables (lime `#c8ff00` accents on `#121212` dark show theme).
 - **Data Engine**: `data/latest.json` (current metrics) + `data/history.json` (daily snapshot log) + `src/services/dataService.ts` (analytics calculations).
-- **Scraper & Avatars**: Python 3 (`scripts/scraper.py`) with multi-strategy fallback — exact follower counts via Instagram `web_profile_info`, precise counts via the Imginn mirror, `og:description` parsing, and anonymous comment totals via `api/v1/feed/user/{id}`. Local JPEG caching under `public/avatars/` with non-square rejection and high-res fallbacks from `mieczaki.com`.
+- **Scraper**: Python 3 (`scripts/scraper.py`) with multi-strategy fallback — exact follower counts via Instagram `web_profile_info`, precise counts via the Imginn mirror, `og:description` parsing, and anonymous comment totals via `api/v1/feed/user/{id}`. Avatars are static — stored under `public/avatars/` and not refreshed by the scraper.
 - **CI/CD Autopilot**: A single GitHub Actions workflow (`.github/workflows/daily-update.yml`) runs daily at 4:00 AM UTC to scrape Instagram, update JSON & avatars, run tests, build Vite assets, and deploy to GitHub Pages. (Deploy is inlined in the same workflow because `GITHUB_TOKEN` pushes do not re-trigger separate workflows.)

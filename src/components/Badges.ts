@@ -87,23 +87,6 @@ export function createBadges(
   });
   grid.appendChild(posterCard);
 
-  // 4. Most Discussed Poster
-  const discussedData = calculatedBadges.mostDiscussedPoster;
-  const discussedContestant = findContestant(discussedData?.handle);
-  const discussedCard = createBadgeCard({
-    badgeType: "most-discussed-poster",
-    icon: "💬",
-    category: "NAJCZĘŚCIEJ KOMENTOWANY W TYGODNIU",
-    title: "Most Discussed Weekly Poster",
-    timeframe: "Ostatnie 7 dni",
-    contestant: discussedContestant,
-    handle: discussedData?.handle,
-    metricText: discussedData
-      ? `${discussedData.comments.toLocaleString("en-US")} komentarzy`
-      : "Brak danych",
-  });
-  grid.appendChild(discussedCard);
-
   section.appendChild(grid);
   return section;
 }

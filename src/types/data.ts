@@ -28,7 +28,6 @@ export interface Badges {
   topWeeklyGainer?: { handle: string; gained: number };
   fastestPercentageGrowth?: { handle: string; percent: number };
   mostActivePoster?: { handle: string; posts: number };
-  mostDiscussedPoster?: { handle: string; comments: number };
 }
 
 export interface MilestoneProgress {

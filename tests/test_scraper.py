@@ -1,4 +1,3 @@
-import os
 import sys
 import unittest
 from pathlib import Path
@@ -7,7 +6,6 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from scripts.scraper import (
-    get_avatar_path,
     merge_contestant_data,
     parse_count,
     parse_description_text,
@@ -71,16 +69,7 @@ class TestScraper(unittest.TestCase):
         self.assertEqual(parse_og_image(html), "https://scontent.cdninstagram.com/avatar.jpg")
         self.assertIsNone(parse_og_image("<html></html>"))
 
-    def test_get_avatar_path(self):
-        path = get_avatar_path("pamelka_mieczaki", base_dir="/tmp/test_dir")
-        self.assertEqual(
-            str(path),
-            os.path.normpath("/tmp/test_dir/public/avatars/pamelka_mieczaki.jpg"),
-        )
-
     def test_merge_contestant_data_anomaly_guard(self):
-        import tempfile
-
         existing = {
             "id": "stachu_goggins_mieczaki",
             "name": "Stanislaw Dybowski",
@@ -98,22 +87,13 @@ class TestScraper(unittest.TestCase):
             "followers": 240,
             "posts": 20,
             "comments": None,
-            "avatar_url": None,
         }
 
-        with tempfile.TemporaryDirectory() as tmp:
-            base_dir = Path(tmp)
-            avatar = base_dir / "public" / "avatars" / "stachu_goggins_mieczaki.jpg"
-            avatar.parent.mkdir(parents=True, exist_ok=True)
-            avatar.write_bytes(b"fake")
-
-            merged = merge_contestant_data(
-                existing=existing,
-                scraped=scraped_bad,
-                handle="stachu_goggins_mieczaki",
-                base_dir=base_dir,
-                user_agent="TestUA",
-            )
+        merged = merge_contestant_data(
+            existing=existing,
+            scraped=scraped_bad,
+            handle="stachu_goggins_mieczaki",
+        )
 
         self.assertEqual(merged["followers"], 19879)
         self.assertEqual(merged["posts"], 17)
@@ -160,8 +140,6 @@ class TestScraper(unittest.TestCase):
             existing=existing,
             scraped=None,
             handle="pamelka_mieczaki",
-            base_dir=Path("/tmp"),
-            user_agent="TestUA",
         )
         self.assertEqual(merged_failed["followers"], 33000)
         self.assertEqual(merged_failed["posts"], 145)
@@ -173,14 +151,11 @@ class TestScraper(unittest.TestCase):
             "followers": 33500,
             "posts": 148,
             "comments": 4950,
-            "avatar_url": None,
         }
         merged_success = merge_contestant_data(
             existing=existing,
             scraped=scraped_success,
             handle="pamelka_mieczaki",
-            base_dir=Path("/tmp"),
-            user_agent="TestUA",
         )
         self.assertEqual(merged_success["followers"], 33500)
         self.assertEqual(merged_success["posts"], 148)

@@ -166,21 +166,14 @@ describe("Badges and Charts Components", () => {
       const posterCard = badgesSection.querySelector(
         '[data-badge-type="most-active-poster"]',
       );
-      const discussedCard = badgesSection.querySelector(
-        '[data-badge-type="most-discussed-poster"]',
-      );
 
       expect(gainerCard).not.toBeNull();
       expect(growthCard).not.toBeNull();
       expect(posterCard).not.toBeNull();
-      expect(discussedCard).not.toBeNull();
 
       expect(gainerCard?.textContent).toContain("Top Weekly Gainer");
       expect(growthCard?.textContent).toContain("Fastest Weekly % Growth");
       expect(posterCard?.textContent).toContain("Most Active Weekly Poster");
-      expect(discussedCard?.textContent).toContain(
-        "Most Discussed Weekly Poster",
-      );
 
       expect(gainerCard?.textContent).toContain("Filip Wrzosek");
       expect(
@@ -196,12 +189,6 @@ describe("Badges and Charts Components", () => {
       expect(
         posterCard?.querySelector('[data-testid="badge-metric"]')?.textContent,
       ).toBe("10 postów");
-
-      expect(discussedCard?.textContent).toContain("Filip Wrzosek");
-      expect(
-        discussedCard?.querySelector('[data-testid="badge-metric"]')
-          ?.textContent,
-      ).toBe("400 komentarzy");
     });
 
     it("handles empty history gracefully", () => {

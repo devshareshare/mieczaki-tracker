@@ -95,7 +95,6 @@ export function getBadges(
   let topGainer: { handle: string; gained: number } | undefined;
   let fastestGrowth: { handle: string; percent: number } | undefined;
   let mostActive: { handle: string; posts: number } | undefined;
-  let mostDiscussed: { handle: string; comments: number } | undefined;
 
   for (const c of latest.contestants) {
     const pastEntry = pastSnapshot.contestants.find(
@@ -103,10 +102,6 @@ export function getBadges(
     );
     const pastFollowers = pastEntry ? pastEntry.followers : c.followers;
     const pastPosts = pastEntry ? pastEntry.posts : c.posts;
-    const pastComments =
-      pastEntry && pastEntry.comments !== undefined
-        ? pastEntry.comments
-        : c.comments || 0;
 
     const gained = c.followers - pastFollowers;
     const percent =
@@ -116,7 +111,6 @@ export function getBadges(
           )
         : 0;
     const postsGained = c.posts - pastPosts;
-    const commentsGained = (c.comments || 0) - pastComments;
 
     if (gained > 0 && (!topGainer || gained > topGainer.gained)) {
       topGainer = { handle: c.handle, gained };
@@ -129,20 +123,12 @@ export function getBadges(
     if (postsGained > 0 && (!mostActive || postsGained > mostActive.posts)) {
       mostActive = { handle: c.handle, posts: postsGained };
     }
-
-    if (
-      commentsGained > 0 &&
-      (!mostDiscussed || commentsGained > mostDiscussed.comments)
-    ) {
-      mostDiscussed = { handle: c.handle, comments: commentsGained };
-    }
   }
 
   return {
     topWeeklyGainer: topGainer,
     fastestPercentageGrowth: fastestGrowth,
     mostActivePoster: mostActive,
-    mostDiscussedPoster: mostDiscussed,
   };
 }
 

@@ -42,21 +42,6 @@ CONTESTANT_HANDLES = [
     "wiktor_mieczaki",
 ]
 
-OFFICIAL_MIECZAKI_AVATARS = {
-    "maquk_mieczaki": "https://mieczaki.com/wp-content/uploads/2026/05/Dominik-Makowiak.jpg",
-    "dori_mieczaki": "https://mieczaki.com/wp-content/uploads/2026/05/DOROTA_KACZMAREK_.jpg",
-    "filip_mieczaki": "https://mieczaki.com/wp-content/uploads/2026/05/Filip-Wrzosek.jpg",
-    "magda_mieczaki": "https://mieczaki.com/wp-content/uploads/2026/05/Magdalena-Majewska.jpg",
-    "oktawia_mieczaki": "https://mieczaki.com/wp-content/uploads/2026/05/OKTAWIA_JUSZCZYK.jpg",
-    "oliwia_mieczaki": "https://mieczaki.com/wp-content/uploads/2026/05/OLIWIA_PLODZIEN.jpg",
-    "pamelka_mieczaki": "https://mieczaki.com/wp-content/uploads/2026/05/PAMELA_KIEDROWICZ.jpg",
-    "patrycja_mieczaki": "https://mieczaki.com/wp-content/uploads/2026/05/PATRYCJA_BOCHYNSKA.jpg",
-    "pati_mieczaki": "https://mieczaki.com/wp-content/uploads/2026/05/PATRYCJA_TOMASZEWSKA.jpg",
-    "patrykbutrym_mieczaki": "https://mieczaki.com/wp-content/uploads/2026/05/PATRYK_BUTRYM.jpg",
-    "stachu_goggins_mieczaki": "https://mieczaki.com/wp-content/uploads/2026/05/STANISLAW_DYBOWSKI.jpg",
-    "wiktor_mieczaki": "https://mieczaki.com/wp-content/uploads/2026/05/WIKTOR_WORONIAK.jpg",
-}
-
 USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
@@ -452,70 +437,6 @@ def strategy_5_opengraph_googlebot(handle: str) -> dict | None:
     return None
 
 
-def get_avatar_path(handle: str, base_dir: Path | str | None = None) -> Path:
-    """Return local avatar file path for a contestant handle."""
-    if base_dir is None:
-        base_dir = Path(__file__).resolve().parent.parent
-    else:
-        base_dir = Path(base_dir)
-    return base_dir / "public" / "avatars" / f"{handle}.jpg"
-
-
-def _jpeg_dimensions(data: bytes) -> tuple[int, int] | None:
-    """Return (width, height) for a JPEG, or None if not a valid JPEG."""
-    if len(data) < 9 or data[:2] != b"\xff\xd8":
-        return None
-    i = 2
-    while i + 9 < len(data):
-        if data[i] != 0xFF:
-            i += 1
-            continue
-        marker = data[i + 1]
-        if 0xC0 <= marker <= 0xCF and marker not in (0xC4, 0xC8, 0xCC):
-            height = (data[i + 5] << 8) | data[i + 6]
-            width = (data[i + 7] << 8) | data[i + 8]
-            return width, height
-        if marker == 0xD8 or marker == 0x01 or 0xD0 <= marker <= 0xD9:
-            i += 2
-            continue
-        i += 2 + ((data[i + 2] << 8) | data[i + 3])
-    return None
-
-
-def download_avatar(url: str, dest_path: Path, user_agent: str) -> bool:
-    """Download JPEG profile image from URL and save to dest_path."""
-    if not url:
-        return False
-    try:
-        req = urllib.request.Request(
-            url,
-            headers={
-                "User-Agent": user_agent,
-                "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
-            },
-        )
-        with urllib.request.urlopen(req, timeout=HTTP_TIMEOUT, context=SSL_CONTEXT) as resp:
-            data = resp.read()
-            if data and len(data) > 100:
-                dims = _jpeg_dimensions(data)
-                if dims:
-                    width, height = dims
-                    ratio = max(width, height) / max(1, min(width, height))
-                    if ratio > 1.5:
-                        print(
-                            f"[avatar] Skipping non-square avatar for {dest_path.stem} ({width}x{height}).",
-                            file=sys.stderr,
-                        )
-                        return False
-                dest_path.parent.mkdir(parents=True, exist_ok=True)
-                with open(dest_path, "wb") as f:
-                    f.write(data)
-                return True
-    except Exception as e:
-        print(f"[avatar] Error downloading avatar for {dest_path.stem}: {e}", file=sys.stderr)
-    return False
-
-
 def fetch_instagram_profile(handle: str, user_agent: str | None = None) -> dict | None:
     """Fetch contestant profile using multi-strategy fallbacks."""
     ua = user_agent or get_random_user_agent()
@@ -572,7 +493,6 @@ def fetch_instagram_profile(handle: str, user_agent: str | None = None) -> dict 
         "handle": handle,
         "followers": scraped_result["followers"],
         "posts": scraped_result["posts"],
-        "avatar_url": scraped_result.get("avatar_url"),
         "strategy": successful_strategy,
     }
 
@@ -589,8 +509,6 @@ def merge_contestant_data(
     existing: dict | None,
     scraped: dict | None,
     handle: str,
-    base_dir: Path,
-    user_agent: str,
 ) -> dict:
     """Merge scraped data with existing contestant data, applying fallback logic."""
     if not existing:
@@ -609,9 +527,6 @@ def merge_contestant_data(
     if "comments" not in updated:
         updated["comments"] = 0
 
-    avatar_path = get_avatar_path(handle, base_dir)
-    avatar_success = False
-
     if scraped and scraped.get("followers") is not None and scraped.get("posts") is not None:
         new_followers = int(scraped["followers"])
         prev_followers = int(updated.get("followers", 0) or 0)
@@ -629,20 +544,10 @@ def merge_contestant_data(
 
             if scraped.get("comments") is not None:
                 updated["comments"] = scraped["comments"]
-
-            avatar_url = scraped.get("avatar_url")
-            if avatar_url:
-                avatar_success = download_avatar(avatar_url, avatar_path, user_agent)
     else:
         print(
             f"[fallback] Retaining previous metrics for {handle}: followers={updated.get('followers')}, posts={updated.get('posts')}, comments={updated.get('comments')}"
         )
-
-    # Ensure avatar exists; if missing or download failed, fallback to official mieczaki avatar
-    if not avatar_success or not avatar_path.exists():
-        official_url = OFFICIAL_MIECZAKI_AVATARS.get(handle)
-        if official_url:
-            download_avatar(official_url, avatar_path, user_agent)
 
     return updated
 
@@ -678,7 +583,7 @@ def run_scraper(project_root: Path | str | None = None) -> None:
         ua = get_random_user_agent()
         scraped = fetch_instagram_profile(handle, user_agent=ua)
         existing = existing_latest.get(handle)
-        merged = merge_contestant_data(existing, scraped, handle, root, ua)
+        merged = merge_contestant_data(existing, scraped, handle)
 
         updated_contestants.append(merged)
         history_entry_contestants.append(
