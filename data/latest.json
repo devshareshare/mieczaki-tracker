@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-08T15:49:50.440126+00:00",
+  "timestamp": "2026-09-08T16:03:43.889006+00:00",
   "contestants": [
     {
       "id": "maquk_mieczaki",
@@ -55,7 +55,7 @@
       "id": "oliwia_mieczaki",
       "name": "Oliwia Płodzień",
       "handle": "oliwia_mieczaki",
-      "followers": 9860,
+      "followers": 9862,
       "posts": 17,
       "avatar": "./avatars/oliwia_mieczaki.jpg",
       "instagramUrl": "https://www.instagram.com/oliwia_mieczaki/",
@@ -75,7 +75,7 @@
       "id": "patrycja_mieczaki",
       "name": "Patrycja Bochyńska",
       "handle": "patrycja_mieczaki",
-      "followers": 9436,
+      "followers": 9437,
       "posts": 52,
       "avatar": "./avatars/patrycja_mieczaki.jpg",
       "instagramUrl": "https://www.instagram.com/patrycja_mieczaki/",
