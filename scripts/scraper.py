@@ -672,6 +672,30 @@ def run_scraper(project_root: Path | str | None = None) -> None:
         # scraper process can exit without orphaned children holding its stdout.
         subprocess.run(["pkill", "-f", "agent-browser-linux"], capture_output=True)
 
+    # Only treat this as an update if the metrics actually changed. Otherwise
+    # leave the files untouched so "Ostatnia aktualizacja" keeps reflecting the
+    # real last update instead of "the script ran today".
+    data_changed = False
+    if len(existing_latest) != len(updated_contestants):
+        data_changed = True
+    else:
+        for c in updated_contestants:
+            prev = existing_latest.get(c["handle"])
+            if (
+                prev is None
+                or prev.get("followers") != c.get("followers")
+                or prev.get("posts") != c.get("posts")
+            ):
+                data_changed = True
+                break
+
+    if not data_changed:
+        print(
+            "[scraper] No metric changes detected; keeping previous data and timestamp.",
+            file=sys.stderr,
+        )
+        return
+
     # Save latest.json
     latest_payload = {
         "timestamp": now_iso,

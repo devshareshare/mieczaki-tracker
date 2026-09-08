@@ -17,7 +17,6 @@ const mockLatest: LatestSnapshot = {
       handle: "filip_mieczaki",
       followers: 25000,
       posts: 120,
-      comments: 3200,
       avatar: "/avatars/filip_mieczaki.jpg",
       instagramUrl: "https://www.instagram.com/filip_mieczaki/",
     },
@@ -27,7 +26,6 @@ const mockLatest: LatestSnapshot = {
       handle: "pamelka_mieczaki",
       followers: 33000,
       posts: 145,
-      comments: 4800,
       avatar: "/avatars/pamelka_mieczaki.jpg",
       instagramUrl: "https://www.instagram.com/pamelka_mieczaki/",
     },
@@ -37,7 +35,6 @@ const mockLatest: LatestSnapshot = {
       handle: "patrycja_mieczaki",
       followers: 3684,
       posts: 28,
-      comments: 650,
       avatar: "/avatars/patrycja_mieczaki.jpg",
       instagramUrl: "https://www.instagram.com/patrycja_mieczaki/",
     },
@@ -52,19 +49,16 @@ const mockHistory: HistorySnapshot[] = [
         handle: "pamelka_mieczaki",
         followers: 29000,
         posts: 130,
-        comments: 4000,
       },
       {
         handle: "filip_mieczaki",
         followers: 20000,
         posts: 100,
-        comments: 2500,
       },
       {
         handle: "patrycja_mieczaki",
         followers: 2000,
         posts: 20,
-        comments: 400,
       },
     ],
   },
@@ -75,19 +69,16 @@ const mockHistory: HistorySnapshot[] = [
         handle: "pamelka_mieczaki",
         followers: 31500,
         posts: 140,
-        comments: 4500,
       },
       {
         handle: "filip_mieczaki",
         followers: 23000,
         posts: 110,
-        comments: 2800,
       },
       {
         handle: "patrycja_mieczaki",
         followers: 3000,
         posts: 25,
-        comments: 550,
       },
     ],
   },
@@ -98,19 +89,16 @@ const mockHistory: HistorySnapshot[] = [
         handle: "pamelka_mieczaki",
         followers: 33000,
         posts: 145,
-        comments: 4800,
       },
       {
         handle: "filip_mieczaki",
         followers: 25000,
         posts: 120,
-        comments: 3200,
       },
       {
         handle: "patrycja_mieczaki",
         followers: 3684,
         posts: 28,
-        comments: 650,
       },
     ],
   },
@@ -196,7 +184,6 @@ describe("dataService", () => {
             handle: "a",
             followers: 10000,
             posts: 80,
-            comments: 500,
             avatar: "",
             instagramUrl: "",
           },
@@ -206,7 +193,6 @@ describe("dataService", () => {
             handle: "b",
             followers: 10000,
             posts: 20,
-            comments: 200,
             avatar: "",
             instagramUrl: "",
           },
@@ -216,8 +202,8 @@ describe("dataService", () => {
         {
           timestamp: "2026-07-29T00:00:00.000Z",
           contestants: [
-            { handle: "a", followers: 10000, posts: 80, comments: 500 },
-            { handle: "b", followers: 10000, posts: 15, comments: 150 },
+            { handle: "a", followers: 10000, posts: 80 },
+            { handle: "b", followers: 10000, posts: 15 },
           ],
         },
       ];
@@ -259,12 +245,10 @@ describe("dataService", () => {
       expect(monthly[0].month).toBe("2026-07");
       expect(monthly[0].followersGained.pamelka_mieczaki).toBe(2500);
       expect(monthly[0].postsPublished.pamelka_mieczaki).toBe(10);
-      expect(monthly[0].commentsGained.pamelka_mieczaki).toBe(500);
 
       expect(monthly[1].month).toBe("2026-08");
       expect(monthly[1].followersGained.pamelka_mieczaki).toBe(1500);
       expect(monthly[1].postsPublished.pamelka_mieczaki).toBe(5);
-      expect(monthly[1].commentsGained.pamelka_mieczaki).toBe(300);
     });
 
     it("handles empty history", () => {

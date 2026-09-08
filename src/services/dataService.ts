@@ -205,7 +205,6 @@ export function getMonthlyStats(history: HistorySnapshot[]): MonthlyStats {
 
     const followersGained: Record<string, number> = {};
     const postsPublished: Record<string, number> = {};
-    const commentsGained: Record<string, number> = {};
 
     const handles = new Set<string>([
       ...startSnapshot.contestants.map((c) => c.handle),
@@ -222,23 +221,15 @@ export function getMonthlyStats(history: HistorySnapshot[]): MonthlyStats {
       const endFollowers = endEntry ? endEntry.followers : 0;
       const startPosts = startEntry ? startEntry.posts : 0;
       const endPosts = endEntry ? endEntry.posts : 0;
-      const startComments =
-        startEntry && startEntry.comments !== undefined
-          ? startEntry.comments
-          : 0;
-      const endComments =
-        endEntry && endEntry.comments !== undefined ? endEntry.comments : 0;
 
       followersGained[handle] = Math.max(0, endFollowers - startFollowers);
       postsPublished[handle] = Math.max(0, endPosts - startPosts);
-      commentsGained[handle] = Math.max(0, endComments - startComments);
     }
 
     result.push({
       month: monthKey,
       followersGained,
       postsPublished,
-      commentsGained,
     });
 
     lastSnapshotOfPreviousMonth = endSnapshot;

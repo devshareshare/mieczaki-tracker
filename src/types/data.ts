@@ -4,7 +4,6 @@ export interface Contestant {
   handle: string;
   followers: number;
   posts: number;
-  comments: number;
   avatar: string;
   instagramUrl: string;
 }
@@ -20,7 +19,6 @@ export interface HistorySnapshot {
     handle: string;
     followers: number;
     posts: number;
-    comments?: number;
   }>;
 }
 
@@ -40,5 +38,4 @@ export type MonthlyStats = Array<{
   month: string;
   followersGained: Record<string, number>;
   postsPublished: Record<string, number>;
-  commentsGained: Record<string, number>;
 }>;
