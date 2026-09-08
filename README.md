@@ -8,20 +8,20 @@ Tracks 12 contestants competing in a 6-month physical/mental transformation prog
 
 ## 🚀 Live Site & Autopilot Deployment
 
-The application is deployed automatically to **GitHub Pages**. A daily GitHub Actions workflow (`.github/workflows/daily-update.yml`) runs on a schedule at 4:00 AM UTC to:
-1. Scrape Instagram follower and post counts for all 12 contestants using `scripts/scraper.py`.
-2. Cache profile avatar images locally under `public/avatars/` (falling back to high-resolution official photos from `mieczaki.com`).
-3. Append timestamped snapshot records to `data/history.json` and update `data/latest.json`.
-4. Run Biome checks, TypeScript type checks, and Vitest + Python unit test suites.
-5. Build the Vite application and deploy the static site to GitHub Pages.
+The application is deployed automatically to **GitHub Pages**. A `@reboot` cron job on the host machine runs `scripts/daily-run.sh` at boot to:
+1. Scrape Instagram follower and post counts for all 12 contestants using `scripts/scraper.py` (headless browser, residential IP).
+2. Update `data/latest.json` and append a snapshot to `data/history.json` — only when the numbers actually change.
+3. Commit and push the data change, which triggers `.github/workflows/deploy.yml` to build and deploy the static site.
+
+(Instagram blocks GitHub's datacenter IPs, so the scrape runs from the host's residential IP instead of GitHub Actions. `.github/workflows/daily-update.yml` remains as a manual `workflow_dispatch` fallback only.)
 
 ---
 
 ## ✨ Features
 
 - **Centered Show Header**: Clean display title, show subtitle, and live status badge with lime `#c8ff00` accents on dark `#121212` show theme.
-- **Top 3 Podium**: Gold (#1, center/highest on desktop, #1 top on mobile), Silver (#2, left), and Bronze (#3, right) cards featuring rank badges, face-zoomed avatars, verified follower counts, post counts, total comments, and unified 50,000 follower milestone progress bars.
-- **Contestant Grid**: Ranks 4 through 12 cards displaying full names, handles, face-zoomed avatars, follower counts, post counts, comment totals, and unified 50,000 follower milestone progress bars.
+- **Top 3 Podium**: Gold (#1, center/highest on desktop, #1 top on mobile), Silver (#2, left), and Bronze (#3, right) cards featuring rank badges, face-zoomed avatars, verified follower counts, post counts, and unified 50,000 follower milestone progress bars.
+- **Contestant Grid**: Ranks 4 through 12 cards displaying full names, handles, face-zoomed avatars, follower counts, post counts, and unified 50,000 follower milestone progress bars.
 - **Centered Weekly Special Badges**:
   - 🔥 **Top Weekly Gainer**: Highlights the contestant who gained the most followers in the last 7 days.
   - 🚀 **Fastest Weekly % Growth**: Highlights the contestant with the highest percentage growth in the last 7 days.
@@ -30,7 +30,6 @@ The application is deployed automatically to **GitHub Pages**. A daily GitHub Ac
   - **Follower Growth Trajectory**: Multi-line line chart tracking follower trends over time with range selectors (*Wszystko*, *Ostatnie 30 dni*, *Ostatnie 7 dni*) and interactive contestant selection chips.
   - **Monthly Followers Gained**: Bar chart comparing follower growth aggregated by calendar month.
   - **Monthly Posts Published**: Bar chart comparing posts published aggregated by calendar month.
-  - **Monthly Comments Gained**: Bar chart comparing total comments gained aggregated by calendar month.
 - **Static Local Avatars**: High-resolution contestant photos stored in `public/avatars/` to guarantee zero broken Instagram CDN links.
 - **Pure Read-Only UI**: Runs on autopilot without manual edit or client-side refresh buttons.
 
@@ -38,20 +37,20 @@ The application is deployed automatically to **GitHub Pages**. A daily GitHub Ac
 
 ## 👥 Tracked Contestants (12)
 
-| Rank | Handle | Name | Followers | Posts | Comments |
-|---|---|---|---|---|---|
-| **#1** | [@pamelka_mieczaki](https://instagram.com/pamelka_mieczaki) | Pamela Kiedrowicz | ~37.2k | 28 | 2,125 |
-| **#2** | [@pati_mieczaki](https://instagram.com/pati_mieczaki) | Patrycja "Pati" Tomaszewska | ~30.4k | 18 | 1,711 |
-| **#3** | [@filip_mieczaki](https://instagram.com/filip_mieczaki) | Filip Wrzosek | ~27.6k | 34 | 1,863 |
-| **#4** | [@maquk_mieczaki](https://instagram.com/maquk_mieczaki) | Dominik "Maquk" Makowiak | ~27.2k | 7 | 1,295 |
-| **#5** | [@wiktor_mieczaki](https://instagram.com/wiktor_mieczaki) | Wiktor Woroniak | ~26.6k | 14 | 1,207 |
-| **#6** | [@stachu_goggins_mieczaki](https://instagram.com/stachu_goggins_mieczaki) | Stanisław "Stachu" Dybowski | ~24.4k | 20 | 1,265 |
-| **#7** | [@magda_mieczaki](https://instagram.com/magda_mieczaki) | Magdalena Majewska | ~19.7k | 20 | 1,241 |
-| **#8** | [@dori_mieczaki](https://instagram.com/dori_mieczaki) | Dorota "Dori" Kaczmarek | ~17.0k | 34 | 1,612 |
-| **#9** | [@patrykbutrym_mieczaki](https://instagram.com/patrykbutrym_mieczaki) | Patryk Butrym | ~13.5k | 19 | 856 |
-| **#10** | [@oktawia_mieczaki](https://instagram.com/oktawia_mieczaki) | Oktawia Juszczyk | ~11.2k | 74 | 1,982 |
-| **#11** | [@oliwia_mieczaki](https://instagram.com/oliwia_mieczaki) | Oliwia Płodzień | 5,163 | 11 | 474 |
-| **#12** | [@patrycja_mieczaki](https://instagram.com/patrycja_mieczaki) | Patrycja Bochyńska | 4,572 | 43 | 1,393 |
+| Rank | Handle | Name | Followers | Posts |
+|---|---|---|---|---|
+| **#1** | [@pamelka_mieczaki](https://instagram.com/pamelka_mieczaki) | Pamela Kiedrowicz | ~48.0k | 29 |
+| **#2** | [@pati_mieczaki](https://instagram.com/pati_mieczaki) | Patrycja "Pati" Tomaszewska | ~44.0k | 24 |
+| **#3** | [@stachu_goggins_mieczaki](https://instagram.com/stachu_goggins_mieczaki) | Stanisław "Stachu" Dybowski | ~39.1k | 25 |
+| **#4** | [@wiktor_mieczaki](https://instagram.com/wiktor_mieczaki) | Wiktor Woroniak | ~39.1k | 23 |
+| **#5** | [@maquk_mieczaki](https://instagram.com/maquk_mieczaki) | Dominik "Maquk" Makowiak | ~34.4k | 9 |
+| **#6** | [@filip_mieczaki](https://instagram.com/filip_mieczaki) | Filip Wrzosek | ~32.9k | 45 |
+| **#7** | [@magda_mieczaki](https://instagram.com/magda_mieczaki) | Magdalena Majewska | ~31.2k | 26 |
+| **#8** | [@dori_mieczaki](https://instagram.com/dori_mieczaki) | Dorota "Dori" Kaczmarek | ~27.1k | 49 |
+| **#9** | [@oktawia_mieczaki](https://instagram.com/oktawia_mieczaki) | Oktawia Juszczyk | ~26.5k | 75 |
+| **#10** | [@patrykbutrym_mieczaki](https://instagram.com/patrykbutrym_mieczaki) | Patryk Butrym | ~21.8k | 26 |
+| **#11** | [@oliwia_mieczaki](https://instagram.com/oliwia_mieczaki) | Oliwia Płodzień | 9,862 | 17 |
+| **#12** | [@patrycja_mieczaki](https://instagram.com/patrycja_mieczaki) | Patrycja Bochyńska | 9,437 | 52 |
 
 *Follower counts ≥10k reflect Instagram's public 0.1K display precision; counts under 10k are exact. This table is a manual snapshot — the live site reads `data/latest.json`.*
 
@@ -64,10 +63,12 @@ The application is deployed automatically to **GitHub Pages**. A daily GitHub Ac
   - `data/latest.json`: Current snapshot holding rankings, follower counts, post counts, and local avatar paths.
   - `data/history.json`: Time-series log containing daily snapshots.
   - `src/services/dataService.ts`: Pure computation module for sorting, badge calculations, progress milestones, and monthly aggregations.
-- **Scraper Script**: Python 3 (`scripts/scraper.py`) with multi-strategy fallback — follower counts read from the rendered Instagram profile via a headless browser (`agent-browser`; exact under 10k, 0.1K precision above), with HTTP mirrors (`web_profile_info`, Imginn, `og:description`) as fallback; post counts via `og:description`; comment totals via `api/v1/feed/user/{id}` + instaloader. Includes User-Agent rotation, follower anomaly guards, and fallback metrics retention.
+- **Scraper Script**: Python 3 (`scripts/scraper.py`) with multi-strategy fallback — follower counts read from the rendered Instagram profile via a headless browser (`agent-browser`; exact under 10k, 0.1K precision above), with HTTP mirrors (`web_profile_info`, Imginn, `og:description`) as fallback; post counts via `og:description`. Includes User-Agent rotation, follower anomaly guards, and fallback metrics retention.
 - **CI/CD Pipelines**:
-  - `.github/workflows/daily-update.yml`: Single self-contained workflow — scheduled daily scraper, tests, build, and GitHub Pages deployment. (Deploy is inlined because `GITHUB_TOKEN` pushes don't re-trigger other workflows.)
+  - `scripts/daily-run.sh` + `@reboot` cron: Boot-triggered scrape, commit, and push — the primary update path.
+  - `.github/workflows/deploy.yml`: Builds and deploys to GitHub Pages on every push to `main`.
   - `.github/workflows/ci.yml`: Pull request and push test/typecheck validation.
+  - `.github/workflows/daily-update.yml`: Manual-only (`workflow_dispatch`) scrape + deploy fallback.
 - **Tooling**: Biome (linting/formatting), Vitest (JS/TS tests), `unittest` (Python scraper tests).
 
 ---
@@ -107,7 +108,8 @@ python3 -m http.server 8080 -d dist
 ```text
 mieczaki-tracker/
 ├── .github/workflows/
-│   ├── daily-update.yml   # Scheduled daily scraper & GitHub Pages deployment
+│   ├── deploy.yml         # Build + deploy to GitHub Pages on push
+│   ├── daily-update.yml   # Manual-only scrape + deploy fallback
 │   └── ci.yml             # PR and push test validation workflow
 ├── .scratch/
 │   └── mieczaki-tracker-modernization/
@@ -119,6 +121,7 @@ mieczaki-tracker/
 ├── public/
 │   └── avatars/           # High-resolution contestant profile photos
 ├── scripts/
+│   ├── daily-run.sh       # Boot-triggered scrape → commit → push runner
 │   └── scraper.py         # Instagram scraper (headless browser + HTTP fallback)
 ├── src/
 │   ├── components/

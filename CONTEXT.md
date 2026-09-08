@@ -16,7 +16,6 @@ Contestants undergo a 6-month physical and mental transformation program competi
 - **Podium** — Gold (#1), Silver (#2), and Bronze (#3) top performers display.
 - **Special Badges** — Weekly highlight cards for *Top Weekly Gainer*, *Fastest Weekly % Growth*, and *Most Active Weekly Poster*.
 - **Goal Milestone** — Unified 50,000 follower target across all contestant progress bars.
-- **Comment Metrics** — Aggregated comment totals across contestants' published posts.
 
 ---
 
@@ -44,6 +43,6 @@ Contestants undergo a 6-month physical and mental transformation program competi
 ## Technical Architecture
 
 - **Frontend**: Vite + TypeScript (strict mode) + Chart.js + CSS Variables (lime `#c8ff00` accents on `#121212` dark show theme).
-- **Data Engine**: `data/latest.json` (current metrics) + `data/history.json` (daily snapshot log) + `src/services/dataService.ts` (analytics calculations).
-- **Scraper**: Python 3 (`scripts/scraper.py`) with multi-strategy fallback. Followers are read from the rendered Instagram profile via a headless browser (`agent-browser`) — exact under 10k, 0.1K precision above — with HTTP mirrors (`web_profile_info`, Imginn, `og:description`) as fallback. Posts come from `og:description`; comments via `api/v1/feed/user/{id}` + instaloader. Avatars are static — stored under `public/avatars/` and not refreshed by the scraper.
-- **CI/CD Autopilot**: A single GitHub Actions workflow (`.github/workflows/daily-update.yml`) runs daily at 4:00 AM UTC to scrape Instagram, update JSON & avatars, run tests, build Vite assets, and deploy to GitHub Pages. (Deploy is inlined in the same workflow because `GITHUB_TOKEN` pushes do not re-trigger separate workflows.)
+- **Data Engine**: `data/latest.json` (current metrics) + `data/history.json` (daily snapshot log) + `src/services/dataService.ts` (analytics calculations). Tracks followers and posts only — comment metrics were removed.
+- **Scraper**: Python 3 (`scripts/scraper.py`) with multi-strategy fallback. Followers are read from the rendered Instagram profile via a headless browser (`agent-browser`) — exact under 10k, 0.1K precision above — with HTTP mirrors (`web_profile_info`, Imginn, `og:description`) as fallback. Posts come from `og:description`. Avatars are static — stored under `public/avatars/` and not refreshed by the scraper.
+- **Automation**: A `@reboot` cron job on the host machine runs `scripts/daily-run.sh` at boot — it waits for network, scrapes, then commits and pushes only if the numbers changed. The push triggers `.github/workflows/deploy.yml` (build + deploy to GitHub Pages). No login or terminal is required; the machine just needs to be powered on. Instagram blocks datacenter IPs, so the scrape runs from the host's residential IP rather than GitHub Actions.
