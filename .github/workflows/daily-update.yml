@@ -1,8 +1,6 @@
 name: Daily Data Refresh
 
 on:
-  schedule:
-    - cron: '0 4 * * *'
   workflow_dispatch:
 
 permissions:
@@ -38,7 +36,7 @@ jobs:
           cache: 'npm'
 
       - name: Install Python dependencies
-        run: python3 -m pip install instaloader beautifulsoup4
+        run: python3 -m pip install beautifulsoup4
 
       - name: Install Node dependencies
         run: npm ci

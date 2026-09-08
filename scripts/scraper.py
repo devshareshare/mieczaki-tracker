@@ -24,14 +24,6 @@ SSL_CONTEXT = ssl._create_unverified_context()
 HTTP_TIMEOUT = 8  # strict timeout in seconds
 MIN_PLAUSIBLE_FOLLOWERS = 1000  # reject mirror garbage below this as a glitch
 
-# Mobile (iPad) app identifiers used by the anonymous api/v1/feed endpoint.
-MOBILE_APP_ID = "124024574287414"
-IPAD_USER_AGENT = (
-    "Instagram 361.0.0.35.82 (iPad13,8; iOS 18_0; en_US; en-US; "
-    "scale=2.00; 2048x2732; 674117118) AppleWebKit/420+"
-)
-MAX_FEED_PAGES = 3  # cap comment pagination at ~3 pages (≈ 99 posts)
-
 CONTESTANT_HANDLES = [
     "maquk_mieczaki",
     "dori_mieczaki",
@@ -155,77 +147,6 @@ def fetch_url(url: str, headers: dict, timeout: int = HTTP_TIMEOUT) -> str | Non
     except Exception:
         pass
     return None
-
-
-def parse_feed_response(data: dict) -> dict:
-    """Extract comment total + pagination info from a mobile feed API response."""
-    total = 0
-    for item in data.get("items") or []:
-        cc = item.get("comment_count")
-        if isinstance(cc, int) and cc > 0:
-            total += cc
-    return {
-        "comments_total": total,
-        "follower_count": data.get("user", {}).get("follower_count"),
-        "next_max_id": data.get("next_max_id") or data.get("max_id"),
-        "more_available": bool(data.get("more_available")),
-    }
-
-
-def fetch_comments_feed(user_id: str | int | None) -> int | None:
-    """Sum comment counts over a user's posts via the anonymous mobile feed endpoint."""
-    if not user_id:
-        return None
-    headers = {
-        "User-Agent": IPAD_USER_AGENT,
-        "x-ig-app-id": MOBILE_APP_ID,
-        "Accept": "*/*",
-        "Accept-Language": "en-US,en;q=0.9",
-    }
-    total = 0
-    max_id = None
-    for _ in range(MAX_FEED_PAGES):
-        params = [("count", "33")]
-        if max_id:
-            params.append(("max_id", max_id))
-        qs = "&".join(f"{k}={v}" for k, v in params)
-        url = f"https://www.instagram.com/api/v1/feed/user/{user_id}/?{qs}"
-        raw = fetch_url(url, headers)
-        if not raw:
-            break
-        try:
-            data = json.loads(raw)
-        except Exception:
-            break
-        parsed = parse_feed_response(data)
-        total += parsed["comments_total"]
-        max_id = parsed["next_max_id"]
-        if not max_id or not parsed["more_available"]:
-            break
-    return total if total > 0 else None
-
-
-def fetch_comments_instaloader(handle: str, timeout: int = 5) -> int | None:
-    """Attempt to fetch comment count using instaloader with timeout."""
-    try:
-        import socket
-        import instaloader
-
-        socket.setdefaulttimeout(timeout)
-        L = instaloader.Instaloader(max_connection_attempts=1)
-        L.context._session.verify = False
-        L.context.max_connection_attempts = 1
-        profile = instaloader.Profile.from_username(L.context, handle)
-        total_comments = 0
-        posts_counted = 0
-        for post in profile.get_posts():
-            total_comments += getattr(post, "comments", 0)
-            posts_counted += 1
-            if posts_counted >= 30:
-                break
-        return total_comments
-    except Exception:
-        return None
 
 
 # Strategy 0: Rendered browser (agent-browser). Reads the follower count that
@@ -387,13 +308,11 @@ def strategy_1_instagram_api(handle: str, user_agent: str) -> dict | None:
             followers = user.get("edge_followed_by", {}).get("count")
             posts = user.get("edge_owner_to_timeline_media", {}).get("count")
             avatar_url = user.get("profile_pic_url_hd") or user.get("profile_pic_url")
-            user_id = user.get("id")
             if followers is not None and posts is not None:
                 return {
                     "followers": int(followers),
                     "posts": int(posts),
                     "avatar_url": avatar_url,
-                    "user_id": user_id,
                 }
     except Exception:
         pass
@@ -644,12 +563,6 @@ def fetch_instagram_profile(
         "strategy": successful_strategy,
     }
 
-    comments = fetch_comments_feed(scraped_result.get("user_id"))
-    if comments is None:
-        comments = fetch_comments_instaloader(handle)
-    if comments is not None:
-        result["comments"] = comments
-
     return result
 
 
@@ -689,12 +602,9 @@ def merge_contestant_data(
         else:
             updated["followers"] = new_followers
             updated["posts"] = scraped["posts"]
-
-            if scraped.get("comments") is not None:
-                updated["comments"] = scraped["comments"]
     else:
         print(
-            f"[fallback] Retaining previous metrics for {handle}: followers={updated.get('followers')}, posts={updated.get('posts')}, comments={updated.get('comments')}"
+            f"[fallback] Retaining previous metrics for {handle}: followers={updated.get('followers')}, posts={updated.get('posts')}"
         )
 
     return updated

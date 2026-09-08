@@ -10,7 +10,6 @@ from scripts.scraper import (
     parse_browser_followers,
     parse_count,
     parse_description_text,
-    parse_feed_response,
     parse_og_description,
     parse_og_image,
 )
@@ -102,7 +101,6 @@ class TestScraper(unittest.TestCase):
             "handle": "stachu_goggins_mieczaki",
             "followers": 240,
             "posts": 20,
-            "comments": None,
         }
 
         merged = merge_contestant_data(
@@ -114,30 +112,6 @@ class TestScraper(unittest.TestCase):
         self.assertEqual(merged["followers"], 19879)
         self.assertEqual(merged["posts"], 17)
         self.assertEqual(merged["comments"], 1265)
-
-    def test_parse_feed_response(self):
-        data = {
-            "items": [
-                {"comment_count": 12, "like_count": 100},
-                {"comment_count": 5, "like_count": 50},
-                {"comment_count": None, "like_count": 20},
-            ],
-            "user": {"follower_count": 23900, "media_count": 20},
-            "next_max_id": "abc123",
-            "more_available": True,
-        }
-        parsed = parse_feed_response(data)
-        self.assertEqual(parsed["comments_total"], 17)
-        self.assertEqual(parsed["follower_count"], 23900)
-        self.assertEqual(parsed["next_max_id"], "abc123")
-        self.assertTrue(parsed["more_available"])
-
-    def test_parse_feed_response_empty(self):
-        parsed = parse_feed_response({})
-        self.assertEqual(parsed["comments_total"], 0)
-        self.assertIsNone(parsed["follower_count"])
-        self.assertIsNone(parsed["next_max_id"])
-        self.assertFalse(parsed["more_available"])
 
     def test_merge_contestant_data_fallback(self):
         existing = {
@@ -166,7 +140,6 @@ class TestScraper(unittest.TestCase):
             "handle": "pamelka_mieczaki",
             "followers": 33500,
             "posts": 148,
-            "comments": 4950,
         }
         merged_success = merge_contestant_data(
             existing=existing,
@@ -175,7 +148,8 @@ class TestScraper(unittest.TestCase):
         )
         self.assertEqual(merged_success["followers"], 33500)
         self.assertEqual(merged_success["posts"], 148)
-        self.assertEqual(merged_success["comments"], 4950)
+        # comments are no longer scraped; retained from previous data
+        self.assertEqual(merged_success["comments"], 4800)
 
 
 if __name__ == "__main__":
