@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-09-08T08:37:43.240337+00:00",
+  "timestamp": "2026-09-08T15:30:43.722256+00:00",
   "contestants": [
     {
       "id": "maquk_mieczaki",
       "name": "Dominik \"Maquk\" Makowiak",
       "handle": "maquk_mieczaki",
-      "followers": 28000,
-      "posts": 7,
+      "followers": 34400,
+      "posts": 9,
       "avatar": "./avatars/maquk_mieczaki.jpg",
       "instagramUrl": "https://www.instagram.com/maquk_mieczaki/",
       "comments": 1295
@@ -15,8 +15,8 @@
       "id": "dori_mieczaki",
       "name": "Dorota \"Dori\" Kaczmarek",
       "handle": "dori_mieczaki",
-      "followers": 18000,
-      "posts": 38,
+      "followers": 27100,
+      "posts": 49,
       "avatar": "./avatars/dori_mieczaki.jpg",
       "instagramUrl": "https://www.instagram.com/dori_mieczaki/",
       "comments": 1612
@@ -25,8 +25,8 @@
       "id": "filip_mieczaki",
       "name": "Filip Wrzosek",
       "handle": "filip_mieczaki",
-      "followers": 28000,
-      "posts": 36,
+      "followers": 32900,
+      "posts": 45,
       "avatar": "./avatars/filip_mieczaki.jpg",
       "instagramUrl": "https://www.instagram.com/filip_mieczaki/",
       "comments": 1863
@@ -35,8 +35,8 @@
       "id": "magda_mieczaki",
       "name": "Magdalena Majewska",
       "handle": "magda_mieczaki",
-      "followers": 21000,
-      "posts": 19,
+      "followers": 31200,
+      "posts": 26,
       "avatar": "./avatars/magda_mieczaki.jpg",
       "instagramUrl": "https://www.instagram.com/magda_mieczaki/",
       "comments": 1241
@@ -45,8 +45,8 @@
       "id": "oktawia_mieczaki",
       "name": "Oktawia Juszczyk",
       "handle": "oktawia_mieczaki",
-      "followers": 11400,
-      "posts": 74,
+      "followers": 26500,
+      "posts": 75,
       "avatar": "./avatars/oktawia_mieczaki.jpg",
       "instagramUrl": "https://www.instagram.com/oktawia_mieczaki/",
       "comments": 1982
@@ -55,8 +55,8 @@
       "id": "oliwia_mieczaki",
       "name": "Oliwia Płodzień",
       "handle": "oliwia_mieczaki",
-      "followers": 5243,
-      "posts": 12,
+      "followers": 9857,
+      "posts": 17,
       "avatar": "./avatars/oliwia_mieczaki.jpg",
       "instagramUrl": "https://www.instagram.com/oliwia_mieczaki/",
       "comments": 474
@@ -65,8 +65,8 @@
       "id": "pamelka_mieczaki",
       "name": "Pamela Kiedrowicz",
       "handle": "pamelka_mieczaki",
-      "followers": 37300,
-      "posts": 28,
+      "followers": 48000,
+      "posts": 29,
       "avatar": "./avatars/pamelka_mieczaki.jpg",
       "instagramUrl": "https://www.instagram.com/pamelka_mieczaki/",
       "comments": 2125
@@ -75,8 +75,8 @@
       "id": "patrycja_mieczaki",
       "name": "Patrycja Bochyńska",
       "handle": "patrycja_mieczaki",
-      "followers": 4631,
-      "posts": 43,
+      "followers": 9435,
+      "posts": 52,
       "avatar": "./avatars/patrycja_mieczaki.jpg",
       "instagramUrl": "https://www.instagram.com/patrycja_mieczaki/",
       "comments": 1393
@@ -85,8 +85,8 @@
       "id": "pati_mieczaki",
       "name": "Patrycja \"Pati\" Tomaszewska",
       "handle": "pati_mieczaki",
-      "followers": 30700,
-      "posts": 18,
+      "followers": 44000,
+      "posts": 24,
       "avatar": "./avatars/pati_mieczaki.jpg",
       "instagramUrl": "https://www.instagram.com/pati_mieczaki/",
       "comments": 1711
@@ -95,8 +95,8 @@
       "id": "patrykbutrym_mieczaki",
       "name": "Patryk Butrym",
       "handle": "patrykbutrym_mieczaki",
-      "followers": 13600,
-      "posts": 19,
+      "followers": 21800,
+      "posts": 26,
       "avatar": "./avatars/patrykbutrym_mieczaki.jpg",
       "instagramUrl": "https://www.instagram.com/patrykbutrym_mieczaki/",
       "comments": 856
@@ -105,8 +105,8 @@
       "id": "stachu_goggins_mieczaki",
       "name": "Stanisław \"Stachu\" Dybowski",
       "handle": "stachu_goggins_mieczaki",
-      "followers": 24700,
-      "posts": 20,
+      "followers": 39100,
+      "posts": 25,
       "avatar": "./avatars/stachu_goggins_mieczaki.jpg",
       "instagramUrl": "https://www.instagram.com/stachu_goggins_mieczaki/",
       "comments": 1265
@@ -115,8 +115,8 @@
       "id": "wiktor_mieczaki",
       "name": "Wiktor Woroniak",
       "handle": "wiktor_mieczaki",
-      "followers": 27100,
-      "posts": 14,
+      "followers": 39100,
+      "posts": 23,
       "avatar": "./avatars/wiktor_mieczaki.jpg",
       "instagramUrl": "https://www.instagram.com/wiktor_mieczaki/",
       "comments": 1207
