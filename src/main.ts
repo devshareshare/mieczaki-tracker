@@ -1,6 +1,7 @@
 import historyData from "../data/history.json";
 import latestData from "../data/latest.json";
 import { renderCharts } from "./components/Charts";
+import { renderFooter } from "./components/Footer";
 import { renderHeader } from "./components/Header";
 import { renderPodium } from "./components/Podium";
 import { renderTileGrid } from "./components/TileGrid";
@@ -21,6 +22,7 @@ function initApp(): void {
   renderPodium(app, rankedContestants);
   renderTileGrid(app, rankedContestants);
   renderCharts(app, history, latest);
+  renderFooter(app);
 }
 
 document.addEventListener("DOMContentLoaded", initApp);
