@@ -1,6 +1,5 @@
 import historyData from "../data/history.json";
 import latestData from "../data/latest.json";
-import { renderBadges } from "./components/Badges";
 import { renderCharts } from "./components/Charts";
 import { renderHeader } from "./components/Header";
 import { renderPodium } from "./components/Podium";
@@ -20,7 +19,6 @@ function initApp(): void {
 
   renderHeader(app, rankedContestants, latest);
   renderPodium(app, rankedContestants);
-  renderBadges(app, latest, history);
   renderTileGrid(app, rankedContestants);
   renderCharts(app, history, latest);
 }

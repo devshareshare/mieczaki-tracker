@@ -209,9 +209,9 @@ describe("UI Components", () => {
         ".progress-bar-fill",
       ) as HTMLElement;
       expect(progressBar).not.toBeNull();
-      // 21000 target is 50000 -> 42%
+      // 21000 target is 100000 -> 21%
       const target = firstCard?.querySelector(".milestone-target");
-      expect(target?.textContent).toBe("42%");
+      expect(target?.textContent).toBe("21%");
     });
   });
 

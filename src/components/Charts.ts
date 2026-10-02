@@ -1,5 +1,5 @@
 import Chart from "chart.js/auto";
-import { getGrowthChartData, getMonthlyStats } from "../services/dataService";
+import { getGrowthChartData } from "../services/dataService";
 import type { HistorySnapshot, LatestSnapshot } from "../types/data";
 
 const CONTESTANT_COLORS: Record<string, string> = {
@@ -57,43 +57,9 @@ export function createCharts(
   `;
   section.appendChild(trajectoryCard);
 
-  // 2 & 3. Grid for Monthly Followers Gained & Monthly Posts Published
-  const gridContainer = document.createElement("div");
-  gridContainer.className = "charts-grid";
-
-  // Monthly Followers Gained
-  const followersBarCard = document.createElement("div");
-  followersBarCard.className = "chart-card";
-  followersBarCard.innerHTML = `
-    <div class="chart-card-header">
-      <h3 class="chart-card-title">📊 OBSERWUJĄCY ZYSKANI MIESIĘCZNIE</h3>
-    </div>
-    <div class="chart-container-wrapper">
-      <canvas id="monthly-followers-chart"></canvas>
-    </div>
-  `;
-  gridContainer.appendChild(followersBarCard);
-
-  // Monthly Posts Published
-  const postsBarCard = document.createElement("div");
-  postsBarCard.className = "chart-card";
-  postsBarCard.innerHTML = `
-    <div class="chart-card-header">
-      <h3 class="chart-card-title">📸 POSTY OPUBLIKOWANE MIESIĘCZNIE</h3>
-    </div>
-    <div class="chart-container-wrapper">
-      <canvas id="monthly-posts-chart"></canvas>
-    </div>
-  `;
-  gridContainer.appendChild(postsBarCard);
-
-  section.appendChild(gridContainer);
-
   // Initialize Charts when appended or immediately
   setTimeout(() => {
     initTrajectoryChart(section, history);
-    initMonthlyFollowersChart(section, history);
-    initMonthlyPostsChart(section, history);
   }, 0);
 
   return section;
@@ -274,146 +240,6 @@ function initTrajectoryChart(
       });
     }
   }
-}
-
-function initMonthlyFollowersChart(
-  container: HTMLElement,
-  history: HistorySnapshot[],
-) {
-  const canvas = container.querySelector(
-    "#monthly-followers-chart",
-  ) as HTMLCanvasElement | null;
-  if (!canvas) return;
-
-  const monthlyStats = getMonthlyStats(history);
-  const labels = monthlyStats.map((s) => s.month);
-
-  const handlesSet = new Set<string>();
-  for (const s of monthlyStats) {
-    for (const h of Object.keys(s.followersGained)) {
-      handlesSet.add(h);
-    }
-  }
-
-  const datasets = Array.from(handlesSet).map((handle) => {
-    const color = getColorForHandle(handle);
-    const data = monthlyStats.map((s) => s.followersGained[handle] || 0);
-    return {
-      label: `@${handle}`,
-      data,
-      backgroundColor: color,
-      borderRadius: 4,
-    };
-  });
-
-  new Chart(canvas, {
-    type: "bar",
-    data: {
-      labels,
-      datasets,
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          labels: {
-            color: "#f3f4f6",
-            font: { family: "'Plus Jakarta Sans', sans-serif", size: 11 },
-            usePointStyle: true,
-            boxWidth: 8,
-          },
-        },
-        tooltip: {
-          backgroundColor: "#1e1e1e",
-          titleColor: "#c8ff00",
-          bodyColor: "#f3f4f6",
-          borderColor: "#2e2e2e",
-          borderWidth: 1,
-        },
-      },
-      scales: {
-        x: {
-          grid: { color: "rgba(255, 255, 255, 0.05)" },
-          ticks: { color: "#9ca3af" },
-        },
-        y: {
-          grid: { color: "rgba(255, 255, 255, 0.05)" },
-          ticks: { color: "#9ca3af" },
-        },
-      },
-    },
-  });
-}
-
-function initMonthlyPostsChart(
-  container: HTMLElement,
-  history: HistorySnapshot[],
-) {
-  const canvas = container.querySelector(
-    "#monthly-posts-chart",
-  ) as HTMLCanvasElement | null;
-  if (!canvas) return;
-
-  const monthlyStats = getMonthlyStats(history);
-  const labels = monthlyStats.map((s) => s.month);
-
-  const handlesSet = new Set<string>();
-  for (const s of monthlyStats) {
-    for (const h of Object.keys(s.postsPublished)) {
-      handlesSet.add(h);
-    }
-  }
-
-  const datasets = Array.from(handlesSet).map((handle) => {
-    const color = getColorForHandle(handle);
-    const data = monthlyStats.map((s) => s.postsPublished[handle] || 0);
-    return {
-      label: `@${handle}`,
-      data,
-      backgroundColor: color,
-      borderRadius: 4,
-    };
-  });
-
-  new Chart(canvas, {
-    type: "bar",
-    data: {
-      labels,
-      datasets,
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          labels: {
-            color: "#f3f4f6",
-            font: { family: "'Plus Jakarta Sans', sans-serif", size: 11 },
-            usePointStyle: true,
-            boxWidth: 8,
-          },
-        },
-        tooltip: {
-          backgroundColor: "#1e1e1e",
-          titleColor: "#c8ff00",
-          bodyColor: "#f3f4f6",
-          borderColor: "#2e2e2e",
-          borderWidth: 1,
-        },
-      },
-      scales: {
-        x: {
-          grid: { color: "rgba(255, 255, 255, 0.05)" },
-          ticks: { color: "#9ca3af" },
-        },
-        y: {
-          grid: { color: "rgba(255, 255, 255, 0.05)" },
-          ticks: { color: "#9ca3af" },
-        },
-      },
-    },
-  });
 }
 
 export function renderCharts(

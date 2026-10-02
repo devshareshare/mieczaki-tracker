@@ -22,20 +22,8 @@ export interface HistorySnapshot {
   }>;
 }
 
-export interface Badges {
-  topWeeklyGainer?: { handle: string; gained: number };
-  fastestPercentageGrowth?: { handle: string; percent: number };
-  mostActivePoster?: { handle: string; posts: number };
-}
-
 export interface MilestoneProgress {
   current: number;
   target: number;
   percent: number;
 }
-
-export type MonthlyStats = Array<{
-  month: string;
-  followersGained: Record<string, number>;
-  postsPublished: Record<string, number>;
-}>;

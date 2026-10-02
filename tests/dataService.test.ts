@@ -1,9 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
-  getBadges,
   getGrowthChartData,
   getMilestoneProgress,
-  getMonthlyStats,
   getRankedContestants,
 } from "../src/services/dataService";
 import type { HistorySnapshot, LatestSnapshot } from "../src/types/data";
@@ -125,93 +123,22 @@ describe("dataService", () => {
     it("calculates correct milestone progress for 3684 followers", () => {
       const progress = getMilestoneProgress(3684);
       expect(progress.current).toBe(3684);
-      expect(progress.target).toBe(50000);
-      expect(progress.percent).toBe(7.4);
+      expect(progress.target).toBe(100000);
+      expect(progress.percent).toBe(3.7);
     });
 
     it("calculates correct milestone progress for 33000 followers", () => {
       const progress = getMilestoneProgress(33000);
       expect(progress.current).toBe(33000);
-      expect(progress.target).toBe(50000);
-      expect(progress.percent).toBe(66);
+      expect(progress.target).toBe(100000);
+      expect(progress.percent).toBe(33);
     });
 
     it("handles 0 followers", () => {
       const progress = getMilestoneProgress(0);
       expect(progress.current).toBe(0);
-      expect(progress.target).toBe(50000);
+      expect(progress.target).toBe(100000);
       expect(progress.percent).toBe(0);
-    });
-  });
-
-  describe("getBadges", () => {
-    it("calculates badges correctly from 7-day history window", () => {
-      const badges = getBadges(mockLatest, mockHistory);
-
-      expect(badges.topWeeklyGainer).toEqual({
-        handle: "filip_mieczaki",
-        gained: 2000,
-      });
-
-      expect(badges.fastestPercentageGrowth).toEqual({
-        handle: "patrycja_mieczaki",
-        percent: 22.8,
-      });
-
-      expect(badges.mostActivePoster).toEqual({
-        handle: "filip_mieczaki",
-        posts: 10,
-      });
-    });
-
-    it("handles empty history gracefully", () => {
-      const badges = getBadges(mockLatest, []);
-      expect(badges.topWeeklyGainer).toBeUndefined();
-      expect(badges.fastestPercentageGrowth).toBeUndefined();
-      expect(badges.mostActivePoster).toEqual({
-        handle: "pamelka_mieczaki",
-        posts: 145,
-      });
-    });
-
-    it("does not award weekly badges from lifetime totals when weekly gain is zero", () => {
-      const latest: LatestSnapshot = {
-        timestamp: "2026-08-05T00:00:00.000Z",
-        contestants: [
-          {
-            id: "a",
-            name: "A",
-            handle: "a",
-            followers: 10000,
-            posts: 80,
-            avatar: "",
-            instagramUrl: "",
-          },
-          {
-            id: "b",
-            name: "B",
-            handle: "b",
-            followers: 10000,
-            posts: 20,
-            avatar: "",
-            instagramUrl: "",
-          },
-        ],
-      };
-      const history: HistorySnapshot[] = [
-        {
-          timestamp: "2026-07-29T00:00:00.000Z",
-          contestants: [
-            { handle: "a", followers: 10000, posts: 80 },
-            { handle: "b", followers: 10000, posts: 15 },
-          ],
-        },
-      ];
-
-      const badges = getBadges(latest, history);
-
-      // "a" has 0 weekly post gain despite 80 lifetime posts; "b" gained 5.
-      expect(badges.mostActivePoster).toEqual({ handle: "b", posts: 5 });
     });
   });
 
@@ -234,25 +161,6 @@ describe("dataService", () => {
 
     it("handles empty history", () => {
       expect(getGrowthChartData([])).toEqual({ labels: [], datasets: [] });
-    });
-  });
-
-  describe("getMonthlyStats", () => {
-    it("aggregates stats by month", () => {
-      const monthly = getMonthlyStats(mockHistory);
-      expect(monthly).toHaveLength(2);
-
-      expect(monthly[0].month).toBe("2026-07");
-      expect(monthly[0].followersGained.pamelka_mieczaki).toBe(2500);
-      expect(monthly[0].postsPublished.pamelka_mieczaki).toBe(10);
-
-      expect(monthly[1].month).toBe("2026-08");
-      expect(monthly[1].followersGained.pamelka_mieczaki).toBe(1500);
-      expect(monthly[1].postsPublished.pamelka_mieczaki).toBe(5);
-    });
-
-    it("handles empty history", () => {
-      expect(getMonthlyStats([])).toEqual([]);
     });
   });
 });

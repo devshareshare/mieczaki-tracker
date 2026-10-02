@@ -1,5 +1,4 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { createBadges } from "../src/components/Badges";
 import { createCharts } from "../src/components/Charts";
 import type { HistorySnapshot, LatestSnapshot } from "../src/types/data";
 
@@ -87,7 +86,7 @@ const mockHistory: HistorySnapshot[] = [
   },
 ];
 
-describe("Badges and Charts Components", () => {
+describe("Charts Component", () => {
   beforeEach(() => {
     document.body.innerHTML = "";
 
@@ -143,73 +142,16 @@ describe("Badges and Charts Components", () => {
     }
   });
 
-  describe("Badges Component", () => {
-    it("renders cards for Top Weekly Gainer, Fastest % Growth, and Most Active Poster", () => {
-      const badgesSection = createBadges(mockLatest, mockHistory);
-      document.body.appendChild(badgesSection);
-
-      const gainerCard = badgesSection.querySelector(
-        '[data-badge-type="top-weekly-gainer"]',
-      );
-      const growthCard = badgesSection.querySelector(
-        '[data-badge-type="fastest-percentage-growth"]',
-      );
-      const posterCard = badgesSection.querySelector(
-        '[data-badge-type="most-active-poster"]',
-      );
-
-      expect(gainerCard).not.toBeNull();
-      expect(growthCard).not.toBeNull();
-      expect(posterCard).not.toBeNull();
-
-      expect(gainerCard?.textContent).toContain("Top Weekly Gainer");
-      expect(growthCard?.textContent).toContain("Fastest Weekly % Growth");
-      expect(posterCard?.textContent).toContain("Most Active Weekly Poster");
-
-      expect(gainerCard?.textContent).toContain("Filip Wrzosek");
-      expect(
-        gainerCard?.querySelector('[data-testid="badge-metric"]')?.textContent,
-      ).toBe("+2,000 obserwujących");
-
-      expect(growthCard?.textContent).toContain("Patrycja Bochyńska");
-      expect(
-        growthCard?.querySelector('[data-testid="badge-metric"]')?.textContent,
-      ).toBe("+22.8%");
-
-      expect(posterCard?.textContent).toContain("Filip Wrzosek");
-      expect(
-        posterCard?.querySelector('[data-testid="badge-metric"]')?.textContent,
-      ).toBe("10 postów");
-    });
-
-    it("handles empty history gracefully", () => {
-      const badgesSection = createBadges(mockLatest, []);
-      document.body.appendChild(badgesSection);
-
-      const gainerCard = badgesSection.querySelector(
-        '[data-badge-type="top-weekly-gainer"]',
-      );
-      const metric = gainerCard?.querySelector('[data-testid="badge-metric"]');
-      expect(metric?.textContent).toBe("Brak danych");
-    });
-  });
-
   describe("Charts Component", () => {
-    it("renders chart containers and canvas elements for trajectory and monthly stats", () => {
+    it("renders trajectory chart container and range filter buttons", () => {
       const chartsSection = createCharts(mockHistory, mockLatest);
       document.body.appendChild(chartsSection);
 
       const trajectoryCanvas = chartsSection.querySelector(
         "#growth-trajectory-chart",
       );
-      const followersCanvas = chartsSection.querySelector(
-        "#monthly-followers-chart",
-      );
-      const postsCanvas = chartsSection.querySelector("#monthly-posts-chart");
 
       expect(trajectoryCanvas).not.toBeNull();
-      expect(followersCanvas).not.toBeNull();
-      expect(postsCanvas).not.toBeNull();
 
       const rangeBtns = chartsSection.querySelectorAll(
         "#range-controls .filter-btn",
