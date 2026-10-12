@@ -51,18 +51,18 @@ log() { echo "[$(date '+%F %T')] $*"; }
   log "scrape done."
 
   # Commit + push only if data actually changed.
-  if git diff --quiet data/latest.json data/history.json; then
+  if git diff --quiet data/latest.json data/history.json data/ex-mieczaki.json; then
     log "no data change; nothing to push."
   else
-    git add data/latest.json data/history.json
+    git add data/latest.json data/history.json data/ex-mieczaki.json
     git commit --quiet -m "auto: daily Instagram data refresh (boot)"
     if ! git push origin main 2>/dev/null; then
       # Remote advanced (e.g. an earlier run pushed) — rebase, favoring our
       # fresh local scrape on any data conflict.
       log "push rejected; rebasing onto remote (favoring fresh data)."
       git pull --rebase --quiet origin main 2>/dev/null || true
-      git checkout --theirs -- data/latest.json data/history.json 2>/dev/null || true
-      git add data/latest.json data/history.json
+      git checkout --theirs -- data/latest.json data/history.json data/ex-mieczaki.json 2>/dev/null || true
+      git add data/latest.json data/history.json data/ex-mieczaki.json
       GIT_EDITOR=true git rebase --continue 2>/dev/null || true
       git push origin main
     fi

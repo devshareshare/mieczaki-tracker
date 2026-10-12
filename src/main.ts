@@ -1,6 +1,8 @@
+import exMieczakiData from "../data/ex-mieczaki.json";
 import historyData from "../data/history.json";
 import latestData from "../data/latest.json";
 import { renderCharts } from "./components/Charts";
+import { renderExMieczaki } from "./components/ExMieczaki";
 import { renderFooter } from "./components/Footer";
 import { renderHeader } from "./components/Header";
 import { renderPodium } from "./components/Podium";
@@ -17,10 +19,12 @@ function initApp(): void {
   const latest = latestData as LatestSnapshot;
   const history = historyData as HistorySnapshot[];
   const rankedContestants = getRankedContestants(latest);
+  const exMieczaki = getRankedContestants(exMieczakiData as LatestSnapshot);
 
   renderHeader(app, rankedContestants, latest);
   renderPodium(app, rankedContestants);
   renderTileGrid(app, rankedContestants);
+  renderExMieczaki(app, exMieczaki);
   renderCharts(app, history, latest);
   renderFooter(app);
 }

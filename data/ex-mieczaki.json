@@ -1,0 +1,23 @@
+{
+  "timestamp": "2026-10-12T19:05:56.451845+00:00",
+  "contestants": [
+    {
+      "id": "nadia_mieczaki",
+      "name": "Nadia Oterska",
+      "handle": "nadia_mieczaki",
+      "followers": 12200,
+      "posts": 63,
+      "avatar": "./avatars/nadia_mieczaki.jpg",
+      "instagramUrl": "https://www.instagram.com/nadia_mieczaki/"
+    },
+    {
+      "id": "mikolaj_mieczaki",
+      "name": "Mikołaj Regewicz",
+      "handle": "mikolaj_mieczaki",
+      "followers": 20600,
+      "posts": 26,
+      "avatar": "./avatars/mikolaj_mieczaki.jpg",
+      "instagramUrl": "https://www.instagram.com/mikolaj_mieczaki/"
+    }
+  ]
+}

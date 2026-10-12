@@ -39,6 +39,16 @@ CONTESTANT_HANDLES = [
     "wiktor_mieczaki",
 ]
 
+EX_MIECZAKI_HANDLES = [
+    "nadia_mieczaki",
+    "mikolaj_mieczaki",
+]
+
+EX_MIECZAKI_NAMES = {
+    "nadia_mieczaki": "Nadia Oterska",
+    "mikolaj_mieczaki": "Mikołaj Regewicz",
+}
+
 USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
@@ -665,6 +675,61 @@ def run_scraper(project_root: Path | str | None = None) -> None:
                 "comments": merged.get("comments", 0),
             }
         )
+
+    # Ex-Mieczaki (former contestants): separate category, separate data file.
+    ex_file = root / "data" / "ex-mieczaki.json"
+    existing_ex = {}
+    if ex_file.exists():
+        try:
+            with open(ex_file, "r", encoding="utf-8") as f:
+                for c in json.load(f).get("contestants", []):
+                    existing_ex[c["handle"]] = c
+        except Exception as e:
+            print(f"[warning] Error reading {ex_file}: {e}", file=sys.stderr)
+
+    updated_ex = []
+    for handle in EX_MIECZAKI_HANDLES:
+        ua = get_random_user_agent()
+        scraped = fetch_instagram_profile(handle, user_agent=ua, env=env)
+        existing = existing_ex.get(handle)
+        merged = merge_contestant_data(existing, scraped, handle)
+        updated_ex.append(
+            {
+                "id": handle,
+                "name": EX_MIECZAKI_NAMES.get(handle, handle),
+                "handle": handle,
+                "followers": merged["followers"],
+                "posts": merged["posts"],
+                "avatar": f"./avatars/{handle}.jpg",
+                "instagramUrl": f"https://www.instagram.com/{handle}/",
+            }
+        )
+
+    ex_changed = False
+    if len(existing_ex) != len(updated_ex):
+        ex_changed = True
+    else:
+        for c in updated_ex:
+            prev = existing_ex.get(c["handle"])
+            if (
+                prev is None
+                or prev.get("followers") != c.get("followers")
+                or prev.get("posts") != c.get("posts")
+            ):
+                ex_changed = True
+                break
+
+    if ex_changed:
+        ex_file.parent.mkdir(parents=True, exist_ok=True)
+        with open(ex_file, "w", encoding="utf-8") as f:
+            json.dump(
+                {"timestamp": now_iso, "contestants": updated_ex},
+                f,
+                ensure_ascii=False,
+                indent=2,
+            )
+            f.write("\n")
+        print(f"[scraper] Saved updated ex-mieczaki metrics to {ex_file}")
 
     if env:
         _ab(["close", "--all"], env)
