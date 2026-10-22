@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-22T14:15:28.701288+00:00",
+  "timestamp": "2026-10-22T14:19:53.708121+00:00",
   "contestants": [
     {
       "id": "nadia_mieczaki",
@@ -18,6 +18,15 @@
       "posts": 28,
       "avatar": "./avatars/mikolaj_mieczaki.jpg",
       "instagramUrl": "https://www.instagram.com/mikolaj_mieczaki/"
+    },
+    {
+      "id": "oliwia_mieczaki",
+      "name": "Oliwia Płodzień",
+      "handle": "oliwia_mieczaki",
+      "followers": 13500,
+      "posts": 26,
+      "avatar": "./avatars/oliwia_mieczaki.jpg",
+      "instagramUrl": "https://www.instagram.com/oliwia_mieczaki/"
     }
   ]
 }

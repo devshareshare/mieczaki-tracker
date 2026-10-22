@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-22T14:15:28.701288+00:00",
+  "timestamp": "2026-10-22T14:19:53.708121+00:00",
   "contestants": [
     {
       "id": "maquk_mieczaki",
@@ -50,16 +50,6 @@
       "avatar": "./avatars/oktawia_mieczaki.jpg",
       "instagramUrl": "https://www.instagram.com/oktawia_mieczaki/",
       "comments": 1982
-    },
-    {
-      "id": "oliwia_mieczaki",
-      "name": "Oliwia Płodzień",
-      "handle": "oliwia_mieczaki",
-      "followers": 13500,
-      "posts": 26,
-      "avatar": "./avatars/oliwia_mieczaki.jpg",
-      "instagramUrl": "https://www.instagram.com/oliwia_mieczaki/",
-      "comments": 474
     },
     {
       "id": "pamelka_mieczaki",
