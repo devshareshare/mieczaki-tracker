@@ -30,7 +30,6 @@ CONTESTANT_HANDLES = [
     "filip_mieczaki",
     "magda_mieczaki",
     "oktawia_mieczaki",
-    "oliwia_mieczaki",
     "pamelka_mieczaki",
     "patrycja_mieczaki",
     "pati_mieczaki",
@@ -42,11 +41,13 @@ CONTESTANT_HANDLES = [
 EX_MIECZAKI_HANDLES = [
     "nadia_mieczaki",
     "mikolaj_mieczaki",
+    "oliwia_mieczaki",
 ]
 
 EX_MIECZAKI_NAMES = {
     "nadia_mieczaki": "Nadia Oterska",
     "mikolaj_mieczaki": "Mikołaj Regewicz",
+    "oliwia_mieczaki": "Oliwia Płodzień",
 }
 
 USER_AGENTS = [
