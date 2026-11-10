@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-11-03T08:48:19.229214+00:00",
+  "timestamp": "2026-11-10T19:58:15.877826+00:00",
   "contestants": [
     {
       "id": "nadia_mieczaki",
       "name": "Nadia Oterska",
       "handle": "nadia_mieczaki",
-      "followers": 12800,
-      "posts": 68,
+      "followers": 13800,
+      "posts": 69,
       "avatar": "./avatars/nadia_mieczaki.jpg",
       "instagramUrl": "https://www.instagram.com/nadia_mieczaki/"
     },
@@ -14,8 +14,8 @@
       "id": "mikolaj_mieczaki",
       "name": "Mikołaj Regewicz",
       "handle": "mikolaj_mieczaki",
-      "followers": 20900,
-      "posts": 30,
+      "followers": 22400,
+      "posts": 34,
       "avatar": "./avatars/mikolaj_mieczaki.jpg",
       "instagramUrl": "https://www.instagram.com/mikolaj_mieczaki/"
     },
@@ -23,8 +23,8 @@
       "id": "oliwia_mieczaki",
       "name": "Oliwia Płodzień",
       "handle": "oliwia_mieczaki",
-      "followers": 14500,
-      "posts": 27,
+      "followers": 14700,
+      "posts": 28,
       "avatar": "./avatars/oliwia_mieczaki.jpg",
       "instagramUrl": "https://www.instagram.com/oliwia_mieczaki/"
     }
