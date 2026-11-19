@@ -6051,5 +6051,76 @@
         "comments": 1207
       }
     ]
+  },
+  {
+    "timestamp": "2026-11-19T14:05:55.516178+00:00",
+    "contestants": [
+      {
+        "handle": "maquk_mieczaki",
+        "followers": 51200,
+        "posts": 20,
+        "comments": 1295
+      },
+      {
+        "handle": "dori_mieczaki",
+        "followers": 36900,
+        "posts": 77,
+        "comments": 1612
+      },
+      {
+        "handle": "filip_mieczaki",
+        "followers": 46500,
+        "posts": 79,
+        "comments": 1863
+      },
+      {
+        "handle": "magda_mieczaki",
+        "followers": 53600,
+        "posts": 59,
+        "comments": 1241
+      },
+      {
+        "handle": "oktawia_mieczaki",
+        "followers": 53600,
+        "posts": 106,
+        "comments": 1982
+      },
+      {
+        "handle": "pamelka_mieczaki",
+        "followers": 66200,
+        "posts": 48,
+        "comments": 2125
+      },
+      {
+        "handle": "patrycja_mieczaki",
+        "followers": 16700,
+        "posts": 82,
+        "comments": 1393
+      },
+      {
+        "handle": "pati_mieczaki",
+        "followers": 65500,
+        "posts": 49,
+        "comments": 1711
+      },
+      {
+        "handle": "patrykbutrym_mieczaki",
+        "followers": 36700,
+        "posts": 40,
+        "comments": 856
+      },
+      {
+        "handle": "stachu_goggins_mieczaki",
+        "followers": 42800,
+        "posts": 35,
+        "comments": 1265
+      },
+      {
+        "handle": "wiktor_mieczaki",
+        "followers": 62700,
+        "posts": 19,
+        "comments": 1207
+      }
+    ]
   }
 ]
